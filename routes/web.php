@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginCustomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/home', 'components.dashboard');
+Auth::routes();
+
+Route::get('/login', [LoginCustomeController::class,'index'])->name('login');
+Route::post('/login', [LoginCustomeController::class,'login'])->name('login');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
 Route::view('/table', 'components.table');
 Route::view('/form', 'components.form');
-Route::view('/login', 'components.login');
 Route::view('/register', 'components.register');
