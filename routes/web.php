@@ -25,3 +25,8 @@ Route::post('/auth', [LoginCustomeController::class,'login'])->name('auth');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::view('/home', 'components.dashboard');
+Route::view('/table', 'components.table');
+Route::view('/form', 'components.form');
+Route::view('/login', 'components.login');
+Route::view('/register', 'components.register');
