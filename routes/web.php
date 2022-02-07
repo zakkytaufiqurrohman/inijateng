@@ -20,13 +20,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/auth', [LoginCustomeController::class,'index'])->name('auth');
-Route::post('/auth', [LoginCustomeController::class,'login'])->name('auth');
+Route::get('/login', [LoginCustomeController::class,'index'])->name('login');
+Route::post('/login', [LoginCustomeController::class,'login'])->name('login');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::view('/home', 'components.dashboard');
 Route::view('/table', 'components.table');
 Route::view('/form', 'components.form');
-Route::view('/login', 'components.login');
 Route::view('/register', 'components.register');

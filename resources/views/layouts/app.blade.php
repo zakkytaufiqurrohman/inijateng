@@ -8,7 +8,7 @@
     
     {{-- Main Content --}}
     @yield('content')
-
+   
     {{-- Footer --}}
     @include('layouts.footer')
 @endsection
