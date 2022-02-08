@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginCustomeController;
+use App\Http\Controllers\Auth\RegisterCostumeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Auth::routes();
 
 Route::get('/login', [LoginCustomeController::class,'index'])->name('login');
 Route::post('/login', [LoginCustomeController::class,'login'])->name('login');
+
+Route::get('/registers', [RegisterCostumeController::class,'index'])->name('register');
+// Route::post('/register', [RegisterController::class,'register'])->name('register');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
