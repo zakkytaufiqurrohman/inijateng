@@ -25,6 +25,10 @@ Route::post('/login', [LoginCustomeController::class,'login'])->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    //logout
+    Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');
+
 });
 
 Route::view('/table', 'components.table');

@@ -73,7 +73,7 @@
             <!-- Main Content end-->
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy;2021 - {{date('Y')}} PT Growell Indo Metal All Right Reserved <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+                    Copyright &copy;2021 - {{date('Y')}} IPPAT</a>
                 </div>
                 <div class="footer-right">
                     2.3.0

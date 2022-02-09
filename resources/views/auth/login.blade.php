@@ -48,6 +48,16 @@
                                     <div class="form-group">
                                         <div class="d-block">
                                             <label for="password" class="control-label">Password</label>
+                                            <div class="float-right">
+                                                <!-- <a href="auth-forgot-password.html" class="text-small">
+                                                Forgot Password?
+                                                </a> -->
+                                                @if (Route::has('password.request'))
+                                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                        {{ __('Forgot Your Password?') }}
+                                                    </a>
+                                                @endif
+                                            </div>
                                         </div>
                                         <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                                         <div class="invalid-feedback">
@@ -60,11 +70,14 @@
                                             Login
                                         </button>
                                     </div>
+                                    <div class="mt-5 text-muted text-center">
+                                        Belum punya akun? <a href="auth-register.html">Register</a>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                         <div class="simple-footer">
-                        Copyright &copy;2021 - {{date('Y')}} IPPAT {{ Date('Y')}}
+                        Copyright &copy;2021 - {{date('Y')}} IPPAT
                         </div>
                     </div>
                 </div>
