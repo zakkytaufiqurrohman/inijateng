@@ -125,7 +125,7 @@
                             message: result.message,
                             position: 'topRight'
                         });
-                        window.location = "/";
+                        window.location = "/home";
                     } else {
                         iziToast.error({
                             title: "Error",

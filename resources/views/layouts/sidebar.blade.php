@@ -1,10 +1,10 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="/">Sparepart</a>
+            <a href="/home">IPPAT</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="/">SP</a>
+            <a href="/">IP</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
