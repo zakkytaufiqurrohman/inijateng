@@ -71,7 +71,7 @@
                                         </button>
                                     </div>
                                     <div class="mt-5 text-muted text-center">
-                                        Belum punya akun? <a href="auth-register.html">Register</a>
+                                        Belum punya akun? <a href="{{ route('register') }}">Register</a>
                                     </div>
                                 </form>
                             </div>

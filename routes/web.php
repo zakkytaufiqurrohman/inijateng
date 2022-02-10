@@ -24,8 +24,8 @@ Auth::routes();
 Route::get('/login', [LoginCustomeController::class,'index'])->name('login');
 Route::post('/login', [LoginCustomeController::class,'login'])->name('login');
 
-Route::get('/registers', [RegisterCostumeController::class,'index'])->name('register');
-// Route::post('/register', [RegisterController::class,'register'])->name('register');
+Route::get('/register', [RegisterCostumeController::class,'index'])->name('register');
+Route::post('/register', [RegisterCostumeController::class,'register'])->name('register');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -34,7 +34,3 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');
 
 });
-
-Route::view('/table', 'components.table');
-Route::view('/form', 'components.form');
-Route::view('/register', 'components.register');
