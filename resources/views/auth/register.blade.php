@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}">
 </head>
 
 <body>
@@ -132,7 +134,7 @@
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="password2" class="d-block">Konfirmasi Password</label>
-                                            <input id="password2" type="password" class="form-control" name="password-confirm"  autocomplete="off">
+                                            <input id="password2" type="password" class="form-control" name="password_confirm"  autocomplete="off">
                                         </div>
                                     </div>
                     
@@ -175,6 +177,8 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <!-- toast -->
     <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('node_modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
 
     <script>
         $(function() {
@@ -182,6 +186,18 @@
             $("#form-register").on("submit", function(e) {
                 e.preventDefault();
                 register();
+            });
+
+            $('#tgl_lahir').val('');
+            $('#btn-register').attr('disabled',true);
+
+            $('#btn-register').prop('disabled', !$('#agree:checked').length);//initially disable/enable button based on checked length
+            $('input[type=checkbox]').click(function() {
+                if ($('#agree:checkbox:checked').length > 0) {
+                    $('#btn-register').prop('disabled', false);
+                } else {
+                    $('#btn-register').prop('disabled', true);
+                }
             });
 
             $('#provinsi').on('change', function () {

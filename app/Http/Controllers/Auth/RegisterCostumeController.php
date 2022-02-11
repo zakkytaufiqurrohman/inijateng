@@ -25,10 +25,8 @@ class RegisterCostumeController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            // 'nik' => 'required|unique:users,nik,NULL,id,deleted_at,NULL',
-            'nik' => 'required',
+            'email' => 'required|unique:users',
+            'nik' => 'required|unique:users|min:16|max:16',
             'npwp' => 'required',
             'no_telp' => 'required',
             'telp_kantor' => 'required',
@@ -36,12 +34,25 @@ class RegisterCostumeController extends Controller
             'tgl_lahir' => 'required',
             'alamat' => 'required',
             'provinsi' => 'required',
-            'kota' => 'required'
+            'kota' => 'required',
+            'password' => 'required|min:6',
+            'password_confirm' => 'required_with:password|same:password|min:6'
         ],[
             'nama.required' => 'Nama tidak boleh kosong',
-            'nik.required' => 'Username tidak boleh kosong',
+            'nik.required' => 'NIK tidak boleh kosong',
+            'nik.unique' => 'NIK sudah terdaftar',
+            'nik.min|nik.max' => 'NIK harus terdiri dari 16 karakter',
             'email.required' => 'Email tidak boleh kosong',
+            'email.unique' => 'Email sudah terdaftar',
             'password.required' => 'Password tidak boleh kosong',
+            'npwp.required' => 'npwp tidak boleh kosong',
+            'no_telp.required' => 'No Telp tidak boleh kosong',
+            'telp_kantor.required' => 'Telp Kantor tidak boleh kosong',
+            'tempat_lahir.required' => 'Tempat Lahir tidak boleh kosong',
+            'tgl_lahir.required' => 'Tanggal Lahir tidak boleh kosong',
+            'alamat.required' => 'Alamat tidak boleh kosong',
+            'provinsi.required' => 'Provinsi tidak boleh kosong',
+            'kota.required' => 'Kota tidak boleh kosong',
         ]);
 
         DB::beginTransaction();
