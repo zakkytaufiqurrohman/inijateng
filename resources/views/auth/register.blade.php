@@ -106,19 +106,17 @@
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <label>Provinsi</label>
-                                            <select class="form-control selectric" id='provinsi' name='provinsi'>
-                                                <option value="1">Indonesia</option>
-                                                <option value="2">Palestine</option>
-                                                <option>Syria</option>
-                                                <option>Malaysia</option>
-                                                <option>Thailand</option>
+                                            <select class="form-control" name="provinsi" id="provinsi" required>
+                                                <option>- Provinsi -</option>
+                                                @foreach ($provinces as $item)
+                                                    <option value="{{ $item->id ?? '' }}">{{ $item->name ?? '' }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
+                                        
                                         <div class="form-group col-6">
                                             <label>Kab/Kota</label>
                                             <select class="form-control selectric" id='kota' name='kota'>
-                                                <option value="2">West Java</option>
-                                                <option value="2">East Java</option>
                                             </select>
                                         </div>
                                     </div>
@@ -185,7 +183,36 @@
                 e.preventDefault();
                 register();
             });
+
+            $('#provinsi').on('change', function () {
+                onChangeSelect('{{ route("cities") }}', $(this).val(), 'kota');
+            });
+            // $('#kota').on('change', function () {
+            //     onChangeSelect('{{ route("districts") }}', $(this).val(), 'kecamatan');
+            // })
+            // $('#kecamatan').on('change', function () {
+            //     onChangeSelect('{{ route("villages") }}', $(this).val(), 'desa');
+            // })
         });
+
+        function onChangeSelect(url, id, name) {
+            // send ajax request to get the cities of the selected province and append to the select tag
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    $('#' + name).empty();
+                    $('#' + name).append('<option>- Pilih Salah Satu -</option>');
+
+                    $.each(data, function (key, value) {
+                        $('#' + name).append('<option value="' + key + '">' + value + '</option>');
+                    });
+                }
+            });
+        }
 
         function register(){
             var formData = $("#form-register").serialize();

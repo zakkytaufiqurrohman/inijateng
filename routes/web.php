@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginCustomeController;
 use App\Http\Controllers\Auth\RegisterCostumeController;
-use App\Http\Controllers\Auth\DependentDropdownController;
+use App\Http\Controllers\DependantDropdownController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +29,10 @@ Route::get('/register', [RegisterCostumeController::class,'index'])->name('regis
 Route::post('/register', [RegisterCostumeController::class,'register'])->name('register');
 
 // Laravolt/indonesia
-Route::get('provinces', [DependentDropdownController::class,'provinces'])->name('provinces');
-Route::get('cities', [DependentDropdownController::class,'cities'])->name('cities');
-Route::get('districts', [DependentDropdownController::class,'districts'])->name('districts');
-Route::get('villages', [DependentDropdownController::class,'villages'])->name('villages');
+Route::get('provinces', [DependantDropdownController::class,'provinces'])->name('provinces');
+Route::get('cities', [DependantDropdownController::class,'cities'])->name('cities');
+Route::get('districts', [DependantDropdownController::class,'districts'])->name('districts');
+Route::get('villages', [DependantDropdownController::class,'villages'])->name('villages');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
