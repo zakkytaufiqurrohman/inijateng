@@ -162,6 +162,9 @@
                                           Register
                                         </button>
                                     </div>
+                                    <div class="mt-5 text-muted text-center">
+                                        Sudah punya akun? <a href="{{ route('login') }}">Login</a>
+                                    </div>
                                 </form>
                             </div>
                         </div>
