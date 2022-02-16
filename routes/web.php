@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginCustomeController;
 use App\Http\Controllers\Auth\RegisterCostumeController;
 use App\Http\Controllers\DependantDropdownController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ Route::get('villages', [DependantDropdownController::class,'villages'])->name('v
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+    Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     //logout
     Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');
 
