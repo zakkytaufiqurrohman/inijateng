@@ -16,7 +16,8 @@ class RegisterCostumeController extends Controller
     public function index()
     {
         $dependant = new DependantDropdownController;
-        $provinces = $dependant::provinces();
+        $provinces = $dependant->provinces();
+        // $provinces = $dependant::provinces();
 
         return view('auth.register',compact('provinces'));
     } 

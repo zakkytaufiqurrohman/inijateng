@@ -75,13 +75,25 @@
                                     </div>
                                     
                                     <div class="row">
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-4">
                                             <label for="tempat_lahir">Tempat Lahir</label>
-                                            <input id="tempat_lahir" type="text" class="form-control" name="tempat_lahir">
+                                            <select class="form-control" name="provinsi_lahir" id="provinsi_lahir" required>
+                                                <option>- Provinsi -</option>
+                                                @foreach ($provinces as $item)
+                                                    <option value="{{ $item->id ?? '' }}">{{ $item->name ?? '' }}</option>
+                                                @endforeach
+                                            </select>
                                             <div class="invalid-feedback">
                                             </div>
                                         </div>
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-4">
+                                            <label for="tempat_lahir">&nbsp;</label>
+                                            <select class="form-control selectric" id='tempat_lahir' name='tempat_lahir'>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-4">
                                             <label for="tgl_lahir">Tanggal Lahir</label>
                                             <input id="tgl_lahir" type="text" class="form-control datepicker" name="tgl_lahir">
                                             <div class="invalid-feedback">
@@ -202,6 +214,10 @@
 
             $('#provinsi').on('change', function () {
                 onChangeSelect('{{ route("cities") }}', $(this).val(), 'kota');
+            });
+
+            $('#provinsi_lahir').on('change', function () {
+                onChangeSelect('{{ route("cities") }}', $(this).val(), 'tempat_lahir');
             });
             // $('#kota').on('change', function () {
             //     onChangeSelect('{{ route("districts") }}', $(this).val(), 'kecamatan');
