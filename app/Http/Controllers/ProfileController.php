@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Http\Controllers\DependantDropdownController;
 use DB;
 
 class ProfileController extends Controller
@@ -16,7 +17,13 @@ class ProfileController extends Controller
         $user_id =  Auth::user()->id;
         $user = User::find($user_id);
 
-        return view('profile.index', compact('user'));
+        $dependant = new DependantDropdownController;
+        $provinces = $dependant->provinces();
+
+        $provinsi_lahir = $dependant->searchBy('cities',$user->tempat_lahir)->province->id;
+        $user['provinsi_lahir'] = $provinsi_lahir;
+
+        return view('profile.index', compact('user','provinces'));
     }
 
     public function update(Request $request)
@@ -28,11 +35,11 @@ class ProfileController extends Controller
             'npwp' => 'required',
             'no_telp' => 'required',
             'telp_kantor' => 'required',
-            // 'tempat_lahir' => 'required',
-            // 'tgl_lahir' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
             'alamat' => 'required',
-            // 'provinsi' => 'required',
-            // 'kota' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
         ],[
             'nama.required' => 'Nama tidak boleh kosong',
             'nik.required' => 'NIK tidak boleh kosong',
@@ -40,15 +47,14 @@ class ProfileController extends Controller
             'nik.min|nik.max' => 'NIK harus terdiri dari 16 karakter',
             'email.required' => 'Email tidak boleh kosong',
             'email.unique' => 'Email sudah terdaftar',
-            // 'password.required' => 'Password tidak boleh kosong',
             'npwp.required' => 'npwp tidak boleh kosong',
             'no_telp.required' => 'No Telp tidak boleh kosong',
             'telp_kantor.required' => 'Telp Kantor tidak boleh kosong',
-            // 'tempat_lahir.required' => 'Tempat Lahir tidak boleh kosong',
-            // 'tgl_lahir.required' => 'Tanggal Lahir tidak boleh kosong',
+            'tempat_lahir.required' => 'Tempat Lahir tidak boleh kosong',
+            'tgl_lahir.required' => 'Tanggal Lahir tidak boleh kosong',
             'alamat.required' => 'Alamat tidak boleh kosong',
-            // 'provinsi.required' => 'Provinsi tidak boleh kosong',
-            // 'kota.required' => 'Kota tidak boleh kosong',
+            'provinsi.required' => 'Provinsi tidak boleh kosong',
+            'kota.required' => 'Kota tidak boleh kosong',
         ]);
 
         DB::beginTransaction();
@@ -62,7 +68,11 @@ class ProfileController extends Controller
                 'npwp' => $request->npwp,
                 'phone_number' => $request->no_telp,
                 'office_number' => $request->telp_kantor,
+                'tgl_lahir' => $request->tgl_lahir,
+                'tempat_lahir' => $request->tempat_lahir,
                 'alamat_kantor' => $request->alamat,
+                'provinsi' => $request->provinsi,
+                'kota' => $request->kota,
             ]);
             DB::commit();
             

@@ -76,7 +76,32 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="form-group col-4">
+                                    <label for="tempat_lahir">Tempat Lahir</label>
+                                    <select class="form-control" name="provinsi_lahir" id="provinsi_lahir" required>
+                                        <option>- Provinsi -</option>
+                                        @foreach ($provinces as $item)
+                                            <option value="{{ $item->id ?? '' }}" @if ($user->provinsi_lahir==$item->id) selected @endif>{{ $item->name ?? '' }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="tempat_lahir">&nbsp;</label>
+                                    <select class="form-control selectric" id='tempat_lahir' name='tempat_lahir'>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="tgl_lahir">Tanggal Lahir</label>
+                                    <input id="tgl_lahir" type="text" class="form-control datepicker" name="tgl_lahir" value="{{ $user->tgl_lahir }}">
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label for="alamat">Alamat Kantor</label>
@@ -89,6 +114,23 @@
                                     <input id="telp_kantor" type="text" class="form-control" name="telp_kantor" value="{{ $user->office_number }}">
                                     <div class="invalid-feedback">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label>Provinsi</label>
+                                    <select class="form-control" name="provinsi" id="provinsi" required>
+                                        <option>- Provinsi -</option>
+                                        @foreach ($provinces as $item)
+                                            <option value="{{ $item->id ?? '' }}"  @if ($user->provinsi==$item->id) selected @endif>{{ $item->name ?? '' }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group col-6">
+                                    <label>Kab/Kota</label>
+                                    <select class="form-control selectric" id='kota' name='kota'>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -119,7 +161,45 @@
             e.preventDefault();
             updateProfile();
         });
+
+        var prov = '{{ $user->provinsi }}';
+        var kota = '{{ $user->kota }}';
+        onChangeSelect('{{ route("cities") }}', prov, 'kota', kota);
+        
+        var prov_lahir = '{{ $user->provinsi_lahir }}';
+        var tempat_lahir = '{{ $user->tempat_lahir }}';
+        onChangeSelect('{{ route("cities") }}', prov_lahir, 'tempat_lahir', tempat_lahir);
+        
+        $('#provinsi').on('change', function () {
+            onChangeSelect('{{ route("cities") }}', $(this).val(), 'kota');
+        });
+
+        $('#provinsi_lahir').on('change', function () {
+            onChangeSelect('{{ route("cities") }}', $(this).val(), 'tempat_lahir');
+        });
     });
+
+    function onChangeSelect(url, id, name, val=null) {
+        // send ajax request to get the cities of the selected province and append to the select tag
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                $('#' + name).empty();
+                $('#' + name).append('<option>- Pilih Salah Satu -</option>');
+
+                $.each(data, function (key, value) {
+                    var sel = '';
+                    if(val==key) var sel = 'selected'; 
+                    
+                    $('#' + name).append('<option value="' + key + '" '+sel+'>' + value + '</option>');
+                });
+            }
+        });
+    }
 
     function updateProfile(){
         var formData = $("#form-update-profile").serialize();
