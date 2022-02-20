@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::put('/profile', [ProfileController::class,'update'])->name('profile');
+    Route::put('/profile/password', [ProfileController::class,'update_password'])->name('profile.password');
     // Route::put('/profile/attr', [ProfileController::class,'update'])->name('profile');
 
     //logout

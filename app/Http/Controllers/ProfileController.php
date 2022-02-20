@@ -84,4 +84,34 @@ class ProfileController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function update_password(Request $request)
+    {
+        if(bdecrypt($request->recent_password)!=Auth::user()->password){
+            return response()->json(['status' => 'error', 'message' => 'Password anda salah']);
+        }
+        $validated = $request->validate([
+            'password' => 'required|min:6',
+            'password_confirm' => 'required_with:password|same:password|min:6'
+        ],[
+            'password.required' => 'Password tidak boleh kosong',
+            'kota.required' => 'Kota tidak boleh kosong',
+        ]);
+        DB::beginTransaction();
+        try{
+            $user = User::find(Auth::user()->id);
+
+            $data = $user->update([
+                'password' => bcrypt($request->password)
+            ]);
+            DB::commit();
+            
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Ubah Password!']);
+        } catch(Exception $e){
+
+            DB::rollback();
+
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
 }
