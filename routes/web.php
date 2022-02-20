@@ -38,6 +38,9 @@ Route::get('villages', [DependantDropdownController::class,'villages'])->name('v
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class,'update'])->name('profile');
+    // Route::put('/profile/attr', [ProfileController::class,'update'])->name('profile');
+
     //logout
     Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');
 

@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('node_modules/weathericons/css/weather-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('node_modules/weathericons/css/weather-icons-wind.min.css') }}">
     <link rel="stylesheet" href="{{ asset('node_modules/summernote/dist/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}">
 
     <!-- custom top script -->
     @yield('top-script')
@@ -97,6 +100,10 @@
     <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
     <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('node_modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
+
 
     <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
