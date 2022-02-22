@@ -147,7 +147,7 @@
                                 <div class="row">
                                     <div class="form-group col-6">
                                         <label for="password" class="d-block">Password Sekarang</label>
-                                        <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="recent_password" autocomplete="off">
+                                        <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="current_password" autocomplete="off">
                                         <div id="pwindicator" class="pwindicator">
                                         <div class="bar"></div>
                                             <div class="label"></div>

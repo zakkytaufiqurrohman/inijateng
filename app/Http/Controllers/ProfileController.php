@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\DependantDropdownController;
 use DB;
+use Hash;
 
 class ProfileController extends Controller
 {
@@ -87,15 +88,16 @@ class ProfileController extends Controller
 
     public function update_password(Request $request)
     {
-        if(bdecrypt($request->recent_password)!=Auth::user()->password){
+        if (!Hash::check($request->current_password, $request->user()->password)) {
             return response()->json(['status' => 'error', 'message' => 'Password anda salah']);
         }
         $validated = $request->validate([
             'password' => 'required|min:6',
-            'password_confirm' => 'required_with:password|same:password|min:6'
+            'password_confirm' => 'required_with:password|same:password'
         ],[
             'password.required' => 'Password tidak boleh kosong',
-            'kota.required' => 'Kota tidak boleh kosong',
+            'password_confirm.required' => 'Konfirmasi Password tidak boleh kosong',
+            'password_confirm.same' => 'Konfirmasi Password tidak sesuai',
         ]);
         DB::beginTransaction();
         try{
