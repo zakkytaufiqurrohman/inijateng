@@ -34,7 +34,7 @@
                     Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.
                 </div>
                 <form>
-                    <input id="profile-picture-upload" type="file" name="profile-picture-upload" placeholder="Photo" onchange="loadFile(event)" capture>
+                    <input id="profile-picture-upload" type="file" name="profile-picture-upload" placeholder="Photo" onchange="loadFile(event)">
                 </form>
             </div>
         </div>
