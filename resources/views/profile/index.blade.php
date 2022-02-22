@@ -1,5 +1,20 @@
 @extends('layouts.app')
 
+@section('top-script')
+<style>
+#profile-picture-upload {
+    display: none;
+}
+
+#profile-picture{
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+	object-fit: cover;
+}
+
+</style>
+@endsection
 @section('body')
 @section('title','Halo, '.$user->name)
 <div class="section-body">
@@ -7,7 +22,7 @@
         <div class="col-12 col-md-12 col-lg-5">
             <div class="card profile-widget">
                 <div class="profile-widget-header">                     
-                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
+                    <img alt="image" src="assets/img/avatar/avatar-1.png" id="profile-picture" class="rounded-circle profile-widget-picture">
                 </div>
                 <div class="profile-widget-description">
                     <div class="profile-widget-name">
@@ -18,6 +33,9 @@
                     </div>
                     Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.
                 </div>
+                <form>
+                    <input id="profile-picture-upload" type="file" name="profile-picture-upload" placeholder="Photo" onchange="loadFile(event)" capture>
+                </form>
             </div>
         </div>
         <div class="col-12 col-md-12 col-lg-7">
@@ -214,7 +232,21 @@
         $('#provinsi_lahir').on('change', function () {
             onChangeSelect('{{ route("cities") }}', $(this).val(), 'tempat_lahir');
         });
+
+        $("#profile-picture").click(function(e) {
+            $("#profile-picture-upload").click();
+        });
+
+        
     });
+
+    function loadFile(event){
+        var output = document.getElementById('profile-picture');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function(){
+            URL.revokeObjectURL(output.src)
+        }
+    }
 
     function onChangeSelect(url, id, name, val=null) {
         // send ajax request to get the cities of the selected province and append to the select tag
