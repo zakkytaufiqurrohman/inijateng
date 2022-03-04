@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginCustomeController;
 use App\Http\Controllers\Auth\RegisterCostumeController;
 use App\Http\Controllers\DependantDropdownController;
+use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\Role\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +42,30 @@ Route::middleware('auth')->group(function () {
     //logout
     Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');
 
+    // role
+    Route::name('role')->prefix('roles')->group(function(){
+        Route::get('/', [RoleController::class,'index']);
+        Route::post('/', [RoleController::class, 'store']);
+        Route::delete('/', [RoleController::class, 'destroy']);
+        Route::put('/', [RoleController::class, 'update']);
+        Route::get('/data', [RoleController::class,'data'])->name('.data');
+        Route::get('/getPermission', [RoleController::class,'getPermission'])->name('.getPermission');
+        Route::get('/show', [RoleController::class,'show'])->name('.show');
+
+    
+    });
+    //permission
+    Route::name('permission')->prefix('/permission')->group(function () {
+        Route::get('/', [PermissionController::class, 'index'])->name('.index');
+        Route::post('/', [PermissionController::class, 'store']);
+        Route::put('/', [PermissionController::class, 'update']);
+        Route::get('/data', [PermissionController::class, 'data'])->name('.data');
+        Route::delete('/', [PermissionController::class, 'destroy'])->name('.delete');
+        Route::get('/show', [PermissionController::class,'show'])->name('.show');
+    });
+
 });
+
+Route::view('/table', 'components.table');
+Route::view('/form', 'components.form');
+Route::view('/register', 'components.register');
