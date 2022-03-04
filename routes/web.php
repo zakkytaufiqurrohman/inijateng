@@ -66,6 +66,6 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::view('/table', 'components.table');
-Route::view('/form', 'components.form');
-Route::view('/register', 'components.register');
+// Route::view('/table', 'components.table');
+// Route::view('/form', 'components.form');
+// Route::view('/register', 'components.register');
