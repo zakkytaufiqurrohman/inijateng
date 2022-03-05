@@ -15,14 +15,14 @@ class AddColumnsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('npwp',50)->notNull();
-            $table->string('phone_number',15)->notNull();
-            $table->string('office_number',15)->notNull();
+            $table->string('nik',16)->notNull();
+            $table->string('wa',15)->notNull();//pakai +62
             $table->integer('kota')->unsigned();
             $table->integer('provinsi')->unsigned();
-            $table->string('alamat_kantor',50)->notNull();
             $table->integer('tempat_lahir')->unsigned()->notNull();
             $table->date('tgl_lahir')->notNull();
+            $table->string('status_anggota',10)->notNull();
+            $table->string('foto',200);
         });
     }
 
@@ -35,14 +35,14 @@ class AddColumnsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('npwp');
-            $table->dropColumn('phone_number');
-            $table->dropColumn('office_number');
+            $table->dropColumn('nik');
+            $table->dropColumn('wa');
             $table->dropColumn('kota');
             $table->dropColumn('provinsi');
-            $table->dropColumn('alamat_kantor');
             $table->dropColumn('tempat_lahir');
             $table->dropColumn('tgl_lahir');
+            $table->dropColumn('status_anggota');
+            $table->dropColumn('foto');
         });
     }
 }
