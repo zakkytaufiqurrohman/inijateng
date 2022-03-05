@@ -23,14 +23,13 @@ class User extends Authenticatable
         'email',
         'password',
         'nik',
-        'npwp',
-        'phone_number',
-        'office_number',
-        'alamat_kantor',
+        'wa',
         'kota',
         'provinsi',
         'tempat_lahir',
-        'tgl_lahir'
+        'tgl_lahir',
+        'status_anggota',
+        'foto'
     ];
 
     /**
