@@ -19,8 +19,29 @@ class RegisterCostumeController extends Controller
         $provinces = $dependant->provinces();
         // $provinces = $dependant::provinces();
 
-        return view('auth.register',compact('provinces'));
+        return view('auth.register2',compact('provinces'));
     } 
+
+    public function check_user(Request $request)
+    {
+        $validated = $request->validate([
+            'nik' => 'required'
+        ],[
+            'nik.required' => 'NIK Masih Kosong'
+        ]);
+
+        try {
+            $user = User::where('nik',$request->nik)->first();
+            if(!$user){
+                return response()->json(['status' => 'error', 'message' => 'NIK Belum Terdaftar, harap hubungi admin']);
+            }
+            $user['is_check'] = (!empty($user->password)) ? 1 : 0;
+            
+            return response()->json(['status' => 'success', 'message' => $user]);
+        } catch(Exception $e){
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
 
     public function register(Request $request)
     {
