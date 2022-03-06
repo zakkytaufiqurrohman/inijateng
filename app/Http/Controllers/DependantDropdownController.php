@@ -26,4 +26,16 @@ class DependantDropdownController extends Controller
     {
         return \Indonesia::findDistrict($request->id, ['villages'])->villages->pluck('name', 'id');
     }
+
+    public function searchBy($search,$id)
+    {
+        if($search=='province')
+            $data = \Indonesia::findProvince($id);
+        else if($search=='cities')
+            $data = \Indonesia::findCity($id, ['province']);
+        else 
+            $data = \Indonesia::allProvinces();
+        
+        return $data;
+    }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use DB;
 use App\Http\Controllers\DependantDropdownController;
+use App\Http\Controllers\Auth\LoginCustomeController;
 // use DataTables;
 
 class RegisterCostumeController extends Controller
@@ -19,62 +20,60 @@ class RegisterCostumeController extends Controller
         $provinces = $dependant->provinces();
         // $provinces = $dependant::provinces();
 
-        return view('auth.register',compact('provinces'));
+        return view('auth.register2',compact('provinces'));
     } 
+
+    public function check_user(Request $request)
+    {
+        $validated = $request->validate([
+            'nik' => 'required'
+        ],[
+            'nik.required' => 'NIK Masih Kosong'
+        ]);
+
+        try {
+            $user = User::where('nik',$request->nik)->first();
+            if(!$user){
+                return response()->json(['status' => 'error', 'message' => 'NIK Belum Terdaftar, harap hubungi admin']);
+            }
+            $user['is_check'] = (!empty($user->password)) ? 1 : 0;
+            
+            return response()->json(['status' => 'success', 'message' => $user]);
+        } catch(Exception $e){
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
 
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'nama' => 'required',
-            'email' => 'required|unique:users',
-            'nik' => 'required|unique:users|min:16|max:16',
-            'npwp' => 'required',
-            'no_telp' => 'required',
-            'telp_kantor' => 'required',
-            'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required',
-            'alamat' => 'required',
-            'provinsi' => 'required',
-            'kota' => 'required',
+            'user_id' => 'required',
+            'email' => 'required',
             'password' => 'required|min:6',
             'password_confirm' => 'required_with:password|same:password|min:6'
         ],[
-            'nama.required' => 'Nama tidak boleh kosong',
-            'nik.required' => 'NIK tidak boleh kosong',
-            'nik.unique' => 'NIK sudah terdaftar',
-            'nik.min|nik.max' => 'NIK harus terdiri dari 16 karakter',
+            'user_id.required' => 'ID tidak ada',
             'email.required' => 'Email tidak boleh kosong',
-            'email.unique' => 'Email sudah terdaftar',
             'password.required' => 'Password tidak boleh kosong',
-            'npwp.required' => 'npwp tidak boleh kosong',
-            'no_telp.required' => 'No Telp tidak boleh kosong',
-            'telp_kantor.required' => 'Telp Kantor tidak boleh kosong',
-            'tempat_lahir.required' => 'Tempat Lahir tidak boleh kosong',
-            'tgl_lahir.required' => 'Tanggal Lahir tidak boleh kosong',
-            'alamat.required' => 'Alamat tidak boleh kosong',
-            'provinsi.required' => 'Provinsi tidak boleh kosong',
-            'kota.required' => 'Kota tidak boleh kosong',
         ]);
 
         DB::beginTransaction();
         try{
 
-            $data = User::create([
-                'name' => $request->nama,
-                'nik' => $request->nik,
-                'password' => bcrypt($request->password),
+            $user = User::where('id',$request->user_id)->first();
+            $update = $user->update([
                 'email' => $request->email,
-                'npwp' => $request->npwp,
-                'phone_number' => $request->no_telp,
-                'office_number' => $request->telp_kantor,
-                'alamat_kantor' => $request->alamat,
-                'kota' => $request->kota,
-                'provinsi' => $request->provinsi,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tgl_lahir' => $request->tgl_lahir
+                'password' => bcrypt($request->password)
             ]);
             DB::commit();
             
+            $request->merge([
+                'nik' => $user->nik
+            ]);
+            
+            $login = new LoginCustomeController;
+            $login->login($request);
+
             return response()->json(['status' => 'success', 'message' => 'Pendaftaran Berhasil!']);
         } catch(Exception $e){
 

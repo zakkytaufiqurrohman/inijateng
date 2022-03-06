@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginCustomeController;
 use App\Http\Controllers\Auth\RegisterCostumeController;
 use App\Http\Controllers\DependantDropdownController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
@@ -29,8 +30,12 @@ Auth::routes();
 Route::get('/login', [LoginCustomeController::class,'index'])->name('login');
 Route::post('/login', [LoginCustomeController::class,'login'])->name('login');
 
+Route::get('/register1', [RegisterCostumeController::class,'index'])->name('register1');
+Route::post('/register1', [RegisterCostumeController::class,'register'])->name('register1');
+
 Route::get('/register', [RegisterCostumeController::class,'index'])->name('register');
 Route::post('/register', [RegisterCostumeController::class,'register'])->name('register');
+Route::post('/register/check', [RegisterCostumeController::class,'check_user'])->name('register.check');
 
 // Laravolt/indonesia
 Route::get('provinces', [DependantDropdownController::class,'provinces'])->name('provinces');
@@ -40,6 +45,10 @@ Route::get('villages', [DependantDropdownController::class,'villages'])->name('v
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/profile', [ProfileController::class,'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class,'update'])->name('profile');
+    Route::put('/profile/password', [ProfileController::class,'update_password'])->name('profile.password');
+    // Route::put('/profile/attr', [ProfileController::class,'update'])->name('profile');
 
     //logout
     Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');
