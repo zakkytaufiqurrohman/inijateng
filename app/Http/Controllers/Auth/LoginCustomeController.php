@@ -13,7 +13,7 @@ class LoginCustomeController extends Controller
     //
     public function index()
     {
-        return view('auth.auth');
+        return view('auth.login');
     }
 
     public function login(Request $request)

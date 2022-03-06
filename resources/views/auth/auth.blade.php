@@ -1,92 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- @extends('layouts.base') -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login &mdash; Sparepart</title>
+@section('body')
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <!-- CSS Libraries -->
-    <!-- <link rel="stylesheet" href="{{ asset('node_modules/bootstrap-social/bootstrap-social.css') }}"> -->
-
-    <!-- Template CSS -->
-    <!-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-    <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}"> -->
-</head>
-
-<body>
-    <div id="app">
-        <section class="section">
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                        <div class="login-brand">
-                            <img src="{{ asset('assets/img/logo1.png') }}" alt="logo" width="150" class="shadow-light rounded-circle">
+<!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+<main>
+    <!-- Section -->
+    <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+        <div class="container">
+            <!-- <p class="text-center">
+                <a href="{{ url('/home') }}" class="d-flex align-items-center justify-content-center">
+                    <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                    Back to homepage
+                </a>
+            </p> -->
+            <div class="row justify-content-center form-bg-image">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                        <div class="text-center text-md-center mb-4 mt-md-0">
+                            <h1 class="mb-0 h3">IPPAT</h1>
                         </div>
-
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h4>Login</h4>
+                        <form id="form-login" action="" class="mt-4">
+                            @csrf
+                            <!-- Form -->
+                            <div class="form-group mb-4">
+                                <label for="nik">Nik</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                    </span>
+                                    <input type="number" class="form-control" name="nik" placeholder="Masukkan NIK" id="nik" autofocus required>
+                                </div>  
                             </div>
-
-                            <div class="card-body">
-                                <form id='form-login' method="POST" action="#" class="needs-validation" novalidate="">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="nik">nik</label>
-                                        <input id="nik" type="nik" class="form-control" name="nik" tabindex="1" required autofocus>
-                                        <div class="invalid-feedback">
-                                            nik Tidak Boleh Kosong
-                                        </div>
+                            <!-- End of Form -->
+                            <div class="form-group">
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="password"> Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon2">
+                                            <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                                        </span>
+                                        <input type="password"  name = "password" placeholder="Password" class="form-control" id="password" required>
+                                    </div>  
+                                </div>
+                                <!-- End of Form -->
+                                <div class="d-flex justify-content-between align-items-top mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="remember">
+                                        <label class="form-check-label mb-0" for="remember">
+                                            Remember me
+                                        </label>
                                     </div>
-
-                                    <div class="form-group">
-                                        <div class="d-block">
-                                            <label for="password" class="control-label">Password</label>
-                                        </div>
-                                        <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                                        <div class="invalid-feedback">
-                                            Passoword Tidak Boleh Kosong
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Login
-                                        </button>
-                                    </div>
-                                </form>
+                                    <div><a href="./forgot-password.html" class="small text-right">Lupa Password?</a></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="simple-footer">
-                        Copyright &copy;2021 - {{date('Y')}} PT Growell Indo Metal All Right Reserved designed by Stisla {{ Date('Y')}}
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-gray-800">Sign in</button>
+                            </div>
+                        </form>
+                        <div class="d-flex justify-content-center align-items-center mt-4">
+                            <span class="fw-normal">
+                                Not registered?
+                                <a href="{{ route('register') }}" class="fw-bold">Create account</a>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</main>
+@section('bottom-script')
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-    <!-- General JS Scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-    <!-- JS Libraies -->
-
-    <!-- Template JS File -->
-    <script src="{{ asset('assets/js/scripts.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <!-- toast -->
-
-    <script>
+<script>
         $(function() {
             "use strict";
             $("#form-login").on("submit", function(e) {
@@ -102,7 +89,7 @@
         function login() {
             var formData = $("#form-login").serialize();
             $.ajax({
-                url: "{{route('auth')}}",
+                url: "{{route('login')}}",
                 type: "POST",
                 dataType: "json",
                 data: formData,
@@ -118,31 +105,30 @@
                 },
                 success(result) {
                     if (result['status'] == 'success') {
-                        // iziToast.success({
-                        //     title: "success",
-                        //     message: result.message,
-                        //     position: 'topRight'
-                        // });
-                        window.location = "/";
+                        iziToast.success({
+                            title: "success",
+                            message: result.message,
+                            position: 'topRight'
+                        });
+                        window.location = "/home";
                     } else {
-                        // iziToast.error({
-                        //     title: "Error",
-                        //     message: result.message,
-                        //     position: 'topRight'
-                        // });
+                        iziToast.error({
+                            title: "Error",
+                            message: result.message,
+                            position: 'topRight'
+                        });
                     }
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
-                    // iziToast.success({
-                    //         title: "error",
-                    //         message: err.message,
-                    //         position: 'topRight'
-                    // });
+                    iziToast.success({
+                            title: "error",
+                            message: err.message,
+                            position: 'topRight'
+                    });
                 }
             });
         }
     </script>
-</body>
-
-</html>
+@endsection
+@endsection
