@@ -34,6 +34,7 @@ Route::get('/register1', [RegisterCostumeController::class,'index'])->name('regi
 Route::post('/register1', [RegisterCostumeController::class,'register'])->name('register1');
 
 Route::get('/register', [RegisterCostumeController::class,'index'])->name('register');
+Route::post('/register', [RegisterCostumeController::class,'register'])->name('register');
 Route::post('/register/check', [RegisterCostumeController::class,'check_user'])->name('register.check');
 
 // Laravolt/indonesia

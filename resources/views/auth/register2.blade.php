@@ -57,6 +57,7 @@
                                         <div class="form-group col-12">
                                             <label for="email">Email</label>
                                             <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+                                            <input id="user_id" type="hidden" class="form-control" name="user_id" >
                                         </div>
                                     </div>
                                     <div class="row">
@@ -115,6 +116,11 @@
                 e.preventDefault();
                 searchUser();
             });
+
+            $("#form-register").on("submit", function(e) {
+                e.preventDefault();
+                register();
+            });
         });
 
         function to(url){
@@ -149,7 +155,7 @@
                             $('#form-register').removeClass('d-none');
                             $('#nik').attr('readonly',true);
 
-                            $('#nik').val(mess.nik);
+                            $('#user_id').val(mess.id);
                             $('#email').val(mess.email);
                             $('#password').val('');
                             $('#password_confirm').val('');
@@ -202,6 +208,8 @@
                         message: result.message,
                         position: 'topRight'
                     });
+
+                    to('{{ route("home") }}')                    
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
