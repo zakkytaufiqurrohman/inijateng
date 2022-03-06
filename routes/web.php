@@ -73,7 +73,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/data', [MasterDataController::class, 'data'])->name('.data');
         Route::delete('/', [MasterDataController::class, 'destroy'])->name('.delete');
         Route::get('/show', [MasterDataController::class,'show'])->name('.show');
+        Route::get('/download/{id}', [MasterDataController::class,'download'])->name('.download');
+       
     });
+
+    // read dari qc code
+    Route::get('/barcode/{id}', [MasterDataController::class,'readQr'])->name('.read_qr');
 
 });
 
