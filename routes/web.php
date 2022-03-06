@@ -7,6 +7,8 @@ use App\Http\Controllers\DependantDropdownController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Role\PermissionController;
+use App\Http\Controllers\MasterDataController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +72,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/data', [PermissionController::class, 'data'])->name('.data');
         Route::delete('/', [PermissionController::class, 'destroy'])->name('.delete');
         Route::get('/show', [PermissionController::class,'show'])->name('.show');
+    });
+    //masterdata
+    Route::name('master_data')->prefix('/master_data')->group(function () {
+        Route::get('/', [MasterDataController::class, 'index'])->name('.index');
+        Route::post('/', [MasterDataController::class, 'store']);
+        Route::put('/', [MasterDataController::class, 'update']);
+        Route::get('/data', [MasterDataController::class, 'data'])->name('.data');
+        Route::delete('/', [MasterDataController::class, 'destroy'])->name('.delete');
+        Route::get('/show', [MasterDataController::class,'show'])->name('.show');
     });
 
 });
