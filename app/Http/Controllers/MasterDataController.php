@@ -179,6 +179,6 @@ class MasterDataController extends Controller
         if(!$data){
             return 'data tidak di temukan';
         }
-        return $data->email;
+        return view('profile.preview',compact('data'));
     }
 }
