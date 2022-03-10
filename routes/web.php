@@ -8,7 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
-
+use App\Http\Controllers\Page\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,11 +21,13 @@ use App\Http\Controllers\MasterDataController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
+
+Route::get('/', [HomeController::class,'index']);
 
 Route::get('/login', [LoginCustomeController::class,'index'])->name('login');
 Route::post('/login', [LoginCustomeController::class,'login'])->name('login');

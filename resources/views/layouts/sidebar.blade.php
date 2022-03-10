@@ -23,6 +23,16 @@
                    
                 </ul>
             </li>
+            <li class="nav-item {{ (request()->is('data_diri*')) ? 'active' : '' }}">
+                <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Data Diri</span></a>
+            </li>
+            <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
+                <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-file-alt"></i><span>Berkas</span></a>
+            </li>
+            <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
+                <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang Bersama</span></a>
+            </li>
+            
             
     </aside>
 </div>
