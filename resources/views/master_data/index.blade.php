@@ -19,6 +19,7 @@
                                 <th>Nik</th>
                                 <th>Email</th>
                                 <th>Status Anggota</th>
+                                <th>Barcode</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -166,6 +167,10 @@
                 },
                 {
                     data: 'status_anggota',
+                    "width": "20%"
+                },
+                {
+                    data: 'barcode',
                     "width": "20%"
                 },
                 {

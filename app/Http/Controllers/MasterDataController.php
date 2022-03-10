@@ -28,6 +28,25 @@ class MasterDataController extends Controller
 
                 return $action;
             })
+            ->addColumn('barcode',function ($data) {
+                if($data->status_anggota == 'notaris'){
+                   $kode = $data->nik;
+                   $kode = $this->base64url_encode($kode);
+                   $kode =  config('app.url').'/barcode/'.$kode;
+                   // generate barcode
+                   $images = \DNS2D::getBarcodePNGPath($kode, 'QRCODE',5,5);
+                   // get image patch
+                   $nameImage = $images;
+                   $nameImage = str_replace("/barcode", "", $nameImage);
+                   $url= asset("barcode/$nameImage");
+   
+                   $barcode = '';
+                   $barcode .= "<a href='master_data/download$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+   
+                   return $barcode;
+
+                }
+            })
             ->escapeColumns([])
             ->addIndexColumn()
             ->make(true);
@@ -147,5 +166,31 @@ class MasterDataController extends Controller
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
+    }
+
+    public function download($filepath)
+    {
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
+    }
+
+    public function readQr($id)
+    {
+        $id = $this->base64url_decode($id);
+        $data = User::where('nik',$id)->first();
+        if(!$data){
+            return 'data tidak di temukan';
+        }
+        return view('profile.preview',compact('data'));
+    }
+
+    function base64url_encode($plainText)
+    {
+        return strtr(base64_encode($plainText), '+=', '-_,');
+    }
+
+    function base64url_decode($b64Text)
+    {
+        return base64_decode(strtr($b64Text, '-_,','+='));
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\NotarisController;
 
+use App\Http\Controllers\Page\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,13 @@ use App\Http\Controllers\NotarisController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
+
+Route::get('/', [HomeController::class,'index']);
 
 Route::get('/login', [LoginCustomeController::class,'index'])->name('login');
 Route::post('/login', [LoginCustomeController::class,'login'])->name('login');
@@ -83,6 +86,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/data', [MasterDataController::class, 'data'])->name('.data');
         Route::delete('/', [MasterDataController::class, 'destroy'])->name('.delete');
         Route::get('/show', [MasterDataController::class,'show'])->name('.show');
+        Route::get('/download/{id}', [MasterDataController::class,'download'])->name('.download');
+       
     });
 
     //Notaris
@@ -90,6 +95,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/data_diri', [NotarisController::class, 'data_diri'])->name('.data_diri');
         Route::get('/data_diri/edit', [NotarisController::class, 'data_diri_edit'])->name('.data_diri.edit');
     });
+    // read dari qc code
+    Route::get('/barcode/{id}', [MasterDataController::class,'readQr'])->name('.read_qr');
 
 });
 
