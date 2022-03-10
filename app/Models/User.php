@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         $this->notify(new PasswordReset($token));
     }
+
+    public function detail_notaris()
+    {
+        return $this->hasOne(DetailNotaris::class,'user_id','id');
+    }
 }

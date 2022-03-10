@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
+use App\Http\Controllers\NotarisController;
 
 
 /*
@@ -82,6 +83,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/data', [MasterDataController::class, 'data'])->name('.data');
         Route::delete('/', [MasterDataController::class, 'destroy'])->name('.delete');
         Route::get('/show', [MasterDataController::class,'show'])->name('.show');
+    });
+
+    //Notaris
+    Route::name('notaris')->prefix('/notaris')->group(function () {
+        Route::get('/data_diri', [NotarisController::class, 'data_diri'])->name('.data_diri');
+        Route::get('/data_diri/edit', [NotarisController::class, 'data_diri_edit'])->name('.data_diri.edit');
     });
 
 });
