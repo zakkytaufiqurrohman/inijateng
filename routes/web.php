@@ -48,7 +48,7 @@ Route::get('districts', [DependantDropdownController::class,'districts'])->name(
 Route::get('villages', [DependantDropdownController::class,'villages'])->name('villages');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::put('/profile', [ProfileController::class,'update'])->name('profile');
     Route::put('/profile/password', [ProfileController::class,'update_password'])->name('profile.password');
