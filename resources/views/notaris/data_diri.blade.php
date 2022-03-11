@@ -18,6 +18,9 @@
     font-weight: 600;
     font-size: 14px;
 }
+/* .button-header-custom{
+    float: right;   
+} */
 </style>
 @endsection
 
@@ -30,6 +33,9 @@
             <div class="card card-primary profile-widget">
                 <div class="profile-widget-header">                     
                     <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" id='profile-picture-custom' class="rounded-circle profile-widget-picture profile-picture-custom">
+                    <div class="button-header-custom float-right p-3">
+                        <a href="{{ route('notaris.data_diri.edit') }}" class="btn btn-lg btn-primary"><span class="d-none d-md-inline">Update&nbsp;</span><i class="fa fa-edit"></i></a>
+                    </div>
                 </div>
                 <div class="profile-widget-description">
                     <div class="profile-widget-name">
@@ -115,7 +121,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="{{ route('notaris.data_diri.edit') }}" class="btn btn-lg btn-primary">Update&nbsp;<i class="fa fa-edit"></i></a>
+                    {{-- <a href="{{ route('notaris.data_diri.edit') }}" class="btn btn-lg btn-primary">Update&nbsp;<i class="fa fa-edit"></i></a> --}}
                 </div>
             </div>
         </div>
