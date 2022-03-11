@@ -54,27 +54,27 @@
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="npwp">NPWP</label>
-                            <input id="npwp" type="text" class="form-control" name="npwp"  value="{{ $user->detail_notaris->npwp }}" disabled>
+                            <input id="npwp" type="text" class="form-control" name="npwp"  value="{{ $user->npwp }}" disabled>
                         </div>
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="telephone">No. Telp</label>
-                            <input id="telephone" type="text" class="form-control" name="telephone"  value="{{ $user->detail_notaris->telephone }}" disabled>
+                            <input id="telephone" type="text" class="form-control" name="telephone"  value="{{ $user->telephone }}" disabled>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="alamat">Alamat Kantor</label>
-                            <input id="alamat" type="text" class="form-control" name="alamat"  value="{{ $user->detail_notaris->alamat_kantor }}" disabled>
+                            <input id="alamat" type="text" class="form-control" name="alamat"  value="{{ $user->alamat_kantor }}" disabled>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="no_kta_ini">No. KTA INI</label>
-                            <input id="no_kta_ini" type="text" class="form-control" name="no_kta_ini"  value="{{ $user->detail_notaris->no_kta_ini }}" disabled>
+                            <input id="no_kta_ini" type="text" class="form-control" name="no_kta_ini"  value="{{ $user->no_kta_ini }}" disabled>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="no_kta_ppat">No. KTA PPAT</label>
-                            <input id="no_kta_ppat" type="text" class="form-control" name="no_kta_ppat"  value="{{ $user->detail_notaris->no_kta_ppat }}" disabled>
+                            <input id="no_kta_ppat" type="text" class="form-control" name="no_kta_ppat"  value="{{ $user->no_kta_ppat }}" disabled>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="ktp_img">Foto KTP</label>
-                            <input id="ktp_img" type="text" class="form-control" name="ktp_img"  value="{{ $user->detail_notaris->ktp_img }}" disabled>
+                            <input id="ktp_img" type="text" class="form-control" name="ktp_img"  value="{{ $user->ktp_img }}" disabled>
                         </div> 
                     </div>
                 </div>

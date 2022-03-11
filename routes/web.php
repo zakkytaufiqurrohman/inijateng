@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
     //Notaris
     Route::name('notaris')->prefix('/notaris')->group(function () {
         Route::get('/data_diri', [NotarisController::class, 'data_diri'])->name('.data_diri');
+        Route::post('/data_diri', [NotarisController::class, 'store'])->name('.data_diri');
         Route::get('/data_diri/edit', [NotarisController::class, 'data_diri_edit'])->name('.data_diri.edit');
     });
     // read dari qc code
