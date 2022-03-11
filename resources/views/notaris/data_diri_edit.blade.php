@@ -88,15 +88,64 @@
 <script>
     $(function() {
         "use strict";
+        // $("#form-data-diri").on("submit", function(e) {
+        //     e.preventDefault();
+        //     submitData();
+        // });
+
         $("#form-data-diri").on("submit", function(e) {
             e.preventDefault();
-            submitData();
+            var form=$("body");
+            form.find('.invalid-feedback').remove();
+            $('input').removeClass('is-invalid');
+            
+            $.ajax({
+                url: "{{ route('notaris.data_diri') }}",
+                type: "POST",
+                dataType: "json",
+                data: new FormData(this),
+                processData: false,
+				contentType: false,
+                beforeSend() {
+                    $("input").attr('disabled', 'disabled');
+                    $("button").attr('disabled', 'disabled');
+                    $("select").attr('disabled', 'disabled');
+                    $('input').removeClass('is-invalid');
+                    $('.invalid-feedback').remove();
+                },
+                complete(){
+                    $("input").removeAttr('disabled', 'disabled');
+                    $("button").removeAttr('disabled', 'disabled');
+                    $("select").removeAttr('disabled', 'disabled');
+                },
+                success(result){
+                                        
+                    iziToast.success({
+                        title: result.status,
+                        message: result.message,
+                        position: 'topRight'
+                    });
+                },
+                error(xhr, status, error) {
+                    var err = eval('(' + xhr.responseText + ')');
+                    iziToast.error({
+                        title: 'Error',
+                        message: err.message,
+                        position: 'topRight'
+                    });
+                },
+                error:function (response){
+                    $.each(response.responseJSON.errors,function(key,value){
+                        $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                    })
+                }
+            });
         });
     });
 
     function submitData(){
         var formData = $("#form-data-diri").serialize();
-
+        var ktp_img = $('#ktp_img').files[0];
         $.ajax({
             url: "{{ route('notaris.data_diri') }}",
             type: "POST",
