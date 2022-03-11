@@ -70,16 +70,52 @@
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="no_kta_ppat">No. KTA PPAT</label>
-                            <input id="no_kta_ppat" type="text" class="form-control" name="no_kta_ppat"  value="{{ $user->no_kta_ppat }}" disabled>
+                            <input id="no_kta_ppat" type="text" class="form-control" name="no_kta_ppat"  value="{{ $user->no_kta_ppt }}" disabled>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="ktp_img">Foto KTP</label>
-                            <input id="ktp_img" type="text" class="form-control" name="ktp_img"  value="{{ $user->ktp_img }}" disabled>
+                            <div class="d-block">
+                                @if(!empty($user->ktp_img))
+                                    <button class="btn btn-success">Sudah Diupload &nbsp;<i class="fa fa-check"></i></button>
+                                @else
+                                    <button class="btn btn-danger">Belum Diupload &nbsp;<i class="fa fa-check"></i></button>
+                                @endif
+                            </div>
+                        </div> 
+                        <div class="form-group col-md-12 col-lg-4">
+                            <label for="ktp_img">SK Notaris</label>
+                            <div class="d-block">
+                                @if(!empty($user->sk_notaris))
+                                    <button class="btn btn-success">Sudah Diupload &nbsp;<i class="fa fa-check"></i></button>
+                                @else
+                                    <button class="btn btn-danger">Belum Diupload &nbsp;<i class="fa fa-check"></i></button>
+                                @endif
+                            </div>
+                        </div> 
+                        <div class="form-group col-md-12 col-lg-4">
+                            <label for="ktp_img">SK PPT</label>
+                            <div class="d-block">
+                                @if(!empty($user->sk_ppt))
+                                    <button class="btn btn-success">Sudah Diupload &nbsp;<i class="fa fa-check"></i></button>
+                                @else
+                                    <button class="btn btn-danger">Belum Diupload &nbsp;<i class="fa fa-check"></i></button>
+                                @endif
+                            </div>
+                        </div> 
+                        <div class="form-group col-md-12 col-lg-4">
+                            <label for="ktp_img">Scan NPWP</label>
+                            <div class="d-block">
+                                @if(!empty($user->scan_npwp))
+                                    <button class="btn btn-success">Sudah Diupload &nbsp;<i class="fa fa-check"></i></button>
+                                @else
+                                    <button class="btn btn-danger">Belum Diupload &nbsp;<i class="fa fa-check"></i></button>
+                                @endif
+                            </div>
                         </div> 
                     </div>
                 </div>
-                <div class="card-footer text-right">
-                    <a href="{{ route('notaris.data_diri.edit') }}" class="btn btn-lg btn-warning">Update Data Diri</a>
+                <div class="card-footer text-center">
+                    <a href="{{ route('notaris.data_diri.edit') }}" class="btn btn-lg btn-primary">Update&nbsp;<i class="fa fa-edit"></i></a>
                 </div>
             </div>
         </div>

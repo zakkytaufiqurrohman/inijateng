@@ -93,6 +93,26 @@
         //     submitData();
         // });
 
+        $('#ktp_img').on('change',function(){
+            var fileName = $('#ktp_img')[0].files[0].name;
+            $(this).next('.custom-file-label').html(fileName);
+        })
+
+        $('#sk_notaris').on('change',function(){
+            var fileName = $('#sk_notaris')[0].files[0].name;
+            $(this).next('.custom-file-label').html(fileName);
+        })
+
+        $('#sk_ppt').on('change',function(){
+            var fileName = $('#sk_ppt')[0].files[0].name;
+            $(this).next('.custom-file-label').html(fileName);
+        })
+
+        $('#scan_npwp').on('change',function(){
+            var fileName = $('#scan_npwp')[0].files[0].name;
+            $(this).next('.custom-file-label').html(fileName);
+        })
+
         $("#form-data-diri").on("submit", function(e) {
             e.preventDefault();
             var form=$("body");
@@ -142,49 +162,5 @@
             });
         });
     });
-
-    function submitData(){
-        var formData = $("#form-data-diri").serialize();
-        var ktp_img = $('#ktp_img').files[0];
-        $.ajax({
-            url: "{{ route('notaris.data_diri') }}",
-            type: "POST",
-            dataType: "json",
-            data: formData,
-            beforeSend() {
-                $("input").attr('disabled', 'disabled');
-                $("button").attr('disabled', 'disabled');
-                $("select").attr('disabled', 'disabled');
-                $('input').removeClass('is-invalid');
-                $('.invalid-feedback').remove();
-            },
-            complete(){
-                $("input").removeAttr('disabled', 'disabled');
-                $("button").removeAttr('disabled', 'disabled');
-                $("select").removeAttr('disabled', 'disabled');
-            },
-            success(result){
-                                    
-                iziToast.success({
-                    title: result.status,
-                    message: result.message,
-                    position: 'topRight'
-                });
-            },
-            error(xhr, status, error) {
-                var err = eval('(' + xhr.responseText + ')');
-                iziToast.error({
-                    title: 'Error',
-                    message: err.message,
-                    position: 'topRight'
-                });
-            },
-            error:function (response){
-                $.each(response.responseJSON.errors,function(key,value){
-                    $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
-                })
-            }
-        });
-    }
 </script>
 @endsection
