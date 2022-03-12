@@ -49,10 +49,13 @@ Route::get('villages', [DependantDropdownController::class,'villages'])->name('v
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [ProfileController::class,'index'])->name('profile');
-    Route::put('/profile', [ProfileController::class,'update'])->name('profile');
-    Route::put('/profile/password', [ProfileController::class,'update_password'])->name('profile.password');
-    // Route::put('/profile/attr', [ProfileController::class,'update'])->name('profile');
+
+    Route::name('profile')->prefix('/profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::put('/', [ProfileController::class, 'update']);
+        Route::put('/password', [ProfileController::class, 'update_password'])->name('.password');
+        Route::put('/photo', [ProfileController::class, 'update_photo'])->name('.photo');
+    });
 
     //logout
     Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');

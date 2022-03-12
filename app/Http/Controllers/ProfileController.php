@@ -107,4 +107,36 @@ class ProfileController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function update_photo(Request $request)
+    {
+        $validated = $request->validate([
+            'photo_img' => 'mimes:jpg,bmp,png',
+        ],[
+            '*.mimes' => 'Format tidak sesuai, periksa kembali',
+        ]);
+        DB::beginTransaction();
+        try{
+            $user_id = Auth::user()->id;
+            $user = User::find($user_id);
+            $foto = $request->photo_img;
+
+            if(!empty($foto)){
+                $filename_foto = $user_id.'-'.time().'.'.$foto->getClientOriginalExtension();
+
+                $data = $user->update([
+                    'foto' => $filename_foto
+                ]);
+                $foto->move(public_path('upload/foto'),$filename_foto);
+            }
+
+            DB::commit();
+            
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Ubah Foto!']);
+        } catch(Exception $e){
+            DB::rollback();
+
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
 }

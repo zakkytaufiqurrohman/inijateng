@@ -2,7 +2,7 @@
 
 @section('top-script')
 <style>
-#profile-picture-upload {
+#photo_img {
     display: none;
 }
 
@@ -12,41 +12,36 @@
     height: 100px;
 	object-fit: cover;
 }
-
 </style>
 @endsection
 @section('body')
 @section('title','Halo, '.$user->name)
 <div class="section-body">
     <div class="row mt-sm-4">
-        <div class="col-12 col-md-12 col-lg-5">
+        <div class="col-12 col-md-12 col-lg-7">
             <div class="card profile-widget">
                 <div class="profile-widget-header">                     
-                    <img alt="image" src="assets/img/avatar/avatar-1.png" id="profile-picture" class="rounded-circle profile-widget-picture">
+                    @if(!empty($user->foto))
+                        <img alt="image" src="{{ asset('upload/foto/'.$user->foto)}}" id="profile-picture" class="rounded-circle profile-widget-picture">
+                    @else
+                        <img alt="image" src="assets/img/avatar/avatar-1.png" id="profile-picture" class="rounded-circle profile-widget-picture">
+                    @endif
                 </div>
                 <div class="profile-widget-description">
                     <div class="profile-widget-name">
                         {{ $user->name }}
                         <div class="text-muted d-inline font-weight-normal">
-                            <div class="slash"></div> Web Developer
+                            <div class="slash"></div> {{ $user->status_anggota }}
                         </div>
                     </div>
-                    Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.
-                </div>
-                <form>
-                    <input id="profile-picture-upload" type="file" name="profile-picture-upload" placeholder="Photo" onchange="loadFile(event)">
-                </form>
-            </div>
-        </div>
-        <div class="col-12 col-md-12 col-lg-7">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Edit</h4>
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-pills" id="myTab3" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="profil-tab" data-toggle="tab" href="#profil" role="tab" aria-controls="profil" aria-selected="true">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="photo-tab" data-toggle="tab" href="#photo" role="tab" aria-controls="photo" aria-selected="true">Foto</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
@@ -132,6 +127,22 @@
                             </div>
                             </form>
                         </div>
+                        <div class="tab-pane fade show" id="photo" role="tabpanel" aria-labelledby="photo-tab">
+                            <form action="#" method="POST" id="form-photo" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-lg-6">
+                                        <label>Foto</label>
+                                        <div class="custom-file">
+                                            <input id="photo_img" accept="image/*" type="file" class="custom-file-input" name="photo_img">
+                                            <label class="custom-file-label" for="photo_img">Pilih Foto</label>
+                                        </div>
+                                        <button type="submit" id='btn-update-photo' class="btn btn-primary">Simpan Perubahan</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
                             <form id='form-update-password' action="#" method="POST">
                                 @csrf
@@ -205,10 +216,62 @@
         });
 
         $("#profile-picture").click(function(e) {
-            $("#profile-picture-upload").click();
+            $("#photo_img").click();
         });
 
-        
+        $('#photo_img').on('change',function(){
+            var fileName = $('#photo_img')[0].files[0].name;
+            $(this).next('.custom-file-label').html(fileName);
+
+            var output = document.getElementById('profile-picture');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function(){
+                URL.revokeObjectURL(output.src)
+            }
+        })
+
+        $("#form-photo").on("submit", function(e) {
+            e.preventDefault();
+            var form=$("body");
+            form.find('.invalid-feedback').remove();
+            $('input').removeClass('is-invalid');
+            
+            $.ajax({
+                url: "{{ route('profile.photo') }}",
+                type: "POST",
+                dataType: "json",
+                data: new FormData(this),
+                processData: false,
+				contentType: false,
+                beforeSend() {
+                    $('input').removeClass('is-invalid');
+                    $('.invalid-feedback').remove();
+                },
+                complete(){
+                    $("input").removeAttr('disabled', 'disabled');
+                },
+                success(result){            
+                    iziToast.success({
+                        title: result.status,
+                        message: result.message,
+                        position: 'topRight'
+                    });
+                },
+                error(xhr, status, error) {
+                    var err = eval('(' + xhr.responseText + ')');
+                    iziToast.error({
+                        title: 'Error',
+                        message: err.message,
+                        position: 'topRight'
+                    });
+                },
+                error:function (response){
+                    $.each(response.responseJSON.errors,function(key,value){
+                        $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                    })
+                }
+            });
+        });
     });
 
     function loadFile(event){
