@@ -51,9 +51,6 @@
                         <li class="nav-item">
                             <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#contact3" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                        </li>
                     </ul>
                     <div class="tab-content" id="myTabContent2">
                         <div class="tab-pane fade show active" id="profil" role="tabpanel" aria-labelledby="profil-tab">
@@ -61,41 +58,32 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-12 col-lg-6">
                                     <label for="nama">Nama</label>
                                     <input id="nama" type="text" class="form-control" name="nama" value="{{ $user->name }}">
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-12 col-lg-6">
                                     <label for="nik">NIK</label>
                                     <input id="nik" type="text" class="form-control" name="nik"  value="{{ $user->nik }}" readonly>
                                 </div>
                             </div>
                             
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-12 col-lg-6">
                                     <label for="email">Email</label>
                                     <input id="email" type="email" class="form-control" name="email"  value="{{ $user->email }}">
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
-                                <div class="form-group col-6">
-                                    <label for="npwp">NPWP</label>
-                                    <input id="npwp" type="text" class="form-control" name="npwp"  value="{{ $user->npwp }}">
-                                    <div class="invalid-feedback">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-12 col-lg-6">
                                     <label for="no_telp">No Telepon / WhatsApp</label>
-                                    <input id="no_telp" type="text" class="form-control" name="no_telp"  value="{{ $user->phone_number }}">
+                                    <input id="no_telp" type="text" class="form-control" name="no_telp"  value="{{ $user->wa }}">
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-4">
+                                <div class="form-group col-md-12 col-lg-4">
                                     <label for="tempat_lahir">Tempat Lahir</label>
                                     <select class="form-control" name="provinsi_lahir" id="provinsi_lahir" required>
                                         <option>- Provinsi -</option>
@@ -106,14 +94,14 @@
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
-                                <div class="form-group col-4">
+                                <div class="form-group col-md-12 col-lg-4">
                                     <label for="tempat_lahir">&nbsp;</label>
                                     <select class="form-control selectric" id='tempat_lahir' name='tempat_lahir'>
                                     </select>
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
-                                <div class="form-group col-4">
+                                <div class="form-group col-md-12 col-lg-4">
                                     <label for="tgl_lahir">Tanggal Lahir</label>
                                     <input id="tgl_lahir" type="text" class="form-control datepicker" name="tgl_lahir" value="{{ $user->tgl_lahir }}">
                                     <div class="invalid-feedback">
@@ -121,21 +109,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="alamat">Alamat Kantor</label>
-                                    <input id="alamat" type="text" class="form-control" name="alamat" value="{{ $user->alamat_kantor }}">
-                                    <div class="invalid-feedback">
-                                    </div>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="telp_kantor">No Telepon Kantor</label>
-                                    <input id="telp_kantor" type="text" class="form-control" name="telp_kantor" value="{{ $user->office_number }}">
-                                    <div class="invalid-feedback">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-12 col-lg-6">
                                     <label>Provinsi</label>
                                     <select class="form-control" name="provinsi" id="provinsi" required>
                                         <option>- Provinsi -</option>
@@ -145,7 +119,7 @@
                                     </select>
                                 </div>
                                 
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-12 col-lg-6">
                                     <label>Kab/Kota</label>
                                     <select class="form-control selectric" id='kota' name='kota'>
                                     </select>
@@ -163,7 +137,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-md-12 col-lg-6">
                                         <label for="password" class="d-block">Password Sekarang</label>
                                         <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="current_password" autocomplete="off">
                                         <div id="pwindicator" class="pwindicator">
@@ -173,7 +147,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-md-12 col-lg-6">
                                         <label for="password" class="d-block">Password Baru</label>
                                         <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password" autocomplete="off">
                                         <div id="pwindicator" class="pwindicator">
@@ -181,7 +155,7 @@
                                             <div class="label"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-md-12 col-lg-6">
                                         <label for="password2" class="d-block">Konfirmasi Password Baru</label>
                                         <input id="password2" type="password" class="form-control" name="password_confirm"  autocomplete="off">
                                     </div>
@@ -192,9 +166,6 @@
                                     </button>
                                 </div>
                             </form>
-                        </div>
-                        <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab3">
-                            Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor.
                         </div>
                     </div>
                 </div>
