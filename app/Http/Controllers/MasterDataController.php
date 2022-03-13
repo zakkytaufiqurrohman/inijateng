@@ -199,7 +199,13 @@ class MasterDataController extends Controller
     public function readQr($id)
     {
         $id = $this->base64url_decode($id);
-        $data = User::where('nik',$id)->first();
+        // $data = User::where('nik',$id)->first();
+
+        $data = User::leftJoin('detail_notaris', function($join) {
+            $join->on('users.id', '=', 'detail_notaris.user_id');
+        })
+        ->where('nik',$id)->first();
+        // dd($data);
         if(!$data){
             return 'data tidak di temukan';
         }

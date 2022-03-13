@@ -49,7 +49,7 @@ class NotarisController extends Controller
             'ktp_img' => 'mimes:jpg,bmp,png',
             'sk_notaris' => 'mimes:pdf',
             'sk_ppt' => 'mimes:pdf',
-            'scan_npwp' => 'mimes:jpg,bmp.png',
+            'scan_npwp' => 'mimes:jpg,bmp,png',
         ],[
             'npwp.required' => 'npwp tidak boleh kosong',
             'telephone.required' => 'No Telp tidak boleh kosong',
