@@ -40,7 +40,16 @@
                             <label for="no_kta_ppt">No. KTA PPT</label>
                             <input id="no_kta_ppt" type="text" class="form-control" name="no_kta_ppt"  value="{{ $user->no_kta_ppt }}" >
                         </div> 
-                        <div class="form-group col-md-12 col-lg-12">
+                        <div class="form-group col-md-12 col-lg-6">
+                            <label for="no_sk_notaris">No. SK Notaris</label>
+                            <input id="no_sk_notaris" type="text" class="form-control" name="no_sk_notaris"  value="{{ $user->no_sk_notaris }}" >
+                        </div> 
+                        <div class="form-group col-md-12 col-lg-6">
+                            <label for="asal_pengda">Asal Pengda</label>
+                            <select class="form-control selectric" id='asal_pengda' name='asal_pengda'>
+                            </select>
+                        </div> 
+                        <div class="form-group col-md-12 col-lg-6">
                             <label for="alamat">Alamat Kantor</label>
                             <textarea id="alamat" type="text" class="form-control" name="alamat" rows="4" cols="50">{{ $user->alamat_kantor }}</textarea>
                         </div> 
@@ -50,6 +59,7 @@
                                 <input id="ktp_img" type="file" class="custom-file-input" name="ktp_img" >
                                 <label class="custom-file-label" for="ktp_img">Choose file</label>
                             </div>
+                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="sk_notaris">SK Notaris</label>
@@ -57,6 +67,7 @@
                                 <input id="sk_notaris" type="file" class="custom-file-input" name="sk_notaris" >
                                 <label class="custom-file-label" for="sk_notaris">Choose file</label>
                             </div>
+                            <span>*Kosongi apabila data tidak ingin diubah (Format PDF)</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="sk_ppt">SK PPT</label>
@@ -64,6 +75,7 @@
                                 <input id="sk_ppt" type="file" class="custom-file-input" name="sk_ppt" >
                                 <label class="custom-file-label" for="sk_ppt">Choose file</label>
                             </div>
+                            <span>*Kosongi apabila data tidak ingin diubah (Format PDF)</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="scan_npwp">Scan NPWP</label>
@@ -71,6 +83,7 @@
                                 <input id="scan_npwp" type="file" class="custom-file-input" name="scan_npwp" >
                                 <label class="custom-file-label" for="scan_npwp">Choose file</label>
                             </div>
+                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
                         </div> 
                     </div>
                 </div>
@@ -92,7 +105,8 @@
         //     e.preventDefault();
         //     submitData();
         // });
-
+        onChangeSelect('{{ route("cities") }}', 13, 'asal_pengda', '{{ $user->asal_pengda }}');
+        
         $('#ktp_img').on('change',function(){
             var fileName = $('#ktp_img')[0].files[0].name;
             $(this).next('.custom-file-label').html(fileName);
@@ -162,5 +176,27 @@
             });
         });
     });
+
+    function onChangeSelect(url, id, name, val=null) {
+        // send ajax request to get the cities of the selected province and append to the select tag
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                $('#' + name).empty();
+                $('#' + name).append('<option>- Pilih Salah Satu -</option>');
+
+                $.each(data, function (key, value) {
+                    var sel = '';
+                    if(val==key) var sel = 'selected'; 
+                    
+                    $('#' + name).append('<option value="' + key + '" '+sel+'>' + value + '</option>');
+                });
+            }
+        });
+    }
 </script>
 @endsection

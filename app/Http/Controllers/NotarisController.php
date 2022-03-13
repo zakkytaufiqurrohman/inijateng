@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\DependantDropdownController;
 use App\Models\User;
 use App\Models\DetailNotaris;
 
@@ -26,6 +27,13 @@ class NotarisController extends Controller
             $join->on('users.id', '=', 'detail_notaris.user_id');
         })
         ->find($user_id);
+
+        $dependant = new DependantDropdownController;
+        $asal_pengda = '';
+        if(!empty($user->asal_pengda)){
+            $asal_pengda = $dependant->searchBy('cities',$user->asal_pengda)->name;
+        }
+        $user['asal_pengda'] = $asal_pengda;
 
         return view('notaris.data_diri', compact('user'));
     }
@@ -70,7 +78,11 @@ class NotarisController extends Controller
                 'alamat_kantor' => $request->alamat,
                 'no_kta_ini' => $request->no_kta_ini,
                 'no_kta_ppt' => $request->no_kta_ppt,
+                'no_sk_notaris' => $request->no_sk_notaris,
+                'asal_pengda' => $request->asal_pengda,
             ];
+
+
 
             if(!empty($ktp)){
                 $filename_ktp = $user_id.'-'.time().'.'.$ktp->getClientOriginalExtension();
@@ -89,7 +101,7 @@ class NotarisController extends Controller
             }
             if(!empty($scan_npwp)){
                 $filename_snpwp = $user_id.'-'.time().'.'.$scan_npwp->getClientOriginalExtension();
-                // $data['ktp_img'] = $filename_snpwp;
+                $data['ktp_img'] = $filename_snpwp;
                 $scan_npwp->move(public_path('upload/scan_npwp'),$filename_snpwp);
             }
             

@@ -31,8 +31,12 @@
     <div class="row mt-sm-4">
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary profile-widget">
-                <div class="profile-widget-header">                     
-                    <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" id='profile-picture-custom' class="rounded-circle profile-widget-picture profile-picture-custom">
+                <div class="profile-widget-header">          
+                    @if(!empty($user->foto))
+                        <img alt="image" src="{{ asset('upload/foto/'.$user->foto)}}" id="profile-picture-custom" class="rounded-circle profile-widget-picture">
+                    @else
+                        <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" id='profile-picture-custom' class="rounded-circle profile-widget-picture profile-picture-custom">
+                    @endif           
                     <div class="button-header-custom float-right p-3">
                         <a href="{{ route('notaris.data_diri.edit') }}" class="btn btn-lg btn-primary"><span class="d-none d-md-inline">Update&nbsp;</span><i class="fa fa-edit"></i></a>
                     </div>
@@ -67,16 +71,24 @@
                             <input id="telephone" type="text" class="form-control" name="telephone"  value="{{ $user->telephone }}" disabled>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
-                            <label for="alamat">Alamat Kantor</label>
-                            <input id="alamat" type="text" class="form-control" name="alamat"  value="{{ $user->alamat_kantor }}" disabled>
-                        </div> 
-                        <div class="form-group col-md-12 col-lg-4">
                             <label for="no_kta_ini">No. KTA INI</label>
                             <input id="no_kta_ini" type="text" class="form-control" name="no_kta_ini"  value="{{ $user->no_kta_ini }}" disabled>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="no_kta_ppat">No. KTA PPAT</label>
                             <input id="no_kta_ppat" type="text" class="form-control" name="no_kta_ppat"  value="{{ $user->no_kta_ppt }}" disabled>
+                        </div> 
+                        <div class="form-group col-md-12 col-lg-4">
+                            <label for="no_sk_notaris">No. SK Notaris</label>
+                            <input id="no_sk_notaris" type="text" class="form-control" name="no_sk_notaris"  value="{{ $user->no_sk_notaris }}" disabled>
+                        </div> 
+                        <div class="form-group col-md-12 col-lg-4">
+                            <label for="alamat">Alamat Kantor</label>
+                            <input id="alamat" type="text" class="form-control" name="alamat"  value="{{ $user->alamat_kantor }}" disabled>
+                        </div> 
+                        <div class="form-group col-md-12 col-lg-4">
+                            <label for="asal_pengda">Asal Pengda</label>
+                            <input id="asal_pengda" type="text" class="form-control" name="asal_pengda"  value="{{ $user->asal_pengda }}" disabled>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="ktp_img">Foto KTP</label>
