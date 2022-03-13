@@ -55,6 +55,12 @@
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-12">
+                                            <label for="email">Nama</label>
+                                            <input id="nama" type="text" readonly class="form-control" name="nama" placeholder="nama">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-12">
                                             <label for="email">Email</label>
                                             <input id="email" type="text" class="form-control" name="email" placeholder="Email">
                                             <input id="user_id" type="hidden" class="form-control" name="user_id" >
@@ -62,7 +68,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="password" class="d-block">Password</label>
+                                            <label for="password" class="d-block">Password   <div class="far fa-eye" id="togglePassword" style="margin-left: 0px; cursor: pointer;"></div></label>
                                             <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password" autocomplete="off">
                                             <div id="pwindicator" class="pwindicator">
                                             <div class="bar"></div>
@@ -70,7 +76,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="password_confirm" class="d-block">Konfirmasi Password</label>
+                                            <label for="password_confirm" class="d-block">Konfirmasi Password <div class="far fa-eye" id="togglePassword1" style="margin-left: 0px; cursor: pointer;"></div></label>
                                             <input id="password_confirm" type="password" class="form-control" name="password_confirm"  autocomplete="off">
                                         </div>
                                     </div>
@@ -108,7 +114,30 @@
     <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
     <script src="{{ asset('node_modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
 
+        // konfirmasi
+        const togglePassword1 = document.querySelector('#togglePassword1');
+        const password1 = document.querySelector('#password_confirm');
+        
+        togglePassword1.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+            password1.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
     <script>
         $(function() {
             "use strict";
@@ -157,6 +186,7 @@
 
                             $('#user_id').val(mess.id);
                             $('#email').val(mess.email);
+                            $('#nama').val(mess.name);
                             $('#password').val('');
                             $('#password_confirm').val('');
                         }else{
