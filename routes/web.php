@@ -11,6 +11,7 @@ use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\NotarisController;
 
 use App\Http\Controllers\Page\HomeController;
+use App\Http\Controllers\PreviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,9 @@ Route::get('provinces', [DependantDropdownController::class,'provinces'])->name(
 Route::get('cities', [DependantDropdownController::class,'cities'])->name('cities');
 Route::get('districts', [DependantDropdownController::class,'districts'])->name('districts');
 Route::get('villages', [DependantDropdownController::class,'villages'])->name('villages');
+
+// read dari qc code
+Route::get('/barcode/{id}', [PreviewController::class,'readQr'])->name('.read_qr');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
@@ -99,8 +103,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/data_diri', [NotarisController::class, 'store'])->name('.data_diri');
         Route::get('/data_diri/edit', [NotarisController::class, 'data_diri_edit'])->name('.data_diri.edit');
     });
-    // read dari qc code
-    Route::get('/barcode/{id}', [MasterDataController::class,'readQr'])->name('.read_qr');
+    
 
 });
 
