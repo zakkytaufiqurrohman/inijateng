@@ -209,7 +209,7 @@
                         position: 'topRight'
                     });
 
-                    to('{{ route("home") }}')                    
+                    to('{{ route("dashboard") }}')                    
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');

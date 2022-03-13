@@ -19,6 +19,7 @@
                                 <th>Nik</th>
                                 <th>Email</th>
                                 <th>Status Anggota</th>
+                                <th>Role</th>
                                 <th>Barcode</th>
                                 <th>Action</th>
                             </tr>
@@ -66,6 +67,15 @@
                            <option value="alb">ALB</option>
                        </select>
                     </div>
+                    <div class="form-group form-role">
+                        <label>Role</label>
+                            <select class="form-control select2" name="role[]" id="role" multiple="multiple">
+                                @foreach($roles as $role)
+                                <option value="{{ $role->id }}" > {{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        <div class="invalid-feedback-custom"></div>
+                    </div>
                    
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -109,6 +119,14 @@
                            <option value="notaris">Notaris</option>
                            <option value="alb">ALB</option>
                        </select>
+                    <div class="form-group form-role">
+                        <label>Role</label>
+                        <select class="form-control select2" name="roleEdit[]" id="role-edit" multiple='multiple'>
+                            @foreach($roles as $role)
+                            <option value="{{ $role->id }}" > {{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
@@ -123,6 +141,8 @@
 @section('bottom-script')
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
 <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+<script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
+
 <script>
     $(function() {
         getData();
@@ -138,6 +158,18 @@
                 e.preventDefault();
                 update();
         });
+
+        // $('#role').select2({
+        //         width: "100%",
+        //         placeholder: "Roles",
+        //         allowClear: true
+        // });
+
+        // $('#role-edit').select2({
+        //     width: "100%",
+        //     placeholder: "Roles",
+        //     allowClear: true
+        // });
     })
 
     // get data
@@ -167,6 +199,10 @@
                 },
                 {
                     data: 'status_anggota',
+                    "width": "20%"
+                },
+                {
+                    data: 'roles',
                     "width": "20%"
                 },
                 {
@@ -228,6 +264,10 @@
             error: function(response) {
                 $.each(response.responseJSON.errors, function(key, value) {
                     $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                    if(key=='role'){ 
+                            $("#role").addClass('is-invalid is-invalid-custom'); 
+                            $(".form-role").append('<div class="invalid-feedback invalid-feedback-custom">'+value+'</div>')
+                    }
                 })
             }
         });
@@ -260,11 +300,18 @@
                 $("button").removeAttr('disabled', 'disabled');
             },
             success(result) {
+                var roles = result['data']['roles'];
                 $('#modal-edit').find("input[name='id']").val(result['data']['id']);
                 $('#modal-edit').find("input[name='name']").val(result['data']['name']);
                 $('#modal-edit').find("input[name='nik']").val(result['data']['nik']);
                 $('#modal-edit').find("input[name='email']").val(result['data']['email']);
                 $('#modal-edit').find("select[name='status_anggota']").val(result['data']['status_anggota']).change();
+                var role = [];
+                $.each(roles, function(key,value){
+                    role.push(value.id)
+                });
+                $('#role-edit').val(role);
+                $('#role-edit').trigger('change');
             },
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
@@ -312,6 +359,10 @@
             error: function(response) {
                 $.each(response.responseJSON.errors, function(key, value) {
                     $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                    if(key=='roleEdit'){ 
+                        $("#role-edit").addClass('is-invalid is-invalid-custom'); 
+                        $(".form-role").append('<div class="invalid-feedback invalid-feedback-custom">'+value+'</div>')
+                    }
                 })
             }
         });

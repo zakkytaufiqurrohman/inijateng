@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            {{-- @if(auth()->user()->can('user') || auth()->user()->can('role') || auth()->user()->can('permission'))  --}}
+            @role('admin')
             <li class="nav-item dropdown {{ (request()->is('user*','role*','permission*','master_data*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Master</span></a>
                 <ul class="dropdown-menu">
@@ -23,15 +23,20 @@
                    
                 </ul>
             </li>
+            @endrole
+            @role('notaris')
             <li class="nav-item {{ (request()->is('notaris*')) ? 'active' : '' }}">
                 <a href="{{ route('notaris.data_diri') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Data Diri</span></a>
             </li>
+            @endrole
+            @role('alb')
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-file-alt"></i><span>Berkas</span></a>
             </li>
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang Bersama</span></a>
             </li>
+            @endrole
             
             
     </aside>

@@ -6,13 +6,20 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use DB;
 use Exception;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class MasterDataController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('role:admin');
+    }
+
     public function index()
     {
-        return view('master_data.index');
+        $roles = Role::all();
+        return view('master_data.index',compact('roles'));
     }
 
     public function data()
@@ -47,6 +54,15 @@ class MasterDataController extends Controller
 
                 }
             })
+            ->editColumn('roles', function($row) {
+                $roles = '';
+                if(!empty($row->getRoleNames())){
+                    foreach($row->getRoleNames() as $role){
+                        $roles .= "<label class='badge badge-primary'>{$role}</label>&nbsp;";
+                    }
+                }
+                return $roles;
+            })
             ->escapeColumns([])
             ->addIndexColumn()
             ->make(true);
@@ -71,12 +87,13 @@ class MasterDataController extends Controller
         ]);
         DB::beginTransaction();
         try {
-            User::create([
+            $data = User::create([
                 'name' => $request->input('name'),
                 'nik' => $request->input('nik'),
                 'email' => $request->input('email'),
                 'status_anggota' => $request->input('status_anggota'),
             ]);
+            $data->assignRole($request->role);
 
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Data']);
@@ -96,6 +113,7 @@ class MasterDataController extends Controller
     {
         $id = $request->id;
         $data = User::find($id);
+        $data->roles;
         if (!$data) {
             return response()->json(['status' => 'error', 'message' => 'gagal mendapatkan data', 'data' => '']);
         }
@@ -118,6 +136,7 @@ class MasterDataController extends Controller
             'nik' => 'required|digits:16|unique:users,nik,'.$id,
             'email' => 'required|unique:users,email,'.$id,
             'status_anggota' => 'required',
+            'roleEdit' => 'required',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
             'name.unique' => 'Nama sudah ada',
@@ -127,6 +146,7 @@ class MasterDataController extends Controller
             'email.required' => 'Email tidak boleh kosong',
             'email.unique' => 'Email sudah ada',
             'status_anggota.required' => 'Status anggota tidak boleh kosong',
+            'roleEdit.required' => 'Role tidak boleh kosong',
         ]);
         DB::beginTransaction();
         try {
@@ -137,6 +157,8 @@ class MasterDataController extends Controller
             $user->email = $request->input('email');
             $user->status_anggota = $request->input('status_anggota');
             $user->save();
+
+            $user->syncRoles($request->roleEdit);
 
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil Mengubah Permission']);
