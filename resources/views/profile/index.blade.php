@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="form-group col-md-12 col-lg-6">
                                     <label for="no_telp">No Telepon / WhatsApp</label>
-                                    <input id="no_telp" type="text" class="form-control" name="no_telp"  value="{{ $user->wa }}">
+                                    <input id="no_telp" type="text" placeholder="Contoh 6285XX" class="form-control" name="no_telp"  value="{{ $user->wa }}">
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="form-group col-md-12 col-lg-4">
                                     <label for="tgl_lahir">Tanggal Lahir</label>
-                                    <input id="tgl_lahir" type="text" class="form-control datepicker" name="tgl_lahir" value="{{ $user->tgl_lahir }}">
+                                    <input id="tgl_lahir" type="text" class="form-control datepicker" name="tgl_lahir" value="{{ $item->tgl_lahir ?? '' }}">
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>

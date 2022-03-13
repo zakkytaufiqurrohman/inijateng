@@ -20,8 +20,10 @@ class ProfileController extends Controller
 
         $dependant = new DependantDropdownController;
         $provinces = $dependant->provinces();
-
-        $provinsi_lahir = $dependant->searchBy('cities',$user->tempat_lahir)->province->id;
+        $provinsi_lahir = '';
+        if(!empty($user->tempat_lahir)){
+            $provinsi_lahir = $dependant->searchBy('cities',$user->tempat_lahir)->province->id;
+        }
         $user['provinsi_lahir'] = $provinsi_lahir;
 
         return view('profile.index', compact('user','provinces'));
@@ -55,12 +57,19 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try{
             $user = User::find(Auth::user()->id);
-
+            //tail wa
+            $wa = $request->no_telp;
+            if(substr($wa,0,1) == 0) {
+                $wa = '62'.substr($wa, 1);
+            }
+            if(substr($wa,0,1) == '+') {
+                $wa = substr($wa, 1);
+            }
             $data = $user->update([
                 'name' => $request->nama,
                 'nik' => $request->nik,
                 'email' => $request->email,
-                'wa' => $request->no_telp,
+                'wa' => $wa,
                 'tgl_lahir' => $request->tgl_lahir,
                 'tempat_lahir' => $request->tempat_lahir,
                 'provinsi' => $request->provinsi,
