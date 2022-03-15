@@ -136,7 +136,7 @@
                                         <label>Foto</label>
                                         <div class="custom-file">
                                             <input id="photo_img" accept="image/*" type="file" class="custom-file-input" name="photo_img">
-                                            <label class="custom-file-label" for="photo_img">Pilih Foto</label>
+                                            <label class="custom-file-label text-truncate" for="photo_img">Pilih Foto</label>
                                         </div>
                                         <button type="submit" id='btn-update-photo' class="btn btn-primary">Simpan Perubahan</button>
                                     </div>

@@ -19,5 +19,7 @@ class DetailNotaris extends Model
         'ktp_img',
         'sk_notaris',
         'sk_ppt',
+        'no_sk_notaris',
+        'asal_pengda',
     ];
 }
