@@ -37,6 +37,61 @@
                 <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang Bersama</span></a>
             </li>
             @endrole
+            <li class="menu-header">Maber</li>
+            <!-- list maber just admin  -->
+            <li class="nav-item {{ (request()->is('maber*')) ? 'active' : '' }}">
+                <a href="{{ route('maber') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list Maber</span></a>
+            </li>
+            <!-- bendahara -->
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
+                <ul class="dropdown-menu">
+                  
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Belum Terverifikasi</a></li>
+                    
+                    
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
+                </ul>
+            </li>
+            <!-- verivikator -->
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Verifikator</span></a>
+                <ul class="dropdown-menu">
+                  
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Maber 1</a></li>
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Maber 2</a></li>
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Maber 3</a></li>
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Maber 4</a></li>
+                </ul>
+            </li>
+
+            <!-- alb -->
+            <li class="menu-header">ALB</li>
+            <!-- list maber just admin  -->
+            <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
+                <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list ALB</span></a>
+            </li>
+            <!-- bendahara -->
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
+                <ul class="dropdown-menu">
+                  
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Belum Terverifikasi</a></li>
+                    
+                    
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Verifikator</span></a>
+                <ul class="dropdown-menu">
+                  
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Belum Terverifikasi</a></li>
+                    
+                    
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
+                </ul>
+            </li>
             
             
     </aside>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MagberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginCustomeController;
 use App\Http\Controllers\Auth\RegisterCostumeController;
@@ -103,6 +104,19 @@ Route::middleware('auth')->group(function () {
         Route::post('/data_diri', [NotarisController::class, 'store'])->name('.data_diri');
         Route::get('/data_diri/edit', [NotarisController::class, 'data_diri_edit'])->name('.data_diri.edit');
     });
+
+    // Maber
+    // list
+    Route::name('maber')->prefix('/maber')->group(function () {
+        Route::get('/', [MagberController::class, 'index'])->name('.index');
+        Route::post('/', [MagberController::class, 'store']);
+        Route::put('/', [MagberController::class, 'update']);
+        Route::get('/data', [MagberController::class, 'data'])->name('.data');
+        Route::delete('/', [MagberController::class, 'destroy'])->name('.delete');
+        Route::get('/show', [MagberController::class,'show'])->name('.show');
+    });
+
+    // end maber
     
 
 });
