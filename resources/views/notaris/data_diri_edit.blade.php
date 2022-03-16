@@ -57,7 +57,7 @@
                             <label for="ktp_img">Foto KTP</label>
                             <div class="custom-file">
                                 <input id="ktp_img" type="file" class="custom-file-input" name="ktp_img" >
-                                <label class="custom-file-label" for="ktp_img">Choose file</label>
+                                <label class="custom-file-label text-truncate" for="ktp_img">Choose file</label>
                             </div>
                             <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
                         </div> 
@@ -65,7 +65,7 @@
                             <label for="sk_notaris">SK Notaris</label>
                             <div class="custom-file">
                                 <input id="sk_notaris" type="file" class="custom-file-input" name="sk_notaris" >
-                                <label class="custom-file-label" for="sk_notaris">Choose file</label>
+                                <label class="custom-file-label text-truncate" for="sk_notaris">Choose file</label>
                             </div>
                             <span>*Kosongi apabila data tidak ingin diubah (Format PDF)</span>
                         </div> 
@@ -73,7 +73,7 @@
                             <label for="sk_ppt">SK PPT</label>
                             <div class="custom-file">
                                 <input id="sk_ppt" type="file" class="custom-file-input" name="sk_ppt" >
-                                <label class="custom-file-label" for="sk_ppt">Choose file</label>
+                                <label class="custom-file-label text-truncate" for="sk_ppt">Choose file</label>
                             </div>
                             <span>*Kosongi apabila data tidak ingin diubah (Format PDF)</span>
                         </div> 
@@ -81,7 +81,7 @@
                             <label for="scan_npwp">Scan NPWP</label>
                             <div class="custom-file">
                                 <input id="scan_npwp" type="file" class="custom-file-input" name="scan_npwp" >
-                                <label class="custom-file-label" for="scan_npwp">Choose file</label>
+                                <label class="custom-file-label text-truncate" for="scan_npwp">Choose file</label>
                             </div>
                             <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
                         </div> 

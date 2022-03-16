@@ -31,7 +31,7 @@
                             <label for="bukti_terdaftar">Bukti Terdaftar</label>
                             <div class="custom-file">
                                 <input id="bukti_terdaftar" type="file" class="custom-file-input" name="bukti_terdaftar" >
-                                <label class="custom-file-label" for="bukti_terdaftar">Choose file</label>
+                                <label class="custom-file-label text-truncate" for="bukti_terdaftar">Choose file</label>
                             </div>
                             <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
                         </div> 
@@ -55,7 +55,7 @@
                             <label for="ijazah_s1">Ijazah S1</label>
                             <div class="custom-file">
                                 <input id="ijazah_s1" type="file" class="custom-file-input" name="ijazah_s1" >
-                                <label class="custom-file-label" for="ijazah_s1">Choose file</label>
+                                <label class="custom-file-label text-truncate" for="ijazah_s1">Choose file</label>
                             </div>
                             <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
                         </div> 
@@ -63,7 +63,7 @@
                             <label for="ijazah_s2">Ijazah S2</label>
                             <div class="custom-file">
                                 <input id="ijazah_s2" type="file" class="custom-file-input" name="ijazah_s2" >
-                                <label class="custom-file-label" for="ijazah_s2">Choose file</label>
+                                <label class="custom-file-label text-truncate" for="ijazah_s2">Choose file</label>
                             </div>
                             <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
                         </div>
