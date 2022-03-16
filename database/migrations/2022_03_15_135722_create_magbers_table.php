@@ -17,7 +17,7 @@ class CreateMagbersTable extends Migration
             $table->id();
             $table->string('judul');
             $table->string('keterangan');
-            $table->year('year');
+            $table->string('year',10);
             $table->enum('status',['0',1]);
             $table->timestamps();
         });
