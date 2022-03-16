@@ -10,6 +10,7 @@ use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\NotarisController;
+use App\Http\Controllers\Admin\ALBController;
 
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\PreviewController;
@@ -103,6 +104,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/data_diri', [NotarisController::class, 'data_diri'])->name('.data_diri');
         Route::post('/data_diri', [NotarisController::class, 'store'])->name('.data_diri');
         Route::get('/data_diri/edit', [NotarisController::class, 'data_diri_edit'])->name('.data_diri.edit');
+    });
+
+    //ALB
+    Route::name('alb')->prefix('/alb')->group(function () {
+        Route::get('/data_diri', [ALBController::class, 'data_diri'])->name('.data_diri');
+        Route::post('/data_diri', [ALBController::class, 'store'])->name('.data_diri');
+        Route::get('/data_diri/edit', [ALBController::class, 'data_diri_edit'])->name('.data_diri.edit');
     });
 
     // Maber
