@@ -103,13 +103,15 @@ class MagberController extends Controller
         $this->validate($request, [
             'judul' => 'required|unique:magbers,judul,'.$id,
             'tahun' => 'required|unique:magbers,year,'.$id,
-            'keterangan' => 'required'
+            'keterangan' => 'required',
+            'status' => 'required'
         ], [
             'judul.required' => 'Judul tidak boleh kosong',
             'judul.unique' => 'Judul sudah ada',
             'tahun.required' => 'Tahun tidak boleh kosong',
             'tahun.unique' => 'Tahun sudah ada',
-            'keterangan.required' => 'Keterangan tidak boleh kosong'
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'status.required' => 'Status tidak boleh kosong'
         ]);
         DB::beginTransaction();
         try {
@@ -117,6 +119,7 @@ class MagberController extends Controller
             $maber = Magber::find($id);
             $maber->judul = $request->input('judul');
             $maber->year = $request->input('tahun');
+            $maber->status = $request->input('status');
             $maber->keterangan = $request->input('keterangan');
             $maber->save();
 
@@ -157,4 +160,40 @@ class MagberController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function eventMagber($id)
+    {
+        return view('Admin.magber.event_magber');
+    }
+
+    public function eventMagberStore(Request $request)
+    {
+        $this->validate($request, [
+            'nik' => 'required|unique:magbers,judul',
+            'semester' => 'required|unique:magbers,year',
+        ], [
+            'judul.required' => 'Nama tidak boleh kosong',
+            'judul.unique' => 'Nama sudah ada',
+            'tahun.required' => 'Tahun tidak boleh kosong',
+            'tahun.unique' => 'Tahun sudah ada',
+            'keterangan.required' => 'Keterangan tidak boleh kosong'
+        ]);
+        DB::beginTransaction();
+        try {
+            Magber::create([
+                'judul' => $request->input('judul'),
+                'year' => $request->input('tahun'),
+                'status' => '0',
+                'keterangan' => $request->input('keterangan'),
+            ]);
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Role.']);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+
 }

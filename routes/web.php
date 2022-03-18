@@ -115,6 +115,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/', [MagberController::class, 'destroy'])->name('.delete');
         Route::get('/show', [MagberController::class,'show'])->name('.show');
     });
+    //pendaftaran
+    Route::get('/event_magber/{id}/', [MagberController::class,'eventMagber'])->name('event_magber');
+    Route::post('/event_magber', [MagberController::class,'eventMagberStore'])->name('event_magber_store');
 
     // end maber
     
