@@ -26,7 +26,7 @@ class ALBController extends Controller
         })
         ->find($user_id);
 
-        return view('admin.alb.data_diri', compact('user'));
+        return view('Admin.alb.data_diri', compact('user'));
     }
 
     public function data_diri_edit()
