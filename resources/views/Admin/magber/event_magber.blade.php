@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="card-body">
-                                <form id='form-register' action="javascript:void(0)" method="POST">
+                                <form id='form-search' action="javascript:void(0)" method="POST" enctype="multipart">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-12">
@@ -53,6 +53,39 @@
                                                 <option value="3">Semester 3</option>
                                                 <option value="4">Semester 4</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="btn-form-search">
+                                        <button type="submit" id='btn-register' class="btn btn-primary btn-lg btn-block">
+                                            Daftar
+                                        </button>
+                                    </div>
+                                </form>
+                                <!-- setelah sukses -->
+                                <form id='form-register' class='d-none' action="javascript:void(0)" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="event_id" value="{{$id}}">
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label for="nik-register">Inputan NIK</label>
+                                            <input id="nik-register" type="text" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <select class="form-control" name="semester" id="semester-register">
+                                                <option value="1">Semester 1</option>
+                                                <option value="2">Semester 2</option>
+                                                <option value="3">Semester 3</option>
+                                                <option value="4">Semester 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label for="bukti_bayar">Bukti Bayar</label>
+                                            <input id="bukti_bayar_register" type="file" class="form-control" name="bukti_bayar" placeholder="Bukti bayar">
+                                            <span>*Maksimal File 1 Mb (Format jpg, png)</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -79,6 +112,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+
 
     <!-- JS Libraies -->
 
@@ -95,9 +130,9 @@
         $(function() {
             "use strict";
 
-            $("#form-register").on("submit", function(e) {
+            $("#form-search").on("submit", function(e) {
                 e.preventDefault();
-                register();
+                searchUser();
             });
         });
 
@@ -105,36 +140,56 @@
             window.location.href = url;
         }
 
-        function register(){
-            var formData = $("#form-register").serialize();
+        function searchUser(){
+            var formData = $("#form-search").serialize();
 
             $.ajax({
-                url: "{{ route('event_magber_store') }}",
+                url: "{{ route('event_magber.check') }}",
                 type: "POST",
                 dataType: "json",
                 data: formData,
                 beforeSend() {
-                    $("input").attr('disabled', 'disabled');
-                    $("button").attr('disabled', 'disabled');
-                    $("select").attr('disabled', 'disabled');
-                    $('input').removeClass('is-invalid');
-                    $('.invalid-feedback').remove();
+                    $("#btn-register").addClass("btn-progress");
                 },
                 complete(){
-                    $("input").removeAttr('disabled', 'disabled');
-                    $("button").removeAttr('disabled', 'disabled');
-                    $("select").removeAttr('disabled', 'disabled');
+                    $("#btn-register").removeClass("btn-progress");
                 },
                 success(result){
-                    $("#form-register")[0].reset();
-                                        
-                    iziToast.success({
-                        title: result.status,
-                        message: result.message,
-                        position: 'topRight'
-                    });
+                    mess = result.message;
+                    if(result.status =='error'){
+                        swal({
+                            title: 'Data Belum Lengkap',
+                            text: 'Silahkan Login dan lengkapi data terlebih dahulu',
+                            icon: 'error',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                to('/login');
+                            }
+                        });
+                    }
+                    if(result.status=='ready'){
+                        swal({
+                            title: 'Sudah Terdaftar',
+                            text: 'Anda Sudah Terdaftar Di Event Ini Silahkan Cek Email',
+                            icon: 'error',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        
+                    }
+                    else{
+                        $('#form-search').addClass('d-none');
+                        $('#form-register').removeClass('d-none');
+                        $('#nik').attr('readonly',true);
 
-                    to('{{ route("dashboard") }}')                    
+                        $('#user_id').val(mess.id);
+                        $('#nik-register').val( $("#nik").val());
+                        $('#semester-register').val( $("#semester").val()).trigger('change');
+                    }
+                    
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
@@ -151,6 +206,49 @@
                 }
             });
         }
+
+        $("#form-register").on("submit", function(e) {
+
+            $.ajax({
+                url: "{{ route('event_magber_store') }}",
+                type: "POST",
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                data:  new FormData(this),
+                beforeSend() {
+                    $("#btn-register").addClass("btn-progress");
+                },
+                complete(){
+                    $("#btn-register").removeClass("btn-progress");
+                },
+                success(result){
+                    $("#form-register")[0].reset();
+                                        
+                    iziToast.success({
+                        title: result.status,
+                        message: result.message,
+                        position: 'topRight'
+                    });
+                    var url = '{{ route("event_magber.success", ":id") }}';
+                    url = url.replace(':id', result.data);
+                    to(url)                    
+                },
+                error(xhr, status, error) {
+                    var err = eval('(' + xhr.responseText + ')');
+                    iziToast.error({
+                        title: 'Error',
+                        message: err.message,
+                        position: 'topRight'
+                    });
+                },
+                error:function (response){
+                    $.each(response.responseJSON.errors,function(key,value){
+                        $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                    })
+                }
+            });
+        })
     </script>
 </body>
 

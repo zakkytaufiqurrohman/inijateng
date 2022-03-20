@@ -124,9 +124,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/', [MagberController::class, 'destroy'])->name('.delete');
         Route::get('/show', [MagberController::class,'show'])->name('.show');
     });
-    //pendaftaran
-    Route::get('/event_magber/{id}/', [MagberController::class,'eventMagber'])->name('event_magber');
-    Route::post('/event_magber', [MagberController::class,'eventMagberStore'])->name('event_magber_store');
+    
 
     // end maber
     
@@ -144,6 +142,12 @@ Route::middleware('auth')->group(function () {
 
     /** end FRONT PAGE */
 });
+//pendaftaran maber
+Route::get('/event_magber/{id}/', [MagberController::class,'eventMagber'])->name('event_magber');
+Route::post('/event_magber', [MagberController::class,'eventMagberStore'])->name('event_magber_store');
+Route::post('/event_magber_check', [MagberController::class,'eventMagberCheck'])->name('event_magber.check');
+Route::get('/event_magber_success/{id}', [MagberController::class,'eventMagberSuccess'])->name('event_magber.success');
+
 
 // Route::view('/table', 'components.table');
 // Route::view('/form', 'components.form');
