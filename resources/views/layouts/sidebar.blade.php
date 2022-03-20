@@ -29,14 +29,17 @@
                 <a href="{{ route('notaris.data_diri') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Data Diri</span></a>
             </li>
             @endrole
-            @role('alb')
-            <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
+            {{-- @role('alb') --}}
+            <li class="nav-item {{ (request()->is('alb*')) ? 'active' : '' }}">
+                <a href="{{ route('alb.data_diri') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Data Diri</span></a>
+            </li>
+            <li class="nav-item {{ (request()->is('alb/berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-file-alt"></i><span>Berkas</span></a>
             </li>
-            <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('alb/berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang Bersama</span></a>
             </li>
-            @endrole
+            {{-- @endrole --}}
             <li class="menu-header">Maber</li>
             <!-- list maber just admin  -->
             <li class="nav-item {{ (request()->is('maber*')) ? 'active' : '' }}">
