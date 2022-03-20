@@ -92,7 +92,13 @@
                     <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
                 </ul>
             </li>
-            
+
+            <!-- front page -->
+            <li class="menu-header">Front Page</li>
+            <!-- list maber just admin  -->
+            <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
+                <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Profile</span></a>
+            </li>
             
     </aside>
 </div>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginCustomeController;
 use App\Http\Controllers\Auth\RegisterCostumeController;
 use App\Http\Controllers\DependantDropdownController;
+use App\Http\Controllers\FrontPage\ProfileController as FrontPageProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Role\PermissionController;
@@ -122,6 +123,18 @@ Route::middleware('auth')->group(function () {
     // end maber
     
 
+    /** begin FRONT PAGE */
+        //profile
+        Route::name('profile_page')->prefix('/profile_page')->group(function () {
+            Route::get('/', [FrontPageProfileController::class, 'index'])->name('.index');
+            Route::post('/', [FrontPageProfileController::class, 'store']);
+            Route::put('/', [FrontPageProfileController::class, 'update']);
+            Route::get('/data', [FrontPageProfileController::class, 'data'])->name('.data');
+            Route::delete('/', [FrontPageProfileController::class, 'destroy'])->name('.delete');
+            Route::get('/show', [FrontPageProfileController::class,'show'])->name('.show');
+        });
+
+    /** end FRONT PAGE */
 });
 
 // Route::view('/table', 'components.table');
