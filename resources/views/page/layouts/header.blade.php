@@ -7,8 +7,22 @@
                     <li><a href='https://www.inijateng.org'>BERANDA</a></li>
                     <li class="has-sub"><a href='#'>PROFIL</a>
                         <ul>
+                            <?php
 
-                            <li><a href='laporan_keuangan.php'>Laporan Keuangan</a>
+                                use App\Models\Profile;
+                                $datas = Profile::where('status','publish')->get();
+                            ?>
+                            @foreach($datas as $data)
+                            <li>
+                                <a href=''>{{$data->judul}}ss</a>
+                            </li>
+                            @endforeach
+                            <li>
+                                <a href=''>ss</a>
+                            </li>
+                    
+
+                            <li><a href='laporan_keuangan.php'>Laporan Keuangans</a>
                                 <ul>
                                     <li><a href='laporan-1-bendahara.html'>Laporan Keuangan Bendahara</a></li>
                                     <li><a href='laporan-2-bendahara.html'>Laporan Keuangan Bendahara 1</a></li>
@@ -46,7 +60,16 @@
                 <li><a href='https://www.inijateng.org'>BERANDA</a></li>
                 <li class="has-sub"><a href='#'>PROFIL</a>
                     <ul>
-                        
+                        <?php
+
+                            $datas = Profile::where('status','publish')->get();
+                        ?>
+                        @foreach($datas as $data)
+                            <li>
+                                <a href=''>{{$data->judul}}ss</a>
+                            </li>
+                        @endforeach
+                       
                         <li><a href='laporan_keuangan.php'>Laporan Keuangan</a>
                             <ul style="margin-left: 240px; margin-top: -40px;">
                                 <li><a href='laporan-1-bendahara.html'>Laporan Keuangan Bendahara</a></li>

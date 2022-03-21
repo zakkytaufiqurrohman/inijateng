@@ -40,7 +40,7 @@ $page_name = 'home';
   gtag('config', 'UA-157710883-1');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pengwil Jateng Ikatan Notaris Indonesia</title>
+<title>INI Jateng</title>
 </head>
 <body>
 @include('page.layouts.header')
@@ -132,7 +132,7 @@ $page_name = 'home';
     </div>
 </div>
 
-<!-- <div class="konten_midle">
+<div class="konten_midle">
     <div class="container_24">
         <div class="left">
         	<div class="top">
@@ -140,11 +140,21 @@ $page_name = 'home';
             </div>
             <div class="bottom" style="margin-bottom: 30px;">
                 <div class="grid">
-                   
+                    <!-- magber -->
+                    <div class="box">
+                        <div class="pic"><a href="#"><img src="{{asset('assets/img/ico_visi.png')}}" style="object-fit: cover;"></a></div>
+                        <h1 class="title"><a href="#">Magang Bersama</a></h1>
+                    </div>
+                    <!-- seleksi alb -->
+                    <div class="box">
+                        <div class="pic"><a href="#"><img src="{{asset('assets/img/ico_visi.png')}}" style="object-fit: cover;"></a></div>
+                        <h1 class="title"><a href="#">Seleksi ALB</a></h1>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="top">
+            <!-- <div class="top">
                 <h1 class="name">Berita</h1>
                 <a href="agenda.php" class="more">Lihat berita lainnya &raquo;</a>
             </div>
@@ -155,7 +165,7 @@ $page_name = 'home';
                         
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="right">
             <div class="box">
@@ -170,7 +180,7 @@ $page_name = 'home';
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 <!-- <div class="dewan_page">
     <div class="container_24">
