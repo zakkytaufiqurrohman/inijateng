@@ -34,9 +34,11 @@ class ProfileController extends Controller
         DB::beginTransaction();
         $foto = $request->foto;
         try{
-            if(!empty($foto)){
+            $filename_foto = '';
+            if($request->hasFile('foto')){
                 $text = str_replace(' ', '',$foto->getClientOriginalName());
                 $filename_foto = time()."_".$text;
+                $foto->move(public_path('upload/FrontPage/profile'),$filename_foto);
             }
             $data = Profile::create([
                 'judul' => $request->judul,
@@ -45,7 +47,6 @@ class ProfileController extends Controller
                 'flag' => $request->flag,
                 'status' => $request->status,
             ]);
-            $foto->move(public_path('upload/FrontPage/profile'),$filename_foto);
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan data']);
         } catch(Exception $e){
@@ -72,6 +73,7 @@ class ProfileController extends Controller
 
         DB::beginTransaction();
         $profile = Profile::find($request->id);
+        $unlink = 'unlink.png';
         try{
             $foto = $request->foto;
             $nama_foto = '';
@@ -80,11 +82,17 @@ class ProfileController extends Controller
                 $fotos = time()."_".$text;
                 $foto->move(public_path('upload/FrontPage/profile'),$fotos);
                 $nama_foto = $fotos;
+                if (!empty($profile->foto)) {
+                    $unlink = $profile->foto;
+                }
+                $image_path = public_path('upload/FrontPage/profile/').$unlink;
+                if (file_exists($image_path)){
+                    unlink($image_path);
+                }
             }
             else {
                 $nama_foto = $profile->foto;
             }
-            $ambil_foto_lama = $profile->foto;
             $profile->update([
                'judul' => $request->judul,
                'isi' =>$request->isi,
@@ -93,13 +101,8 @@ class ProfileController extends Controller
                'foto' => $nama_foto
             ]);
             DB::commit();
-
-            $image_path = public_path('upload/FrontPage/profile/').$ambil_foto_lama;
-            if (file_exists($image_path)){
-                unlink($image_path);
-            }
             
-            return response()->json(['status' => 'success', 'message' => $image_path]);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Menambahkan Data']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -120,11 +123,16 @@ class ProfileController extends Controller
     {
         DB::beginTransaction();
         try {
+            $unlink = 'default.php';
             $data = Profile::find($request->id);
             $ambil_foto_lama = $data->foto;
             $data->delete();
             DB::commit();
-            $image_path = public_path('upload/FrontPage/profile/').$ambil_foto_lama;
+
+            if (!empty($ambil_foto_lama)) {
+                $unlink = $ambil_foto_lama;
+            }
+            $image_path = public_path('upload/FrontPage/profile/').$unlink;
             if (file_exists($image_path)){
                 unlink($image_path);
             }

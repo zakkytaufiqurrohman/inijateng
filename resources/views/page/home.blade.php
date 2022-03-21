@@ -148,7 +148,7 @@ $page_name = 'home';
                         $magber = Magber::where('status','1')->first();
                     ?>
                     <div class="box">
-                        <div class="pic"><a href="#"><img src="{{asset('upload/banner_magber/'.$magber->banner)}}" style="object-fit: cover;"></a></div>
+                        <div class="pic"><a href="{{route('event_magber',$magber->id)}}" target="_blank"><img src="{{asset('upload/banner_magber/'.$magber->banner)}}" style="object-fit: cover;"></a></div>
                         <h1 class="title"><a href="#">{{$magber->judul}}</a></h1>
                     </div>
                     <!-- seleksi alb -->

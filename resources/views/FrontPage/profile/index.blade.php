@@ -66,7 +66,7 @@
                         <label for="flag">Status Publish</label>
                         <select name="status" class="form-control" id="status">
                             <option value="no">Tidak</option>
-                            <option value="publish">Pubish</option>
+                            <option value="publish">Publish</option>
                         </select>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
 
 <!-- modal edit -->
 <div class="modal fade" role="dialog" id="modal-update-profile_page">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Update Profile</h5>
@@ -188,13 +188,13 @@
             beforeSend() {
                 $("#btn-add-profile_page").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
-                $("button").attr('disabled', 'disabled');
-                $("select").attr('disabled', 'disabled');
+                // $("button").attr('disabled', 'disabled');
+
             },
             complete() {
                 $("#btn-add-profile_page").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
-                $("button").removeAttr('disabled', 'disabled');
+                // $("button").removeAttr('disabled', 'disabled');
             },
             success(result) {
                 if(result['status'] == 'success'){
@@ -220,7 +220,7 @@
                         .closest('.form-group')
                         .addClass('has-error')
                         .append('<span class="help-block"><strong>'+value+'</strong></span>');
-                    $("checkbox[name="+key+"]")
+                    $("select[name="+key+"]")
                     .closest('.form-group')
                     .addClass('has-error')
                     .append('<span class="help-block"><strong>'+value+'</strong></span>');
@@ -290,14 +290,12 @@
             beforeSend() {
                 $("#btn-update-profile_page").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
-                $("button").attr('disabled', 'disabled');
-                $("select").attr('disabled', 'disabled');
+                // $("button").attr('disabled', 'disabled');
             },
             complete() {
                 $("#btn-update-profile_page").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
-                $("button").removeAttr('disabled', 'disabled');
-                $("select").removeAttr('disabled', 'disabled');
+                // $("button").removeAttr('disabled', 'disabled');
             },
             success(result) {
                 if(result['status'] == 'success'){

@@ -180,7 +180,7 @@
                         })
                         
                     }
-                    else{
+                    if(result.status =='success'){
                         $('#form-search').addClass('d-none');
                         $('#form-register').removeClass('d-none');
                         $('#nik').attr('readonly',true);

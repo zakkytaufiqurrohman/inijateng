@@ -183,6 +183,7 @@ class MagberController extends Controller
         $id = $request->id;
         DB::beginTransaction();
         try {
+            $unlink = 'defaul.png';
             $data = Magber::find($id);
             $ambil_foto_lama = $data->banner;
             if($data->status == '1')
@@ -192,7 +193,10 @@ class MagberController extends Controller
             else{
                 $data->delete();
                 DB::commit();
-                $image_path = public_path('upload/banner_magber/').$ambil_foto_lama;
+                if (!empty($ambil_foto_lama)) {
+                    $unlink = $ambil_foto_lama;
+                }
+                $image_path = public_path('upload/banner_magber/').$unlink;
                 if (file_exists($image_path)){
                     unlink($image_path);
                 }
