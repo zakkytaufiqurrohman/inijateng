@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Magber;
+
 $page_name = 'home';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -141,9 +144,12 @@ $page_name = 'home';
             <div class="bottom" style="margin-bottom: 30px;">
                 <div class="grid">
                     <!-- magber -->
+                    <?php
+                        $magber = Magber::where('status','1')->first();
+                    ?>
                     <div class="box">
-                        <div class="pic"><a href="#"><img src="{{asset('assets/img/ico_visi.png')}}" style="object-fit: cover;"></a></div>
-                        <h1 class="title"><a href="#">Magang Bersama</a></h1>
+                        <div class="pic"><a href="#"><img src="{{asset('upload/banner_magber/'.$magber->banner)}}" style="object-fit: cover;"></a></div>
+                        <h1 class="title"><a href="#">{{$magber->judul}}</a></h1>
                     </div>
                     <!-- seleksi alb -->
                     <div class="box">

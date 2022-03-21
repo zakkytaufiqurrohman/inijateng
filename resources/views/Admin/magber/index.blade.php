@@ -15,6 +15,7 @@
                             <tr>
                                 <th class="text-center"> No</th>
                                 <th>Judul</th>
+                                <th>Banner</th>
                                 <th>Tahun</th>
                                 <th>Keterangan</th>
                                 <th>Status</th>
@@ -48,6 +49,10 @@
                     <div class="form-group">
                         <label>Judul</label>
                         <input type="text" class="form-control" name="judul" id="judul" placeholder="Judul Maber" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="bukti_bayar">Banner</label>
+                        <input id="banner" type="file" class="form-control" name="banner" placeholder="Banner">
                     </div>
                     <div class="form-group">
                         <label>Tahun</label>
@@ -93,6 +98,10 @@
                         <input type="number" class="form-control" name="tahun" id="update-tahun" placeholder="tahun" autocomplete="off">
                     </div>
                     <div class="form-group">
+                        <label for="bukti_bayar">Banner</label>
+                        <input id="banner-edit" type="file" class="form-control" name="banner" placeholder="Banner">
+                    </div>
+                    <div class="form-group">
                         <label>Status</label>
                        <select class="form-control" name="status" id="status">
                            <option value="0">Tidak Aktif</option>
@@ -120,18 +129,6 @@
 <script>
     $(function() {
         getData();
-
-        // preven add
-        $("#form-add").on("submit", function(e) {
-            e.preventDefault();
-            AddData();
-        });
-
-        // preven update
-        $("#form-update").on("submit", function(e) {
-                e.preventDefault();
-                update();
-        });
     })
 
     // get data
@@ -153,6 +150,10 @@
                 },
                 {
                     data: 'year',
+                    "width": "20%"
+                },
+                {
+                    data: 'banner',
                     "width": "20%"
                 },
                 {
@@ -182,7 +183,7 @@
             form.find('.form-group .is-invalid').removeClass('is-invalid');
     }
 
-    function AddData() {
+    $("#form-add").on("submit", function(e) {
         var form=$("body");
             form.find('.invalid-feedback').remove();
             form.find('.form-group .is-invalid').removeClass('is-invalid');
@@ -191,7 +192,9 @@
             url: "{{ route('maber') }}",
             type: "POST",
             dataType: "json",
-            data: formData,
+            processData: false,
+            contentType: false,
+            data:  new FormData(this),
             beforeSend() {
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
@@ -221,7 +224,7 @@
                 })
             }
         });
-    }
+    })
 
     // edit show/asign data
     function edit(object) {
@@ -265,17 +268,19 @@
     }
 
     // update
-    function update() {
+    $("#form-update").on("submit", function(e) {
         var form=$("body");
             form.find('.invalid-feedback').remove();
             form.find('.form-group').removeClass('is-invalid');
-        var formData = $("#form-update").serialize();
+        // var formData = $("#form-update").serialize();
 
         $.ajax({
             url: "{{ route('maber') }}",
             type: "POST",
             dataType: "json",
-            data: formData,
+            processData: false,
+            contentType: false,
+            data:  new FormData(this),
             beforeSend() {
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
@@ -305,7 +310,7 @@
                 })
             }
         });
-    }
+    })
 
 
     function Delete(object) {

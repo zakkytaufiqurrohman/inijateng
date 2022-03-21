@@ -33,6 +33,13 @@ class MagberController extends Controller
 
                 return $action;
             })
+            ->addColumn('banner',function ($data) {
+                $url= asset("upload/banner_magber/$data->banner");
+                $foto = '';
+                $foto .= "<img src=".$url." border='0' width='100' class='img' align='center' />'" ;
+
+                return $foto;
+            })
             ->addColumn('status', function ($data) {
 
                 $status = 'Aktif';
@@ -52,24 +59,32 @@ class MagberController extends Controller
         $this->validate($request, [
             'judul' => 'required|unique:magbers,judul',
             'tahun' => 'required|unique:magbers,year',
-            'keterangan' => 'required'
+            'keterangan' => 'required',
+            'banner' => 'required|mimes:jpg,bmp,png',
         ], [
             'judul.required' => 'Nama tidak boleh kosong',
             'judul.unique' => 'Nama sudah ada',
             'tahun.required' => 'Tahun tidak boleh kosong',
             'tahun.unique' => 'Tahun sudah ada',
-            'keterangan.required' => 'Keterangan tidak boleh kosong'
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            '*.mimes' => 'Format tidak sesuai, periksa kembali',
         ]);
         DB::beginTransaction();
+        $foto = $request->banner;
+        $text = str_replace(' ', '',$foto->getClientOriginalName());
+        $fotos = time()."_".$text;
         try {
             Magber::create([
                 'judul' => $request->input('judul'),
                 'year' => $request->input('tahun'),
                 'status' => '0',
+                'banner' => $fotos,
                 'keterangan' => $request->input('keterangan'),
             ]);
 
             DB::commit();
+            $foto->move(public_path('upload/banner_magber'),$fotos);
+
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Role.']);
         } catch (Exception $e) {
             DB::rollback();
@@ -108,22 +123,43 @@ class MagberController extends Controller
             'judul' => 'required|unique:magbers,judul,'.$id,
             'tahun' => 'required|unique:magbers,year,'.$id,
             'keterangan' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'banner' => 'mimes:jpg,bmp,png',
         ], [
             'judul.required' => 'Judul tidak boleh kosong',
             'judul.unique' => 'Judul sudah ada',
             'tahun.required' => 'Tahun tidak boleh kosong',
             'tahun.unique' => 'Tahun sudah ada',
             'keterangan.required' => 'Keterangan tidak boleh kosong',
-            'status.required' => 'Status tidak boleh kosong'
+            'status.required' => 'Status tidak boleh kosong',
+            '*.mimes' => 'Format tidak sesuai, periksa kembali',
         ]);
         DB::beginTransaction();
+        $maber = Magber::find($id);
+        $unlink = 'unlink.png';
+        $foto = $request->banner;
+            $nama_foto = '';
+            if($request->hasfile('banner')){
+                $text = str_replace(' ', '',$foto->getClientOriginalName());
+                $fotos = time()."_".$text;
+                $foto->move(public_path('upload/banner_magber'),$fotos);
+                $nama_foto = $fotos;
+                if (!empty($maber->banner)) {
+                    $unlink = $maber->banner;
+                }
+                $image_path = public_path('upload/banner_magber/').$unlink;
+                if (file_exists($image_path)){
+                    unlink($image_path);
+                }
+            }
+            else {
+                $nama_foto = $maber->banner;
+            }
         try {
-
-            $maber = Magber::find($id);
             $maber->judul = $request->input('judul');
             $maber->year = $request->input('tahun');
             $maber->status = $request->input('status');
+            $maber->banner = $nama_foto;
             $maber->keterangan = $request->input('keterangan');
             $maber->save();
 
@@ -148,6 +184,7 @@ class MagberController extends Controller
         DB::beginTransaction();
         try {
             $data = Magber::find($id);
+            $ambil_foto_lama = $data->banner;
             if($data->status == '1')
             {
                 return response()->json(['status' => 'error', 'message' => 'Event Masih Berlangsung']);
@@ -155,6 +192,10 @@ class MagberController extends Controller
             else{
                 $data->delete();
                 DB::commit();
+                $image_path = public_path('upload/banner_magber/').$ambil_foto_lama;
+                if (file_exists($image_path)){
+                    unlink($image_path);
+                }
                 return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus data']);
             }
 
@@ -194,7 +235,6 @@ class MagberController extends Controller
         $foto = $request->bukti_bayar;
         $text = str_replace(' ', '',$foto->getClientOriginalName());
         $fotos = time()."_".$text;
-        $nama_foto = $fotos;
         try {
             MagberTransaction::create([
                 'user_id' => $user->id,
