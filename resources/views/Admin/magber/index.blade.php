@@ -3,24 +3,21 @@
 <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
 @endsection
 @section('body')
-@section('title','Master Data Notaris Dan ALB')
+@section('title','List Maber')
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <button class="btn btn-md btn-primary" onclick="OpenModalAdd()"><i class='fa fa-plus'></i>&nbsp;Tambah</button>
-                <button class="btn btn-md btn-primary" onclick=""><i class='fa fa-upload'></i>&nbsp;Import</button>
                 <div class="table-responsive mt-4">
                     <table id="role" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th class="text-center"> No</th>
-                                <th>Nama</th>
-                                <th>Nik</th>
-                                <th>Email</th>
-                                <th>Status Anggota</th>
-                                <th>Role</th>
-                                <th>Barcode</th>
+                                <th>Judul</th>
+                                <th>Tahun</th>
+                                <th>Keterangan</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -40,7 +37,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Data</h5>
+                <h5 class="modal-title">Tambah Data Maber</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,32 +46,16 @@
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <label>Nama</label>
-                        <input type="text" class="form-control" name="name" id="nama" placeholder="Nama" autocomplete="off">
+                        <label>Judul</label>
+                        <input type="text" class="form-control" name="judul" id="judul" placeholder="Judul Maber" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Nik</label>
-                        <input type="number" class="form-control" name="nik" id="nik" placeholder="nik 16 digit" autocomplete="off">
+                        <label>Tahun</label>
+                        <input type="number" class="form-control" name="tahun" id="tahun" placeholder="2022" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="email" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label>Status Anggota</label>
-                       <select class="form-control" name="status_anggota" id="status_anggota">
-                           <option value="notaris">Notaris</option>
-                           <option value="alb">ALB</option>
-                       </select>
-                    </div>
-                    <div class="form-group form-role">
-                        <label>Role</label>
-                            <select class="form-control select2" name="role[]" id="role" multiple="multiple">
-                                @foreach($roles as $role)
-                                <option value="{{ $role->id }}" > {{ $role->name }}</option>
-                                @endforeach
-                            </select>
-                        <div class="invalid-feedback-custom"></div>
+                        <label>Keterangan</label>
+                        <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Keterangan" autocomplete="off">
                     </div>
                    
                 </div>
@@ -93,7 +74,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Data</h5>
+                <h5 class="modal-title">Edit Data Maber</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -104,28 +85,23 @@
                     @method('PUT')
                     <input type="hidden" name="id" value="" id="update-id">
                     <div class="form-group">
-                        <label>Nama</label>
-                        <input type="text" class="form-control" name="name" id="update-nama" placeholder="Nama" autocomplete="off">
+                        <label>judul</label>
+                        <input type="text" class="form-control" name="judul" id="update-judul" placeholder="Judul" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Nik</label>
-                        <input type="number" class="form-control" name="nik" id="nik" placeholder="nik 16 digit" autocomplete="off">
+                        <label>Tahun</label>
+                        <input type="number" class="form-control" name="tahun" id="update-tahun" placeholder="tahun" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="email" autocomplete="off">
-                    </div>
-                    <select class="form-control" name="status_anggota" id="status_anggota">
-                           <option value="notaris">Notaris</option>
-                           <option value="alb">ALB</option>
+                        <label>Status</label>
+                       <select class="form-control" name="status" id="status">
+                           <option value="0">Tidak Aktif</option>
+                           <option value="1">Aktif</option>
                        </select>
-                    <div class="form-group form-role">
-                        <label>Role</label>
-                        <select class="form-control select2" name="roleEdit[]" id="role-edit" multiple='multiple'>
-                            @foreach($roles as $role)
-                            <option value="{{ $role->id }}" > {{ $role->name }}</option>
-                            @endforeach
-                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <input type="text" class="form-control" name="keterangan" id="update-keterangan" placeholder="Keterangan" autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -141,8 +117,6 @@
 @section('bottom-script')
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
 <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
-<script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
-
 <script>
     $(function() {
         getData();
@@ -158,18 +132,6 @@
                 e.preventDefault();
                 update();
         });
-
-        // $('#role').select2({
-        //         width: "100%",
-        //         placeholder: "Roles",
-        //         allowClear: true
-        // });
-
-        // $('#role-edit').select2({
-        //     width: "100%",
-        //     placeholder: "Roles",
-        //     allowClear: true
-        // });
     })
 
     // get data
@@ -178,7 +140,7 @@
             processing: true,
             serverSide: true,
             destroy: true,
-            ajax: "{{route('master_data.data')}}",
+            ajax: "{{route('maber.data')}}",
             columns: [{
                     data: 'DT_RowIndex',
                     orderable: false,
@@ -186,27 +148,19 @@
                     "width": "5%"
                 },
                 {
-                    data: 'name',
+                    data: 'judul',
                     "width": "20%"
                 },
                 {
-                    data: 'nik',
+                    data: 'year',
                     "width": "20%"
                 },
                 {
-                    data: 'email',
+                    data: 'keterangan',
                     "width": "20%"
                 },
                 {
-                    data: 'status_anggota',
-                    "width": "20%"
-                },
-                {
-                    data: 'roles',
-                    "width": "20%"
-                },
-                {
-                    data: 'barcode',
+                    data: 'status',
                     "width": "20%"
                 },
                 {
@@ -234,7 +188,7 @@
             form.find('.form-group .is-invalid').removeClass('is-invalid');
         var formData = $("#form-add").serialize();
         $.ajax({
-            url: "{{ route('master_data') }}",
+            url: "{{ route('maber') }}",
             type: "POST",
             dataType: "json",
             data: formData,
@@ -264,10 +218,6 @@
             error: function(response) {
                 $.each(response.responseJSON.errors, function(key, value) {
                     $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
-                    if(key=='role'){ 
-                            $("#role").addClass('is-invalid is-invalid-custom'); 
-                            $(".form-role").append('<div class="invalid-feedback invalid-feedback-custom">'+value+'</div>')
-                    }
                 })
             }
         });
@@ -283,7 +233,7 @@
         $('#modal-edit').modal('show');
         $('#form-update')[0].reset();
         $.ajax({
-            url: "{{route('master_data.show')}}",
+            url: "{{route('maber.show')}}",
             type: "GET",
             dataType: "json",
             data: {
@@ -300,18 +250,11 @@
                 $("button").removeAttr('disabled', 'disabled');
             },
             success(result) {
-                var roles = result['data']['roles'];
                 $('#modal-edit').find("input[name='id']").val(result['data']['id']);
-                $('#modal-edit').find("input[name='name']").val(result['data']['name']);
-                $('#modal-edit').find("input[name='nik']").val(result['data']['nik']);
-                $('#modal-edit').find("input[name='email']").val(result['data']['email']);
-                $('#modal-edit').find("select[name='status_anggota']").val(result['data']['status_anggota']).change();
-                var role = [];
-                $.each(roles, function(key,value){
-                    role.push(value.id)
-                });
-                $('#role-edit').val(role);
-                $('#role-edit').trigger('change');
+                $('#modal-edit').find("input[name='judul']").val(result['data']['judul']);
+                $('#modal-edit').find("input[name='tahun']").val(result['data']['year']);
+                $('#modal-edit').find("input[name='keterangan']").val(result['data']['keterangan']);
+                $('#modal-edit').find("select[name='status']").val(result['data']['status']).trigger('change');
             },
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
@@ -329,7 +272,7 @@
         var formData = $("#form-update").serialize();
 
         $.ajax({
-            url: "{{ route('master_data') }}",
+            url: "{{ route('maber') }}",
             type: "POST",
             dataType: "json",
             data: formData,
@@ -359,10 +302,6 @@
             error: function(response) {
                 $.each(response.responseJSON.errors, function(key, value) {
                     $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
-                    if(key=='roleEdit'){ 
-                        $("#role-edit").addClass('is-invalid is-invalid-custom'); 
-                        $(".form-role").append('<div class="invalid-feedback invalid-feedback-custom">'+value+'</div>')
-                    }
                 })
             }
         });
@@ -381,7 +320,7 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                        url: "{{ route('master_data') }}",
+                        url: "{{ route('maber') }}",
                         method: "POST",
                         dataType: "json",
                         data: {
@@ -390,6 +329,7 @@
                             "_method": "DELETE"
                         },
                         success(result) {
+                            if(result)
                             getData();
                             iziToast.success({
                                 title: result.status,

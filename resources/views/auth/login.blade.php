@@ -47,7 +47,7 @@
 
                                     <div class="form-group">
                                         <div class="d-block">
-                                            <label for="password" class="control-label">Password</label>
+                                            <label for="password" class="control-label">Password                                         <i class="far fa-eye" id="togglePassword" style="margin-left: 0px; cursor: pointer;"></i></label>
                                             <div class="float-right">
                                                 <!-- <a href="auth-forgot-password.html" class="text-small">
                                                 Forgot Password?
@@ -100,7 +100,18 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <!-- toast -->
     <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
-
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
     <script>
         $(function() {
             "use strict";
@@ -138,7 +149,7 @@
                             message: result.message,
                             position: 'topRight'
                         });
-                        window.location = "/home";
+                        window.location = "/dashboard";
                     } else {
                         iziToast.error({
                             title: "Error",

@@ -20,8 +20,10 @@ class ProfileController extends Controller
 
         $dependant = new DependantDropdownController;
         $provinces = $dependant->provinces();
-
-        $provinsi_lahir = $dependant->searchBy('cities',$user->tempat_lahir)->province->id;
+        $provinsi_lahir = '';
+        if(!empty($user->tempat_lahir)){
+            $provinsi_lahir = $dependant->searchBy('cities',$user->tempat_lahir)->province->id;
+        }
         $user['provinsi_lahir'] = $provinsi_lahir;
 
         return view('profile.index', compact('user','provinces'));
@@ -33,12 +35,9 @@ class ProfileController extends Controller
             'nama' => 'required',
             'email' => 'required',
             'nik' => 'required',
-            'npwp' => 'required',
             'no_telp' => 'required',
-            'telp_kantor' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
-            'alamat' => 'required',
             'provinsi' => 'required',
             'kota' => 'required',
         ],[
@@ -48,12 +47,9 @@ class ProfileController extends Controller
             'nik.min|nik.max' => 'NIK harus terdiri dari 16 karakter',
             'email.required' => 'Email tidak boleh kosong',
             'email.unique' => 'Email sudah terdaftar',
-            'npwp.required' => 'npwp tidak boleh kosong',
             'no_telp.required' => 'No Telp tidak boleh kosong',
-            'telp_kantor.required' => 'Telp Kantor tidak boleh kosong',
             'tempat_lahir.required' => 'Tempat Lahir tidak boleh kosong',
             'tgl_lahir.required' => 'Tanggal Lahir tidak boleh kosong',
-            'alamat.required' => 'Alamat tidak boleh kosong',
             'provinsi.required' => 'Provinsi tidak boleh kosong',
             'kota.required' => 'Kota tidak boleh kosong',
         ]);
@@ -61,17 +57,21 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try{
             $user = User::find(Auth::user()->id);
-
+            //tail wa
+            $wa = $request->no_telp;
+            if(substr($wa,0,1) == 0) {
+                $wa = '62'.substr($wa, 1);
+            }
+            if(substr($wa,0,1) == '+') {
+                $wa = substr($wa, 1);
+            }
             $data = $user->update([
                 'name' => $request->nama,
                 'nik' => $request->nik,
                 'email' => $request->email,
-                'npwp' => $request->npwp,
-                'phone_number' => $request->no_telp,
-                'office_number' => $request->telp_kantor,
+                'wa' => $wa,
                 'tgl_lahir' => $request->tgl_lahir,
                 'tempat_lahir' => $request->tempat_lahir,
-                'alamat_kantor' => $request->alamat,
                 'provinsi' => $request->provinsi,
                 'kota' => $request->kota,
             ]);
@@ -111,6 +111,38 @@ class ProfileController extends Controller
             return response()->json(['status' => 'success', 'message' => 'Berhasil Ubah Password!']);
         } catch(Exception $e){
 
+            DB::rollback();
+
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function update_photo(Request $request)
+    {
+        $validated = $request->validate([
+            'photo_img' => 'mimes:jpg,bmp,png',
+        ],[
+            '*.mimes' => 'Format tidak sesuai, periksa kembali',
+        ]);
+        DB::beginTransaction();
+        try{
+            $user_id = Auth::user()->id;
+            $user = User::find($user_id);
+            $foto = $request->photo_img;
+
+            if(!empty($foto)){
+                $filename_foto = $user_id.'-'.time().'.'.$foto->getClientOriginalExtension();
+
+                $data = $user->update([
+                    'foto' => $filename_foto
+                ]);
+                $foto->move(public_path('upload/foto'),$filename_foto);
+            }
+
+            DB::commit();
+            
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Ubah Foto!']);
+        } catch(Exception $e){
             DB::rollback();
 
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

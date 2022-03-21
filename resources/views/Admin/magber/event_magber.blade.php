@@ -37,47 +37,55 @@
                             </div>
 
                             <div class="card-body">
-                                <form id='form-search' action="javascript:void(0)" method="POST">
+                                <form id='form-search' action="javascript:void(0)" method="POST" enctype="multipart">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-12">
-                                            <label for="nik">Inputan Nomor NIK</label>
+                                            <label for="nik">Inputan NIK</label>
                                             <input id="nik" type="text" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan">
                                         </div>
                                     </div>
-                                    <div class="form-group" id='btn-form-search'>
-                                        <button type="submit" id='btn-search' class="btn btn-primary btn-lg btn-block">
-                                            Cari
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <select class="form-control" name="semester" id="semester">
+                                                <option value="1">Semester 1</option>
+                                                <option value="2">Semester 2</option>
+                                                <option value="3">Semester 3</option>
+                                                <option value="4">Semester 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="btn-form-search">
+                                        <button type="submit" id='btn-register' class="btn btn-primary btn-lg btn-block">
+                                            Daftar
                                         </button>
                                     </div>
                                 </form>
+                                <!-- setelah sukses -->
                                 <form id='form-register' class='d-none' action="javascript:void(0)" method="POST">
                                     @csrf
+                                    <input type="hidden" name="event_id" value="{{$id}}">
                                     <div class="row">
                                         <div class="form-group col-12">
-                                            <label for="email">Nama</label>
-                                            <input id="nama" type="text" readonly class="form-control" name="nama" placeholder="nama">
+                                            <label for="nik-register">Inputan NIK</label>
+                                            <input id="nik-register" type="text" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-12">
-                                            <label for="email">Email</label>
-                                            <input id="email" type="text" class="form-control" name="email" placeholder="Email">
-                                            <input id="user_id" type="hidden" class="form-control" name="user_id" >
+                                            <select class="form-control" name="semester" id="semester-register">
+                                                <option value="1">Semester 1</option>
+                                                <option value="2">Semester 2</option>
+                                                <option value="3">Semester 3</option>
+                                                <option value="4">Semester 4</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="password" class="d-block">Password   <div class="far fa-eye" id="togglePassword" style="margin-left: 0px; cursor: pointer;"></div></label>
-                                            <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password" autocomplete="off">
-                                            <div id="pwindicator" class="pwindicator">
-                                            <div class="bar"></div>
-                                                <div class="label"></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label for="password_confirm" class="d-block">Konfirmasi Password <div class="far fa-eye" id="togglePassword1" style="margin-left: 0px; cursor: pointer;"></div></label>
-                                            <input id="password_confirm" type="password" class="form-control" name="password_confirm"  autocomplete="off">
+                                        <div class="form-group col-12">
+                                            <label for="bukti_bayar">Bukti Bayar</label>
+                                            <input id="bukti_bayar_register" type="file" class="form-control" name="bukti_bayar" placeholder="Bukti bayar">
+                                            <span>*Maksimal File 1 Mb (Format jpg, png)</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -104,6 +112,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+
 
     <!-- JS Libraies -->
 
@@ -115,40 +125,14 @@
     <script src="{{ asset('node_modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
     <script>
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-        
-        togglePassword.addEventListener('click', function (e) {
-            // toggle the type attribute
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            // toggle the eye slash icon
-            this.classList.toggle('fa-eye-slash');
-        });
-
-        // konfirmasi
-        const togglePassword1 = document.querySelector('#togglePassword1');
-        const password1 = document.querySelector('#password_confirm');
-        
-        togglePassword1.addEventListener('click', function (e) {
-            // toggle the type attribute
-            const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
-            password1.setAttribute('type', type);
-            // toggle the eye slash icon
-            this.classList.toggle('fa-eye-slash');
-        });
     </script>
     <script>
         $(function() {
             "use strict";
+
             $("#form-search").on("submit", function(e) {
                 e.preventDefault();
                 searchUser();
-            });
-
-            $("#form-register").on("submit", function(e) {
-                e.preventDefault();
-                register();
             });
         });
 
@@ -160,39 +144,52 @@
             var formData = $("#form-search").serialize();
 
             $.ajax({
-                url: "{{ route('register.check') }}",
+                url: "{{ route('event_magber.check') }}",
                 type: "POST",
                 dataType: "json",
                 data: formData,
                 beforeSend() {
-                    $("input").attr('disabled', 'disabled');
-                    $("button").attr('disabled', 'disabled');
-                    $('input').removeClass('is-invalid');
-                    $('.invalid-feedback').remove();
+                    $("#btn-register").addClass("btn-progress");
                 },
                 complete(){
-                    $("input").removeAttr('disabled', 'disabled');
-                    $("button").removeAttr('disabled', 'disabled');
+                    $("#btn-register").removeClass("btn-progress");
                 },
                 success(result){
                     mess = result.message;
-                    if(result.status!='success'){
-                        $("input[name='nik']").addClass('is-invalid').after('<div class="invalid-feedback">'+mess+'</div>')
-                    }else{
-                        if(mess.is_check!=1){
-                            $('#btn-form-search').addClass('d-none');
-                            $('#form-register').removeClass('d-none');
-                            $('#nik').attr('readonly',true);
-
-                            $('#user_id').val(mess.id);
-                            $('#email').val(mess.email);
-                            $('#nama').val(mess.name);
-                            $('#password').val('');
-                            $('#password_confirm').val('');
-                        }else{
-                            to("{{ route('login') }}");
-                        }
+                    if(result.status =='error'){
+                        swal({
+                            title: 'Data Belum Lengkap',
+                            text: 'Silahkan Login dan lengkapi data terlebih dahulu',
+                            icon: 'error',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                to('/login');
+                            }
+                        });
                     }
+                    if(result.status=='ready'){
+                        swal({
+                            title: 'Sudah Terdaftar',
+                            text: 'Anda Sudah Terdaftar Di Event Ini Silahkan Cek Email',
+                            icon: 'error',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        
+                    }
+                    else{
+                        $('#form-search').addClass('d-none');
+                        $('#form-register').removeClass('d-none');
+                        $('#nik').attr('readonly',true);
+
+                        $('#user_id').val(mess.id);
+                        $('#nik-register').val( $("#nik").val());
+                        $('#semester-register').val( $("#semester").val()).trigger('change');
+                    }
+                    
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
@@ -210,25 +207,20 @@
             });
         }
 
-        function register(){
-            var formData = $("#form-register").serialize();
+        $("#form-register").on("submit", function(e) {
 
             $.ajax({
-                url: "{{ route('register') }}",
+                url: "{{ route('event_magber_store') }}",
                 type: "POST",
                 dataType: "json",
-                data: formData,
+                processData: false,
+                contentType: false,
+                data:  new FormData(this),
                 beforeSend() {
-                    $("input").attr('disabled', 'disabled');
-                    $("button").attr('disabled', 'disabled');
-                    $("select").attr('disabled', 'disabled');
-                    $('input').removeClass('is-invalid');
-                    $('.invalid-feedback').remove();
+                    $("#btn-register").addClass("btn-progress");
                 },
                 complete(){
-                    $("input").removeAttr('disabled', 'disabled');
-                    $("button").removeAttr('disabled', 'disabled');
-                    $("select").removeAttr('disabled', 'disabled');
+                    $("#btn-register").removeClass("btn-progress");
                 },
                 success(result){
                     $("#form-register")[0].reset();
@@ -238,8 +230,9 @@
                         message: result.message,
                         position: 'topRight'
                     });
-
-                    to('{{ route("dashboard") }}')                    
+                    var url = '{{ route("event_magber.success", ":id") }}';
+                    url = url.replace(':id', result.data);
+                    to(url)                    
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
@@ -255,7 +248,7 @@
                     })
                 }
             });
-        }
+        })
     </script>
 </body>
 

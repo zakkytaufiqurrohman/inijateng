@@ -1,14 +1,20 @@
 <?php
 
+use App\Http\Controllers\Admin\MagberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginCustomeController;
 use App\Http\Controllers\Auth\RegisterCostumeController;
 use App\Http\Controllers\DependantDropdownController;
+use App\Http\Controllers\FrontPage\ProfileController as FrontPageProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
+use App\Http\Controllers\NotarisController;
+use App\Http\Controllers\Admin\ALBController;
+
 use App\Http\Controllers\Page\HomeController;
+use App\Http\Controllers\PreviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,12 +51,23 @@ Route::get('cities', [DependantDropdownController::class,'cities'])->name('citie
 Route::get('districts', [DependantDropdownController::class,'districts'])->name('districts');
 Route::get('villages', [DependantDropdownController::class,'villages'])->name('villages');
 
+// read dari qc code
+Route::get('/barcode/{id}', [PreviewController::class,'readQr'])->name('.read_qr');
+
 Route::middleware('auth')->group(function () {
-    Route::get('/homes', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::get('/homes', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::put('/profile', [ProfileController::class,'update'])->name('profile');
     Route::put('/profile/password', [ProfileController::class,'update_password'])->name('profile.password');
     // Route::put('/profile/attr', [ProfileController::class,'update'])->name('profile');
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+    Route::name('profile')->prefix('/profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::put('/', [ProfileController::class, 'update']);
+        Route::put('/password', [ProfileController::class, 'update_password'])->name('.password');
+        Route::put('/photo', [ProfileController::class, 'update_photo'])->name('.photo');
+    });
 
     //logout
     Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');
@@ -88,10 +105,54 @@ Route::middleware('auth')->group(function () {
        
     });
 
-    // read dari qc code
-    Route::get('/barcode/{id}', [MasterDataController::class,'readQr'])->name('.read_qr');
+    //Notaris
+    Route::name('notaris')->prefix('/notaris')->group(function () {
+        Route::get('/data_diri', [NotarisController::class, 'data_diri'])->name('.data_diri');
+        Route::post('/data_diri', [NotarisController::class, 'store'])->name('.data_diri');
+        Route::get('/data_diri/edit', [NotarisController::class, 'data_diri_edit'])->name('.data_diri.edit');
+    });
 
+    //ALB
+    Route::name('alb')->prefix('/alb')->group(function () {
+        Route::get('/data_diri', [ALBController::class, 'data_diri'])->name('.data_diri');
+        Route::post('/data_diri', [ALBController::class, 'store'])->name('.data_diri');
+        Route::get('/data_diri/edit', [ALBController::class, 'data_diri_edit'])->name('.data_diri.edit');
+    });
+
+    // Maber
+    // list
+    Route::name('maber')->prefix('/maber')->group(function () {
+        Route::get('/', [MagberController::class, 'index'])->name('.index');
+        Route::post('/', [MagberController::class, 'store']);
+        Route::put('/', [MagberController::class, 'update']);
+        Route::get('/data', [MagberController::class, 'data'])->name('.data');
+        Route::delete('/', [MagberController::class, 'destroy'])->name('.delete');
+        Route::get('/show', [MagberController::class,'show'])->name('.show');
+    });
+    
+
+    // end maber
+    
+
+    /** begin FRONT PAGE */
+        //profile
+        Route::name('profile_page')->prefix('/profile_page')->group(function () {
+            Route::get('/', [FrontPageProfileController::class, 'index'])->name('.index');
+            Route::post('/', [FrontPageProfileController::class, 'store']);
+            Route::put('/', [FrontPageProfileController::class, 'update']);
+            Route::get('/data', [FrontPageProfileController::class, 'data'])->name('.data');
+            Route::delete('/', [FrontPageProfileController::class, 'destroy'])->name('.delete');
+            Route::get('/show', [FrontPageProfileController::class,'show'])->name('.show');
+        });
+
+    /** end FRONT PAGE */
 });
+//pendaftaran maber
+Route::get('/event_magber/{id}/', [MagberController::class,'eventMagber'])->name('event_magber');
+Route::post('/event_magber', [MagberController::class,'eventMagberStore'])->name('event_magber_store');
+Route::post('/event_magber_check', [MagberController::class,'eventMagberCheck'])->name('event_magber.check');
+Route::get('/event_magber_success/{id}', [MagberController::class,'eventMagberSuccess'])->name('event_magber.success');
+
 
 // Route::view('/table', 'components.table');
 // Route::view('/form', 'components.form');

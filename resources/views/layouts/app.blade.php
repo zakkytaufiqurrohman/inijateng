@@ -25,6 +25,13 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+    <style>   
+        .profile-pic-custom{
+            width: 100%;
+            height: 30px;
+            object-fit: cover;
+        }
+    </style>
     <!-- CSS yajra -->
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
@@ -43,7 +50,11 @@
                 </form>
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                            @if(!empty(Auth::user()->foto))
+                            <img alt="image" src="{{ asset('upload/foto/'.Auth::user()->foto) }}" class="rounded-circle mr-1 profile-pic-custom">
+                            @else
+                            <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1 profile-pic-custom">
+                            @endif
                             <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

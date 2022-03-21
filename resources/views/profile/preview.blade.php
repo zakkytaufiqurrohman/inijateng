@@ -2,6 +2,9 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+<head>
+<title>IPPAT</title>
+</head>
 <style>
     body{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
@@ -104,18 +107,19 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                            <img width="400px" height="400px" src="{{asset('upload/foto/'.$data->foto)}}" alt=""/>
                           
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
-                                    Ikatan Notaris Indonesia Kota Semarang
+                                    <h5><b>
+                                    IKATAN PEJABAT PEMBUAT AKTA TANAH JAWA TENGAH</b>
                                     </h5>
                                     <h6>
                                        {{$data->name}}
                                     </h6>
+                                    <p>{{$data->alamat_kantor}}</p>
                                     <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
                             <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -127,15 +131,12 @@
                             </ul> -->
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <!-- <h3>IPPAT</h3> -->
-                        <input type="" class="profile-edit-btn" name="btnAddMore" value="IPPAT"/>
-                    </div>
+                  
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>Ikatan Notaris Indonesia Kota Semarang. All Rights Reserved.</p>
+                            <p>Ikatan Pejabat Pembuat Akta Tanah All Rights Reserved.</p>
                             <!-- <a href="">Website Link</a><br/>
                             <a href="">Bootsnipp Profile</a><br/>
                             <a href="">Bootply Profile</a> -->
@@ -155,7 +156,7 @@
                                                 <label>No. SK Kenotariatan</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti123</p>
+                                                <p>{{$data->sk_notaris}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -163,7 +164,7 @@
                                                 <label>No. KTA INI</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti Ghelani</p>
+                                                <p>{{$data->no_kta_ini}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -171,15 +172,15 @@
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>kshitighelani@gmail.com</p>
+                                                <p>{{$data->email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Phone</label>
+                                                <label>Phone/Wa</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p>{{$data->wa}}</p>
                                             </div>
                                         </div>
                                         <!-- <div class="row">

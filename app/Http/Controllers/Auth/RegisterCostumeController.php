@@ -9,7 +9,7 @@ use App\Models\User;
 use DB;
 use App\Http\Controllers\DependantDropdownController;
 use App\Http\Controllers\Auth\LoginCustomeController;
-// use DataTables;
+use Spatie\Permission\Models\Role;
 
 class RegisterCostumeController extends Controller
 {
@@ -65,12 +65,16 @@ class RegisterCostumeController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password)
             ]);
-            DB::commit();
             
             $request->merge([
                 'nik' => $user->nik
             ]);
-            
+
+            //cek is notaris or alb ?
+            $status = $user->status_anggota == 'notaris' ? $status = 'notaris' : $status = 'alb';
+            $user->assignRole($status);
+            DB::commit();
+
             $login = new LoginCustomeController;
             $login->login($request);
 
