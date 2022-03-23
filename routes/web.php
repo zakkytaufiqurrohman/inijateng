@@ -12,7 +12,7 @@ use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\Admin\ALBController;
-
+use App\Http\Controllers\Admin\MagberTransactionController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\PreviewController;
 
@@ -120,15 +120,21 @@ Route::middleware('auth')->group(function () {
     });
 
     // Maber
-    // list
-    Route::name('maber')->prefix('/maber')->group(function () {
-        Route::get('/', [MagberController::class, 'index'])->name('.index');
-        Route::post('/', [MagberController::class, 'store']);
-        Route::put('/', [MagberController::class, 'update']);
-        Route::get('/data', [MagberController::class, 'data'])->name('.data');
-        Route::delete('/', [MagberController::class, 'destroy'])->name('.delete');
-        Route::get('/show', [MagberController::class,'show'])->name('.show');
-    });
+        // list
+        Route::name('maber')->prefix('/maber')->group(function () {
+            Route::get('/', [MagberController::class, 'index'])->name('.index');
+            Route::post('/', [MagberController::class, 'store']);
+            Route::put('/', [MagberController::class, 'update']);
+            Route::get('/data', [MagberController::class, 'data'])->name('.data');
+            Route::delete('/', [MagberController::class, 'destroy'])->name('.delete');
+            Route::get('/show', [MagberController::class,'show'])->name('.show');
+        });
+        Route::name('bendahara_maber')->prefix('/bendahara/maber/')->group(function () {
+            Route::get('/{id}', [MagberTransactionController::class, 'bendaharaIndex'])->name('.index');
+            Route::get('get/datas', [MagberTransactionController::class, 'bendahara'])->name('.data');
+            Route::get('show/{user}', [MagberTransactionController::class, 'show'])->name('.show');
+           
+        });
     
 
     // end maber

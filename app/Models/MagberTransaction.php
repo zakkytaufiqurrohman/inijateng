@@ -17,4 +17,14 @@ class MagberTransaction extends Model
         'bendahara_status',
         'bendahara_status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function detail_alb()
+    {
+        return $this->belongsTo(DetailAlb::class);
+    }
 }
