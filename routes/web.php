@@ -118,6 +118,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/data_diri', [ALBController::class, 'data_diri'])->name('.data_diri');
         Route::post('/data_diri', [ALBController::class, 'store'])->name('.data_diri');
         Route::get('/data_diri/edit', [ALBController::class, 'data_diri_edit'])->name('.data_diri.edit');
+        
+        Route::get('/berkas', [ALBController::class, 'berkas'])->name('.berkas');
+        Route::post('/berkas', [ALBController::class, 'store_berkas'])->name('.berkas');
+        Route::get('/berkas/edit', [ALBController::class, 'berkas_edit'])->name('.berkas.edit');
     });
 
     // Maber
