@@ -76,19 +76,13 @@ class ALBController extends Controller
             ];
 
             if(!empty($ijazah_s1)){
-                $filename_ijazahs1 = $user_id.'-'.time().'.'.$ijazah_s1->getClientOriginalExtension();
-                $data['ijazah_s1'] = $filename_ijazahs1;
-                $ijazah_s1->move(public_path('upload/ijazah/s1'),$filename_ijazahs1);
+                $data['ijazah_s1'] = $this->move_file($ijazah_s1,'ijazah_s1','upload/ijazah/s1');
             }
             if(!empty($ijazah_s1)){
-                $filename_ijazahs2 = $user_id.'-'.time().'.'.$ijazah_s2->getClientOriginalExtension();
-                $data['ijazah_s2'] = $filename_ijazahs2;
-                $ijazah_s2->move(public_path('upload/ijazah/s2'),$filename_ijazahs2);
+                $data['ijazah_s2'] = $this->move_file($ijazah_s2,'ijazah_s2','upload/ijazah/s2');
             }
             if(!empty($bukti_terdaftar)){
-                $filename_bukti = $user_id.'-'.time().'.'.$bukti_terdaftar->getClientOriginalExtension();
-                $data['bukti_terdaftar'] = $filename_bukti;
-                $bukti_terdaftar->move(public_path('upload/bukti/'),$filename_bukti);
+                $data['bukti_terdaftar'] = $this->move_file($bukti_terdaftar,'ijazah_s2','upload/bukti');
             }
 
             $detail = DetailALB::updateOrCreate(
