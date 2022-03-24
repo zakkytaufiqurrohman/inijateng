@@ -26,7 +26,7 @@
                     </ul>
                     <div class="tab-content" id="myTabContent2">
                         <div class="tab-pane fade show active" id="magang" role="tabpanel" aria-labelledby="magang-tab">
-                            <button class="btn btn-md btn-primary float-right mb-2" onclick="OpenModalAdd()"><i class='fa fa-plus'></i>&nbsp;Tambah</button>
+                            <button class="btn btn-md btn-primary float-right mb-2" onclick="OpenModalAddMagang()"><i class='fa fa-plus'></i>&nbsp;Tambah</button>
                             <div class="table-responsive mt-4">
                                 <table id="riwayat_magang" class="table table-bordered table-hover">
                                     <thead>
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="ttmb" role="tabpanel" aria-labelledby="ttmb-tab">
-                            <button class="btn btn-md btn-primary float-right mb-2" onclick="OpenModalAdd()"><i class='fa fa-plus'></i>&nbsp;Tambah</button>
+                            <button class="btn btn-md btn-primary float-right mb-2" onclick="OpenModalAddTTMB()"><i class='fa fa-plus'></i>&nbsp;Tambah</button>
                             <div class="table-responsive mt-4">
                                 <table id="riwayat_ttmb" class="table table-bordered table-hover" >
                                     <thead>
@@ -73,6 +73,102 @@
         </div>
     </div>
 </div>
+
+<!-- modal add -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-add-magang">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Riwayat Magang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="javascript:void(0)" id="form-add-magang">
+                <div class="modal-body">
+                    @csrf
+                    <div class="form-group">
+                        <label>Penerima Magang</label>
+                        <input type="text" class="form-control" name="penerima_magang" id="penerima_magang" placeholder="Penerima Magang" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Tempat Magang</label>
+                        <input type="text" class="form-control" name="tempat_magang" id="tempat_magang" placeholder="Tempat Magang" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Wilayah Kerja</label>
+                        <input type="text" class="form-control" name="wilayah_kerja" id="wilayah_kerja" placeholder="Wilayah Kerja" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Masa Kerja</label>
+                        <input type="text" class="form-control" name="masa_kerja" id="masa_kerja" placeholder="Masa Kerja" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Tgl & No Surat</label>
+                        <input type="text" class="form-control" name="tgl_no_surat" id="tgl_no_surat" placeholder="Tgl & No Surat" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Magang Ke</label>
+                        <input type="number" class="form-control" name="magang_ke" id="magang_ke" placeholder="Magang Ke" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end modal add -->
+
+<!-- modal add -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-add-ttmb">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Riwayat TTMB</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="javascript:void(0)" id="form-add-ttmb">
+                <div class="modal-body">
+                    @csrf
+                    <div class="form-group">
+                        <label>Pengwil</label>
+                        <input type="text" class="form-control" name="pengwil" id="pengwil" placeholder="Pengwil" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Tgl Pelaksanaan</label>
+                        <input type="text" class="form-control datepicker" name="tgl_pelaksanaan" id="tgl_pelaksanaan" placeholder=">Tgl Pelaksanaan" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Materi</label>
+                        <input type="text" class="form-control" name="materi" id="materi" placeholder="Materi" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Nilai</label>
+                        <input type="text" class="form-control" name="nilai" id="nilai" placeholder="Nilai" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Tgl & Nomor</label>
+                        <input type="text" class="form-control" name="tgl_nomor" id="tgl_nomor" placeholder="Tgl & Nomor" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Magang Ke</label>
+                        <input type="number" class="form-control" name="magang_ke" id="magang_ke" placeholder="Magang Ke" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end modal add -->
 @endsection
 @section('bottom-script')
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
@@ -128,5 +224,105 @@
             ]
         });
     }
+
+    function OpenModalAddMagang(){
+        $('#modal-add-magang').modal('show');
+        var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group .is-invalid').removeClass('is-invalid');
+    }
+
+    $("#form-add-magang").on("submit", function(e) {
+        var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group .is-invalid').removeClass('is-invalid');
+        var formData = $("#form-add-magang").serialize();
+        $.ajax({
+            url: "{{ route('alb.magang.riwayat') }}",
+            type: "POST",
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            data:  new FormData(this),
+            beforeSend() {
+                $("input").attr('disabled', 'disabled');
+                $("button").attr('disabled', 'disabled');
+            },
+            complete() {
+                $("input").removeAttr('disabled', 'disabled');
+                $("button").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                $("#form-add-magang")[0].reset();
+                $('#modal-add-magang').modal('hide');
+                getDataMagang();
+
+                iziToast.success({
+                    title: result.status,
+                    message: result.message,
+                    position: 'topRight'
+                });
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                toastr.error(err.message);
+            },
+            error: function(response) {
+                $.each(response.responseJSON.errors, function(key, value) {
+                    $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                })
+            }
+        });
+    })
+
+    function OpenModalAddTTMB(){
+        $('#modal-add-ttmb').modal('show');
+        var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group .is-invalid').removeClass('is-invalid');
+    }
+
+    $("#form-add-ttmb").on("submit", function(e) {
+        var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group .is-invalid').removeClass('is-invalid');
+        var formData = $("#form-add-ttmb").serialize();
+        $.ajax({
+            url: "{{ route('alb.ttmb.riwayat') }}",
+            type: "POST",
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            data:  new FormData(this),
+            beforeSend() {
+                $("input").attr('disabled', 'disabled');
+                $("button").attr('disabled', 'disabled');
+            },
+            complete() {
+                $("input").removeAttr('disabled', 'disabled');
+                $("button").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                $("#form-add-ttmb")[0].reset();
+                $('#modal-add-ttmb').modal('hide');
+                getDataTTMB();
+
+                iziToast.success({
+                    title: result.status,
+                    message: result.message,
+                    position: 'topRight'
+                });
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                toastr.error(err.message);
+            },
+            error: function(response) {
+                $.each(response.responseJSON.errors, function(key, value) {
+                    $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                })
+            }
+        });
+    })
 </script>
 @endsection
