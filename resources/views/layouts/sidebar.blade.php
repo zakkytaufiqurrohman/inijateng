@@ -71,8 +71,8 @@
             <!-- alb -->
             <li class="menu-header">ALB</li>
             <!-- list maber just admin  -->
-            <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
-                <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list ALB</span></a>
+            <li class="nav-item {{ (request()->is('alb_event*')) ? 'active' : '' }}">
+                <a href="{{ route('alb_event') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list ALB</span></a>
             </li>
             <!-- bendahara -->
             <li class="nav-item dropdown">

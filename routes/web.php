@@ -12,6 +12,7 @@ use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\Admin\ALBController;
+use App\Http\Controllers\Admin\AlbEventController;
 use App\Http\Controllers\Admin\MagberTransactionController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\PreviewController;
@@ -138,6 +139,19 @@ Route::middleware('auth')->group(function () {
     
 
     // end maber
+
+    // ALb trans
+    Route::name('alb_event')->prefix('/alb_event')->group(function () {
+        Route::get('/', [AlbEventController::class, 'index'])->name('.index');
+        Route::post('/', [AlbEventController::class, 'store']);
+        Route::put('/', [AlbEventController::class, 'update']);
+        Route::get('/data', [AlbEventController::class, 'data'])->name('.data');
+        Route::delete('/', [AlbEventController::class, 'destroy'])->name('.delete');
+        Route::get('/show', [AlbEventController::class,'show'])->name('.show');
+    });
+
+
+    // end alb
     
 
     /** begin FRONT PAGE */
@@ -159,6 +173,8 @@ Route::post('/event_magber', [MagberController::class,'eventMagberStore'])->name
 Route::post('/event_magber_check', [MagberController::class,'eventMagberCheck'])->name('event_magber.check');
 Route::get('/event_magber_success/{id}', [MagberController::class,'eventMagberSuccess'])->name('event_magber.success');
 
+//pendaftaran alb
+Route::get('/event_alb/{id}/daftar', [AlbEventController::class,'eventAlb'])->name('event_alb');
 
 // Route::view('/table', 'components.table');
 // Route::view('/form', 'components.form');
