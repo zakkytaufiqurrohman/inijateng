@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DependantDropdownController;
 use App\Models\Alb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,13 @@ class AlbEventController extends Controller
     public function index(Request $request)
     {
         return view('Admin.alb.index');
+    }
+
+    public function eventAlb($id)
+    {
+        $dependant = new DependantDropdownController;
+        $provinces = $dependant->provinces();
+        return view('Admin.alb.register_alb',compact('id','provinces'));
     }
 
     public function data()
