@@ -107,7 +107,7 @@
     }
 
     function getDataTTMB(){
-        $("#riwayat_ttmb").removeAttr('width').dataTable({
+        $("#riwayat_ttmb").attr('width','100%').dataTable({
             processing: true,
             serverSide: true,
             destroy: true,
