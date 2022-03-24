@@ -17,6 +17,7 @@ class RiwayatMagang extends Model
         'wilayah_kerja',
         'masa_magang',
         'tgl_no_surat',
+        'magang_ke',
         'user_id'
     ];
 }
