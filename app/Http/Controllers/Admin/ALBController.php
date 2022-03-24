@@ -183,7 +183,7 @@ class ALBController extends Controller
 
             DB::commit();
             
-            return response()->json(['status' => 'success', 'message' => 'Berhasil Ubah Data Diri!']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Simpan Berkas!']);
         } catch(Exception $e){
             DB::rollback();
 

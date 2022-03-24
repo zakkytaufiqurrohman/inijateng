@@ -36,8 +36,8 @@
             <li class="nav-item {{ (request()->is('alb/berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('alb.berkas') }}" class="nav-link"><i class="fas fa-file-alt"></i><span>Berkas</span></a>
             </li>
-            <li class="nav-item {{ (request()->is('alb/magber*')) ? 'active' : '' }}">
-                <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang Bersama</span></a>
+            <li class="nav-item {{ (request()->is('alb/magang*')) ? 'active' : '' }}">
+                <a href="{{ route('alb.magang') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang</span></a>
             </li>
             {{-- @endrole --}}
             <li class="menu-header">Maber</li>

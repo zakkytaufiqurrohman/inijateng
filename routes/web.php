@@ -122,6 +122,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/berkas', [ALBController::class, 'berkas'])->name('.berkas');
         Route::post('/berkas', [ALBController::class, 'store_berkas'])->name('.berkas');
         Route::get('/berkas/edit', [ALBController::class, 'berkas_edit'])->name('.berkas.edit');
+
+        Route::get('/magang', [ALBController::class, 'data_diri'])->name('.magang');
     });
 
     // Maber
