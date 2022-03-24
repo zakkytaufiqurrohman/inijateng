@@ -50,10 +50,10 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
                   
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Belum Terverifikasi</a></li>
+                    <li class="{{ (request()->is('bendahara_maber*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',0) }}">Belum Terverifikasi</a></li>
                     
                     
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
+                    <li class="{{ (request()->is('bendahara_maber*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
             <!-- verivikator -->
@@ -71,8 +71,8 @@
             <!-- alb -->
             <li class="menu-header">ALB</li>
             <!-- list maber just admin  -->
-            <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
-                <a href="{{ route('permission') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list ALB</span></a>
+            <li class="nav-item {{ (request()->is('alb_event*')) ? 'active' : '' }}">
+                <a href="{{ route('alb_event') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list ALB</span></a>
             </li>
             <!-- bendahara -->
             <li class="nav-item dropdown">

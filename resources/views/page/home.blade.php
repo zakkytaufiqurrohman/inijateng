@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Alb;
 use App\Models\Magber;
 
 $page_name = 'home';
@@ -149,12 +150,15 @@ $page_name = 'home';
                     ?>
                     <div class="box">
                         <div class="pic"><a href="{{route('event_magber',$magber->id)}}" target="_blank"><img src="{{asset('upload/banner_magber/'.$magber->banner)}}" style="object-fit: cover;"></a></div>
-                        <h1 class="title"><a href="#">{{$magber->judul}}</a></h1>
+                        <h1 class="title"><a href="{{route('event_magber',$magber->id)}}" target="_blank">{{$magber->judul}}</a></h1>
                     </div>
                     <!-- seleksi alb -->
+                    <?php
+                        $albs = Alb::where('status','1')->first();
+                    ?>
                     <div class="box">
-                        <div class="pic"><a href="#"><img src="{{asset('assets/img/ico_visi.png')}}" style="object-fit: cover;"></a></div>
-                        <h1 class="title"><a href="#">Seleksi ALB</a></h1>
+                        <div class="pic"><a href="{{route('event_alb',$albs->id)}}" target="_blank"><img src="{{asset('upload/banner_alb/'.$albs->banner)}}" style="object-fit: cover;"></a></div>
+                        <h1 class="title"><a href="{{route('event_alb',$albs->id)}}" target="_blank">{{$albs->judul}}</a></h1>
                     </div>
 
                 </div>
