@@ -12,6 +12,7 @@ use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\Admin\ALBController;
+use App\Http\Controllers\Admin\RiwayatMagangController;
 use App\Http\Controllers\Admin\AlbEventController;
 use App\Http\Controllers\Admin\MagberTransactionController;
 use App\Http\Controllers\Page\HomeController;
@@ -123,7 +124,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/berkas', [ALBController::class, 'store_berkas'])->name('.berkas');
         Route::get('/berkas/edit', [ALBController::class, 'berkas_edit'])->name('.berkas.edit');
 
-        Route::get('/magang', [ALBController::class, 'data_diri'])->name('.magang');
+        Route::get('/magang', [RiwayatMagangController::class, 'index'])->name('.magang');
+        Route::get('/magang/riwayat', [RiwayatMagangController::class, 'data'])->name('.magang.riwayat');
     });
 
     // Maber
