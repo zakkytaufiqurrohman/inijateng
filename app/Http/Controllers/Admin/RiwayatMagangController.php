@@ -39,4 +39,23 @@ class RiwayatMagangController extends Controller
             ->addIndexColumn()
             ->make(true);
     }
+
+    public function data_ttmb()
+    {
+        $user_id = Auth::user()->id;
+        $data = RiwayatTTMB::where('user_id',$user_id)->orderBy('id','DESC');
+
+        return DataTables::eloquent($data)
+            ->addColumn('action', function ($data) {
+
+                $action = '';
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id}' onclick='edit(this);'><i class='fa fa-edit'></i></a>&nbsp;";
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id}' onclick='Delete(this);'><i class='fa fa-trash'></i></a>&nbsp;";
+
+                return $action;
+            })
+            ->escapeColumns([])
+            ->addIndexColumn()
+            ->make(true);
+    }
 }

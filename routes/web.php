@@ -126,6 +126,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/magang', [RiwayatMagangController::class, 'index'])->name('.magang');
         Route::get('/magang/riwayat', [RiwayatMagangController::class, 'data'])->name('.magang.riwayat');
+
+        Route::get('/ttmb/riwayat', [RiwayatMagangController::class, 'data_ttmb'])->name('.ttmb.riwayat');
     });
 
     // Maber
