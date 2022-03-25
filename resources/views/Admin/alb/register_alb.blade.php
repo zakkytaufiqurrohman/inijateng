@@ -37,8 +37,9 @@
                             </div>
 
                             <div class="card-body">
-                                <form id='form-register' action="javascript:void(0)" method="POST">
+                                <form id='form-register' action="javascript:void(0)" enctype="multipart/form-data" method="POST">
                                     @csrf
+                                    <input type="hidden" value="{{$id}}" name="alb_id">
                                     <div class="row">
                                         <div class="form-group col-12">
                                             <label for="nama">Nama</label>
@@ -136,7 +137,7 @@
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="s1_tahun">Tahun Lulus S1</label>
-                                            <input id="s1_tahun" type="text" class="form-control" placeholder="contoh 2021" name="s1_tahun">
+                                            <input id="s1_tahun" type="number" class="form-control" placeholder="contoh 2021" name="s1_tahun">
                                             <div class="invalid-feedback">
                                             </div>
                                         </div>
@@ -150,7 +151,7 @@
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="s2_tahun">Tahun Lulus S1</label>
-                                            <input id="s2_tahun" type="text" class="form-control" placeholder="contoh 2022" name="s2_tahun">
+                                            <input id="s2_tahun" type="number" class="form-control" placeholder="contoh 2022" name="s2_tahun">
                                             <div class="invalid-feedback">
                                             </div>
                                         </div>
@@ -158,7 +159,7 @@
                                     <div class="row">
                                         <div class="form-group col-12">
                                             <label for="foto">Upload Foto Formal</label>
-                                            <input id="foto" type="text" class="form-control" name="foto">
+                                            <input id="foto" type="file" class="form-control" name="foto">
                                             <span>*Upload foto formal berformat Jpg, Jpeg, Png dengan background merah, ukuran file tidak lebih dari 2MB</span>
                                             <div class="invalid-feedback">
                                             </div>
@@ -166,8 +167,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-12">
-                                            <label for="foto">Upload file Suket Pengda</label>
-                                            <input id="foto" type="text" class="form-control" name="foto">
+                                            <label for="suket">Surat Keterangan Pengda</label>
+                                            <input id="suket" type="file" class="form-control" name="suket">
                                             <span>*Format Pdf, ukuran file tidak lebih dari 2MB</span>
                                             <div class="invalid-feedback">
                                             </div>
@@ -175,7 +176,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="ijazah_s1">Scan Ijazah Notariat (S2)</label>
+                                            <label for="ijazah_s1">Foto Formal</label>
                                             <input id="ijazah_s1" type="file" class="form-control" name="ijazah_s1">
                                             <span>*Upload foto formal berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
                                             <div class="invalid-feedback">
@@ -198,7 +199,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="bukti_bayar">Scan Ijazah Notariat (S2)</label>
+                                            <label for="bukti_bayar">Bukti Bayar</label>
                                             <input id="bukti_bayar" type="file" class="form-control" name="bukti_bayar">
                                             <span>*Upload foto formal berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
                                             <div class="invalid-feedback">
@@ -218,14 +219,11 @@
                                           Register
                                         </button>
                                     </div>
-                                    <div class="mt-5 text-muted text-center">
-                                        Sudah punya akun? <a href="{{ route('login') }}">Login</a>
-                                    </div>
                                 </form>
                             </div>
                         </div>
                         <div class="simple-footer">
-                        Copyright &copy;2021 - {{date('Y')}} IPPAT
+                        Copyright &copy;2021 - {{date('Y')}} Ikatan Notaris Indonesia
                         </div>
                     </div>
                 </div>
@@ -254,10 +252,10 @@
     <script>
         $(function() {
             "use strict";
-            $("#form-register").on("submit", function(e) {
-                e.preventDefault();
-                register();
-            });
+            // $("#form-register").on("submit", function(e) {
+            //     e.preventDefault();
+            //     register();
+            // });
 
             $('#tgl_lahir').val('');
             $('#btn-register').attr('disabled',true);
@@ -305,15 +303,23 @@
             });
         }
 
-        function register(){
-            var formData = $("#form-register").serialize();
-
+        $("#form-register").on("submit", function(e) {
+            var id = "{{$id}}";
+            e.preventDefault();
+            var form=$("body");
+            form.find('.invalid-feedback').remove();
+            $('input').removeClass('is-invalid');
+            var url = '{{ route("event_alb.register", ":id") }}';
+            url = url.replace(':id', id);
             $.ajax({
-                url: "{{ route('register') }}",
+                url: url,
                 type: "POST",
                 dataType: "json",
-                data: formData,
+                data: new FormData(this),
+                processData: false,
+				contentType: false,
                 beforeSend() {
+                    $("#btn-register").addClass("btn-progress");
                     $("input").attr('disabled', 'disabled');
                     $("button").attr('disabled', 'disabled');
                     $("select").attr('disabled', 'disabled');
@@ -321,6 +327,7 @@
                     $('.invalid-feedback').remove();
                 },
                 complete(){
+                    $("#btn-register").removeClass("btn-progress");
                     $("input").removeAttr('disabled', 'disabled');
                     $("button").removeAttr('disabled', 'disabled');
                     $("select").removeAttr('disabled', 'disabled');
@@ -333,6 +340,10 @@
                         message: result.message,
                         position: 'topRight'
                     });
+                    var url = '{{ route("event_alb.success", ":id") }}';
+                    url = url.replace(':id', result.data);
+
+                    window.location.href = url
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
@@ -345,10 +356,11 @@
                 error:function (response){
                     $.each(response.responseJSON.errors,function(key,value){
                         $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                        $("select[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
                     })
                 }
             });
-        }
+        })
     </script>
 </body>
 
