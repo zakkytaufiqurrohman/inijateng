@@ -127,9 +127,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/magang', [RiwayatMagangController::class, 'index'])->name('.magang');
         Route::get('/magang/riwayat', [RiwayatMagangController::class, 'data'])->name('.magang.riwayat');
         Route::post('/magang/riwayat', [RiwayatMagangController::class, 'store'])->name('.magang.riwayat');
+        Route::delete('/magang/riwayat', [RiwayatMagangController::class, 'destroy'])->name('.magang.riwayat');
 
         Route::get('/ttmb/riwayat', [RiwayatMagangController::class, 'data_ttmb'])->name('.ttmb.riwayat');
         Route::post('/ttmb/riwayat', [RiwayatMagangController::class, 'store_ttmb'])->name('.ttmb.riwayat');
+        Route::delete('/ttmb/riwayat', [RiwayatMagangController::class, 'destroy_ttmb'])->name('.ttmb.riwayat');
     });
 
     // Maber
