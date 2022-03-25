@@ -138,12 +138,13 @@ class AlbEventController extends Controller
                 'tahun_s2'=> $request->s2_tahun,
                 'foto'=> $nama_foto ,
                 'suket'=> $nama_suket ,
+                'alamat'=> $request->alamat ,
                 'ijazah_s1'=> $nama_ijazah_s1,
                 'ijazah_s2'=> $nama_ijazah_s2,
                 'ktp'=> $nama_ktp,
                 'bukti_bayar'=> $nama_bukti,
-                'bendahara_status'=> 0,
-                'verifikator_status' => 0
+                'bendahara_status'=> '0',
+                'verifikator_status' => '0'
             ]);
 
             DB::commit();

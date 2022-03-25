@@ -31,6 +31,7 @@ class AlbTransaction extends Model
         'ktp',
         'bukti_bayar',
         'bendahara_status',
-        'verifikator_status'
+        'verifikator_status',
+        'alamat'
     ];
 }
