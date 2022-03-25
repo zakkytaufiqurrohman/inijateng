@@ -324,5 +324,93 @@
             }
         });
     })
+
+    function Delete(object){
+        var id = $(object).data('id');
+        swal({
+            title: 'Hapus?',
+            text: 'Apakah anda yakin ingin menghapus data ini?',
+            icon: 'error',
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{ route('alb.magang.riwayat') }}",
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        "id": id,
+                        "_token": "{{ csrf_token() }}",
+                        "_method": "DELETE"
+                    },
+                    success(result) {
+                        if(result.status=='success')
+                            getDataMagang();
+
+                        iziToast.success({
+                            title: result.status,
+                            message: result.message,
+                            position: 'topRight'
+                        });
+
+                    },
+                    error(xhr, status, error) {
+                        var err = eval('(' + xhr.responseText + ')');
+                        iziToast.error({
+                            title: status,
+                            message: err.message,
+                            position: 'topRight'
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function DeleteTTMB(object){
+        var id = $(object).data('id');
+        swal({
+            title: 'Hapus?',
+            text: 'Apakah anda yakin ingin menghapus data ini?',
+            icon: 'error',
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{ route('alb.ttmb.riwayat') }}",
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        "id": id,
+                        "_token": "{{ csrf_token() }}",
+                        "_method": "DELETE"
+                    },
+                    success(result) {
+                        if(result.status=='success')
+                            getDataTTMB();
+                            
+                        iziToast.success({
+                            title: result.status,
+                            message: result.message,
+                            position: 'topRight'
+                        });
+
+                    },
+                    error(xhr, status, error) {
+                        var err = eval('(' + xhr.responseText + ')');
+                        iziToast.error({
+                            title: status,
+                            message: err.message,
+                            position: 'topRight'
+                        });
+                    }
+                });
+            }
+        });
+    }
 </script>
 @endsection

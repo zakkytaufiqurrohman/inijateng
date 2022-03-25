@@ -75,6 +75,21 @@ class RiwayatMagangController extends Controller
         }
     }
 
+    public function destroy(Request $request)
+    {
+        $id = $request->id;
+        DB::beginTransaction();
+        try {
+            $data = RiwayatMagang::find($id)->delete();
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus data']);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
     public function data_ttmb()
     {
         $user_id = Auth::user()->id;
@@ -85,7 +100,7 @@ class RiwayatMagangController extends Controller
 
                 $action = '';
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id}' onclick='edit(this);'><i class='fa fa-edit'></i></a>&nbsp;";
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id}' onclick='Delete(this);'><i class='fa fa-trash'></i></a>&nbsp;";
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id}' onclick='DeleteTTMB(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
                 return $action;
             })
@@ -128,4 +143,20 @@ class RiwayatMagangController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function destroy_ttmb(Request $request)
+    {
+        $id = $request->id;
+        DB::beginTransaction();
+        try {
+            $data = RiwayatTTMB::find($id)->delete();
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus data']);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+    
 }
