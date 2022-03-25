@@ -411,6 +411,52 @@
         });
     }
 
+      // update
+      $("#form-update-magang").on("submit", function(e) {
+        var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group').removeClass('is-invalid');
+        // var formData = $("#form-update").serialize();
+
+        $.ajax({
+            url: "{{ route('alb.magang.riwayat') }}",
+            type: "POST",
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            data:  new FormData(this),
+            beforeSend() {
+                $("input").attr('disabled', 'disabled');
+                $("button").attr('disabled', 'disabled');
+            },
+            complete() {
+                $("input").removeAttr('disabled', 'disabled');
+                $("button").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                $("#form-update-magang")[0].reset();
+                $('#modal-edit-magang').modal('hide');
+                getDataMagang();
+
+                iziToast.success({
+                    title: result.status,
+                    message: result.message,
+                    position: 'topRight'
+                });
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                toastr.error(err.message);
+            },
+            error: function(response) {
+                $.each(response.responseJSON.errors, function(key, value) {
+                    $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                })
+            }
+        });
+    })
+
+
     function OpenModalAddTTMB(){
         $('#modal-add-ttmb').modal('show');
         var form=$("body");
