@@ -87,6 +87,40 @@ class RiwayatMagangController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data', 'data' => $data]);
     }
 
+    public function update(Request $request)
+    {
+        $id = $request->id;
+        $validated = $request->validate([
+            'penerima_magang' => 'required',
+            'tempat_magang' => 'required',
+            'wilayah_kerja' => 'required',
+            'masa_magang' => 'required',
+            'tgl_no_surat' => 'required',
+            'magang_ke' => 'required',
+        ],[
+            '*.required' => 'tidak boleh kosong',
+        ]);
+        DB::beginTransaction();
+        try{
+
+            $data = RiwayatMagang::find($id);
+            $update = $data->update([
+                'penerima_magang' => $request->penerima_magang,
+                'tempat_magang' => $request->tempat_magang,
+                'wilayah_kerja' => $request->wilayah_kerja,
+                'masa_magang' => $request->masa_magang,
+                'tgl_no_surat' => $request->tgl_no_surat,
+                'magang_ke' => $request->magang_ke
+            ]);
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Update Riwayat Magang!']);
+        } catch(Exception $e){
+            DB::rollback();
+
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
     public function destroy(Request $request)
     {
         $id = $request->id;
