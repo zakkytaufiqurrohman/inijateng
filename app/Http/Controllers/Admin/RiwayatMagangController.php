@@ -145,7 +145,7 @@ class RiwayatMagangController extends Controller
             ->addColumn('action', function ($data) {
 
                 $action = '';
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id}' onclick='edit(this);'><i class='fa fa-edit'></i></a>&nbsp;";
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id}' onclick='editTTMB(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id}' onclick='DeleteTTMB(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
                 return $action;
@@ -183,6 +183,52 @@ class RiwayatMagangController extends Controller
             DB::commit();
             
             return response()->json(['status' => 'success', 'message' => 'Berhasil Simpan Riwayat TTMB!']);
+        } catch(Exception $e){
+            DB::rollback();
+
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function show_ttmb(Request $request)
+    {
+        $id = $request->id;
+        $data = RiwayatTTMB::find($id);
+
+        if (!$data) {
+            return response()->json(['status' => 'error', 'message' => 'gagal mendapatkan data', 'data' => '']);
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data', 'data' => $data]);
+    }
+
+    public function update_ttmb(Request $request)
+    {
+        $id = $request->id;
+        $validated = $request->validate([
+            'pengwil' => 'required',
+            'tgl_pelaksanaan' => 'required',
+            'materi' => 'required',
+            'nilai' => 'required',
+            'tgl_nomor' => 'required',
+            'magang_ke' => 'required',
+        ],[
+            '*.required' => 'tidak boleh kosong',
+        ]);
+        DB::beginTransaction();
+        try{
+
+            $data = RiwayatTTMB::find($id);
+            $update = $data->update([
+                'pengwil' => $request->pengwil,
+                'tgl_pelaksanaan' => $request->tgl_pelaksanaan,
+                'materi' => $request->materi,
+                'nilai' => $request->nilai,
+                'tgl_nomor' => $request->tgl_nomor,
+                'magang_ke' => $request->magang_ke,
+            ]);
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Update Riwayat TTMB!']);
         } catch(Exception $e){
             DB::rollback();
 

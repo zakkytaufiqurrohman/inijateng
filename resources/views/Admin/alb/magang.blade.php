@@ -219,6 +219,55 @@
         </div>
     </div>
 </div>
+
+<!-- modal edit -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-edit-ttmb">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Riwayat Magang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="javascript:void(0)" id="form-update-ttmb">
+                <div class="modal-body">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id" value="" id="update-id">
+                    <div class="form-group">
+                        <label>Pengwil</label>
+                        <input type="text" class="form-control" name="pengwil" id="pengwil" placeholder="Pengwil" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Tgl Pelaksanaan</label>
+                        <input type="text" class="form-control datepicker" name="tgl_pelaksanaan" id="tgl_pelaksanaan" placeholder="Tgl Pelaksanaan" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Materi</label>
+                        <input type="text" class="form-control" name="materi" id="materi" placeholder="Materi" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Nilai</label>
+                        <input type="text" class="form-control" name="nilai" id="nilai" placeholder="Nilai" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Tgl & Nomor</label>
+                        <input type="text" class="form-control" name="tgl_nomor" id="tgl_nomor" placeholder="Tgl & Nomor" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Magang Ke</label>
+                        <input type="number" class="form-control" name="magang_ke" id="magang_ke" placeholder="Magang Ke" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary btn-update">Ubah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @section('bottom-script')
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
@@ -411,8 +460,8 @@
         });
     }
 
-      // update
-      $("#form-update-magang").on("submit", function(e) {
+    // update
+    $("#form-update-magang").on("submit", function(e) {
         var form=$("body");
             form.find('.invalid-feedback').remove();
             form.find('.form-group').removeClass('is-invalid');
@@ -550,5 +599,93 @@
             }
         });
     }
+
+    function editTTMB(object) {
+        var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group .is-invalid').removeClass('is-invalid');
+        var id = $(object).data('id');
+
+        $('#modal-edit-ttmb').modal('show');
+        $('#form-update-ttmb')[0].reset();
+        $.ajax({
+            url: "{{route('alb.ttmb.show')}}",
+            type: "GET",
+            dataType: "json",
+            data: {
+                "id": id,
+            },
+            beforeSend() {
+                $(".btn-update").addClass('btn-progress');
+                $("input").attr('disabled', 'disabled');
+                $("button").attr('disabled', 'disabled');
+            },
+            complete() {
+                $(".btn-update").removeClass('btn-progress');
+                $("input").removeAttr('disabled', 'disabled');
+                $("button").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                $('#modal-edit-ttmb').find("input[name='id']").val(result['data']['id']);
+                $('#modal-edit-ttmb').find("input[name='pengwil']").val(result['data']['pengwil']);
+                $('#modal-edit-ttmb').find("input[name='tgl_pelaksanaan']").val(result['data']['tgl_pelaksanaan']);
+                $('#modal-edit-ttmb').find("input[name='materi']").val(result['data']['materi']);
+                $('#modal-edit-ttmb').find("input[name='nilai']").val(result['data']['nilai']);
+                $('#modal-edit-ttmb').find("input[name='tgl_nomor']").val(result['data']['tgl_nomor']);
+                $('#modal-edit-ttmb').find("input[name='magang_ke']").val(result['data']['magang_ke']);
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                notification(status, err.message);
+                checkCSRFToken(err.message);
+            }
+        });
+    }
+
+    // update
+    $("#form-update-ttmb").on("submit", function(e) {
+        var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group').removeClass('is-invalid');
+        // var formData = $("#form-update").serialize();
+
+        $.ajax({
+            url: "{{ route('alb.ttmb.riwayat') }}",
+            type: "POST",
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            data:  new FormData(this),
+            beforeSend() {
+                $("input").attr('disabled', 'disabled');
+                $("button").attr('disabled', 'disabled');
+            },
+            complete() {
+                $("input").removeAttr('disabled', 'disabled');
+                $("button").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                $("#form-update-ttmb")[0].reset();
+                $('#modal-edit-ttmb').modal('hide');
+                getDataTTMB();
+
+                iziToast.success({
+                    title: result.status,
+                    message: result.message,
+                    position: 'topRight'
+                });
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                toastr.error(err.message);
+            },
+            error: function(response) {
+                $.each(response.responseJSON.errors, function(key, value) {
+                    $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                })
+            }
+        });
+    })
+
 </script>
 @endsection
