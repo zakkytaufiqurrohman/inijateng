@@ -133,6 +133,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/ttmb/riwayat', [RiwayatMagangController::class, 'data_ttmb'])->name('.ttmb.riwayat');
         Route::post('/ttmb/riwayat', [RiwayatMagangController::class, 'store_ttmb'])->name('.ttmb.riwayat');
+        Route::get('/ttmb/riwayat/show', [RiwayatMagangController::class, 'show_ttmb'])->name('.ttmb.show');
+        Route::put('/ttmb/riwayat', [RiwayatMagangController::class, 'update_ttmb'])->name('.ttmb.riwayat');
         Route::delete('/ttmb/riwayat', [RiwayatMagangController::class, 'destroy_ttmb'])->name('.ttmb.riwayat');
     });
 
