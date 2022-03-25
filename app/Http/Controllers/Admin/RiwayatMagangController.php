@@ -75,6 +75,18 @@ class RiwayatMagangController extends Controller
         }
     }
 
+    public function show(Request $request)
+    {
+        $id = $request->id;
+        $data = RiwayatMagang::find($id);
+
+        if (!$data) {
+            return response()->json(['status' => 'error', 'message' => 'gagal mendapatkan data', 'data' => '']);
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data', 'data' => $data]);
+    }
+
     public function destroy(Request $request)
     {
         $id = $request->id;
