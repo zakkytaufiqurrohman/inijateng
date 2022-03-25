@@ -127,6 +127,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/magang', [RiwayatMagangController::class, 'index'])->name('.magang');
         Route::get('/magang/riwayat', [RiwayatMagangController::class, 'data'])->name('.magang.riwayat');
         Route::post('/magang/riwayat', [RiwayatMagangController::class, 'store'])->name('.magang.riwayat');
+        Route::get('/magang/riwayat/show', [RiwayatMagangController::class, 'show'])->name('.magang.show');
         Route::delete('/magang/riwayat', [RiwayatMagangController::class, 'destroy'])->name('.magang.riwayat');
 
         Route::get('/ttmb/riwayat', [RiwayatMagangController::class, 'data_ttmb'])->name('.ttmb.riwayat');

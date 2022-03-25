@@ -101,7 +101,7 @@
                     </div>
                     <div class="form-group">
                         <label>Masa Kerja</label>
-                        <input type="text" class="form-control" name="masa_kerja" id="masa_kerja" placeholder="Masa Kerja" autocomplete="off">
+                        <input type="text" class="form-control" name="masa_magang" id="masa_magang" placeholder="Masa Kerja" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Tgl & No Surat</label>
@@ -169,6 +169,56 @@
     </div>
 </div>
 <!-- end modal add -->
+
+
+<!-- modal edit -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-edit-magang">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Riwayat Magang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="javascript:void(0)" id="form-update-magang">
+                <div class="modal-body">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id" value="" id="update-id">
+                    <div class="form-group">
+                        <label>Penerima Magang</label>
+                        <input type="text" class="form-control" name="penerima_magang" id="penerima_magang" placeholder="Penerima Magang" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Tempat Magang</label>
+                        <input type="text" class="form-control" name="tempat_magang" id="tempat_magang" placeholder="Tempat Magang" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Wilayah Kerja</label>
+                        <input type="text" class="form-control" name="wilayah_kerja" id="wilayah_kerja" placeholder="Wilayah Kerja" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Masa Magang</label>
+                        <input type="text" class="form-control" name="masa_magang" id="masa_magang" placeholder="Masa Kerja" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Tgl & No Surat</label>
+                        <input type="text" class="form-control" name="tgl_no_surat" id="tgl_no_surat" placeholder="Tgl & No Surat" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Magang Ke</label>
+                        <input type="number" class="form-control" name="magang_ke" id="magang_ke" placeholder="Magang Ke" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary btn-update">Ubah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @section('bottom-script')
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
@@ -275,6 +325,92 @@
         });
     })
 
+    function Delete(object){
+        var id = $(object).data('id');
+        swal({
+            title: 'Hapus?',
+            text: 'Apakah anda yakin ingin menghapus data ini?',
+            icon: 'error',
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{ route('alb.magang.riwayat') }}",
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        "id": id,
+                        "_token": "{{ csrf_token() }}",
+                        "_method": "DELETE"
+                    },
+                    success(result) {
+                        if(result.status=='success')
+                            getDataMagang();
+
+                        iziToast.success({
+                            title: result.status,
+                            message: result.message,
+                            position: 'topRight'
+                        });
+
+                    },
+                    error(xhr, status, error) {
+                        var err = eval('(' + xhr.responseText + ')');
+                        iziToast.error({
+                            title: status,
+                            message: err.message,
+                            position: 'topRight'
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function edit(object) {
+        var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group .is-invalid').removeClass('is-invalid');
+        var id = $(object).data('id');
+
+        $('#modal-edit-magang').modal('show');
+        $('#form-update-magang')[0].reset();
+        $.ajax({
+            url: "{{route('alb.magang.show')}}",
+            type: "GET",
+            dataType: "json",
+            data: {
+                "id": id,
+            },
+            beforeSend() {
+                $(".btn-update").addClass('btn-progress');
+                $("input").attr('disabled', 'disabled');
+                $("button").attr('disabled', 'disabled');
+            },
+            complete() {
+                $(".btn-update").removeClass('btn-progress');
+                $("input").removeAttr('disabled', 'disabled');
+                $("button").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                $('#modal-edit-magang').find("input[name='id']").val(result['data']['id']);
+                $('#modal-edit-magang').find("input[name='penerima_magang']").val(result['data']['penerima_magang']);
+                $('#modal-edit-magang').find("input[name='tempat_magang']").val(result['data']['tempat_magang']);
+                $('#modal-edit-magang').find("input[name='wilayah_kerja']").val(result['data']['wilayah_kerja']);
+                $('#modal-edit-magang').find("input[name='masa_magang']").val(result['data']['masa_magang']);
+                $('#modal-edit-magang').find("input[name='tgl_no_surat']").val(result['data']['tgl_no_surat']);
+                $('#modal-edit-magang').find("input[name='magang_ke']").val(result['data']['magang_ke']);
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                notification(status, err.message);
+                checkCSRFToken(err.message);
+            }
+        });
+    }
+
     function OpenModalAddTTMB(){
         $('#modal-add-ttmb').modal('show');
         var form=$("body");
@@ -324,50 +460,6 @@
             }
         });
     })
-
-    function Delete(object){
-        var id = $(object).data('id');
-        swal({
-            title: 'Hapus?',
-            text: 'Apakah anda yakin ingin menghapus data ini?',
-            icon: 'error',
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                $.ajax({
-                    url: "{{ route('alb.magang.riwayat') }}",
-                    method: "POST",
-                    dataType: "json",
-                    data: {
-                        "id": id,
-                        "_token": "{{ csrf_token() }}",
-                        "_method": "DELETE"
-                    },
-                    success(result) {
-                        if(result.status=='success')
-                            getDataMagang();
-
-                        iziToast.success({
-                            title: result.status,
-                            message: result.message,
-                            position: 'topRight'
-                        });
-
-                    },
-                    error(xhr, status, error) {
-                        var err = eval('(' + xhr.responseText + ')');
-                        iziToast.error({
-                            title: status,
-                            message: err.message,
-                            position: 'topRight'
-                        });
-                    }
-                });
-            }
-        });
-    }
 
     function DeleteTTMB(object){
         var id = $(object).data('id');
