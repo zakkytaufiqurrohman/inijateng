@@ -194,7 +194,7 @@ class ALBController extends Controller
     private function move_file($file,$name,$dir,$old_filename=NULL)
     {
         $name = str_replace(' ', '',$file->getClientOriginalName());
-        $filename = time()."_".$name;
+        $filename = rand(10,100).time()."_".$name;
         $file->move(public_path($dir),$filename);
 
         return $filename;
