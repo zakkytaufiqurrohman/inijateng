@@ -223,7 +223,7 @@
                             </div>
                         </div>
                         <div class="simple-footer">
-                        Copyright &copy;2021 - {{date('Y')}} Ikatan Notaris Indonesia
+                            Copyright {{date('Y')}} © Ikatan Notaris Indonesia Pengurus Wilayah Jawa Tengah. All rights reserved</a>
                         </div>
                     </div>
                 </div>

@@ -28,7 +28,7 @@ class RegisterAlb extends Mailable
      */
     public function build()
     {
-        return $this->from('Ippat@gmail.com')
+        return $this->from('IniJateng@gmail.com')
         ->view('mail.register_alb')
         ->subject('Pendaftaran Alb (No Repplay)');
     }
