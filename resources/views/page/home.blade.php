@@ -140,7 +140,7 @@ $page_name = 'home';
     <div class="container_24">
         <div class="left">
         	<div class="top">
-                <h1 class="name">Kegiatan Pengwil INI Jateng</h1>
+                <h1 class="name">Kegiatan Pengwil INI Jatengss</h1>
             </div>
             <div class="bottom" style="margin-bottom: 30px;">
                 <div class="grid">
