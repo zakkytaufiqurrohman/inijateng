@@ -46,7 +46,7 @@ class RiwayatMagangController extends Controller
             'penerima_magang' => 'required',
             'tempat_magang' => 'required',
             'wilayah_kerja' => 'required',
-            'masa_kerja' => 'required',
+            'masa_magang' => 'required',
             'tgl_no_surat' => 'required',
             'magang_ke' => 'required',
         ],[
@@ -61,7 +61,7 @@ class RiwayatMagangController extends Controller
                 'penerima_magang' => $request->penerima_magang,
                 'tempat_magang' => $request->tempat_magang,
                 'wilayah_kerja' => $request->wilayah_kerja,
-                'masa_kerja' => $request->masa_kerja,
+                'masa_magang' => $request->masa_magang,
                 'tgl_no_surat' => $request->tgl_no_surat,
                 'magang_ke' => $request->magang_ke,
             ]);
