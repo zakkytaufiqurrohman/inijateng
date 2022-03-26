@@ -51,7 +51,7 @@ $page_name = 'home';
 
 <div class="header_news">
     <div class="container_24">
-        <h1 class="title">Berita Terbaru</h1>
+        <h1 class="title">Berita Terbaruu</h1>
         <div class="show_news">
             <div class="marquee up">
 
