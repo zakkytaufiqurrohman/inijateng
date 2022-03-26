@@ -12,6 +12,7 @@ use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\Admin\ALBController;
+use App\Http\Controllers\Admin\RiwayatMagangController;
 use App\Http\Controllers\Admin\AlbEventController;
 use App\Http\Controllers\Admin\MagberTransactionController;
 use App\Http\Controllers\Page\HomeController;
@@ -122,6 +123,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/berkas', [ALBController::class, 'berkas'])->name('.berkas');
         Route::post('/berkas', [ALBController::class, 'store_berkas'])->name('.berkas');
         Route::get('/berkas/edit', [ALBController::class, 'berkas_edit'])->name('.berkas.edit');
+
+        Route::get('/magang', [RiwayatMagangController::class, 'index'])->name('.magang');
+        Route::get('/magang/riwayat', [RiwayatMagangController::class, 'data'])->name('.magang.riwayat');
+        Route::post('/magang/riwayat', [RiwayatMagangController::class, 'store'])->name('.magang.riwayat');
+        Route::get('/magang/riwayat/show', [RiwayatMagangController::class, 'show'])->name('.magang.show');
+        Route::put('/magang/riwayat', [RiwayatMagangController::class, 'update'])->name('.magang.riwayat');
+        Route::delete('/magang/riwayat', [RiwayatMagangController::class, 'destroy'])->name('.magang.riwayat');
+
+        Route::get('/ttmb/riwayat', [RiwayatMagangController::class, 'data_ttmb'])->name('.ttmb.riwayat');
+        Route::post('/ttmb/riwayat', [RiwayatMagangController::class, 'store_ttmb'])->name('.ttmb.riwayat');
+        Route::get('/ttmb/riwayat/show', [RiwayatMagangController::class, 'show_ttmb'])->name('.ttmb.show');
+        Route::put('/ttmb/riwayat', [RiwayatMagangController::class, 'update_ttmb'])->name('.ttmb.riwayat');
+        Route::delete('/ttmb/riwayat', [RiwayatMagangController::class, 'destroy_ttmb'])->name('.ttmb.riwayat');
     });
 
     // Maber

@@ -38,7 +38,7 @@ class ALBController extends Controller
         })
         ->find($user_id);
 
-        return view('admin.alb.data_diri_edit', compact('user'));
+        return view('Admin.alb.data_diri_edit', compact('user'));
     }
 
     public function store(Request $request)
@@ -108,7 +108,7 @@ class ALBController extends Controller
         })
         ->find($user_id);
         
-        return view('admin.alb.berkas', compact('user'));
+        return view('Admin.alb.berkas', compact('user'));
     }
 
     public function berkas_edit()
@@ -119,7 +119,7 @@ class ALBController extends Controller
         })
         ->find($user_id);
         
-        return view('admin.alb.berkas_edit', compact('user'));
+        return view('Admin.alb.berkas_edit', compact('user'));
     }
 
     public function store_berkas(Request $request)
@@ -183,7 +183,7 @@ class ALBController extends Controller
 
             DB::commit();
             
-            return response()->json(['status' => 'success', 'message' => 'Berhasil Ubah Data Diri!']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Simpan Berkas!']);
         } catch(Exception $e){
             DB::rollback();
 
