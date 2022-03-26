@@ -29,7 +29,7 @@ class RegisterMaber extends Mailable
      */
     public function build()
     {
-        return $this->from('Ippat@gmail.com')
+        return $this->from('inijateng@gmail.com')
                    ->view('mail.register_maber')
                    ->subject('Pendaftaran Maber (No Repplay)');
     }

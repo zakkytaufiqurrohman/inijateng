@@ -1,10 +1,10 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="/home">IPPAT</a>
+            <a href="/home">INI JATENG</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="/">IP</a>
+            <a href="/">INI</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>

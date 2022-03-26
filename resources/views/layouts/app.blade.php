@@ -87,7 +87,7 @@
             <!-- Main Content end-->
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy;2021 - {{date('Y')}} IPPAT</a>
+                    Copyright {{date('Y')}} © Ikatan Notaris Indonesia Pengurus Wilayah Jawa Tengah. All rights reserved</a>
                 </div>
                 <div class="footer-right">
                     2.3.0

@@ -41,5 +41,5 @@ Jika ada pertanyaan silahkan hub panitia klik disini <a href="https://api.whatsa
 <br>
 
 <div style="left:0px; color:white; text-align:center; padding: 12px;">
-Suport By &copy; INIJATENG
+Copyright {{date('Y')}} © Ikatan Notaris Indonesia Pengurus Wilayah Jawa Tengah. All rights reserved</a>
 </div>
