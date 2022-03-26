@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            @role('admin')
+           
             <li class="nav-item dropdown {{ (request()->is('user*','role*','permission*','master_data*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Master</span></a>
                 <ul class="dropdown-menu">
@@ -23,13 +23,13 @@
                    
                 </ul>
             </li>
-            @endrole
+          
             @role('notaris')
             <li class="nav-item {{ (request()->is('notaris*')) ? 'active' : '' }}">
                 <a href="{{ route('notaris.data_diri') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Data Diri</span></a>
             </li>
             @endrole
-            {{-- @role('alb') --}}
+            @role('alb')
             <li class="nav-item {{ (request()->is('alb/data_diri*')) ? 'active' : '' }}">
                 <a href="{{ route('alb.data_diri') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Data Diri</span></a>
             </li>
@@ -39,12 +39,13 @@
             <li class="nav-item {{ (request()->is('alb/magang*')) ? 'active' : '' }}">
                 <a href="{{ route('alb.magang') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang</span></a>
             </li>
-            {{-- @endrole --}}
+            @endrole
+            @role('admin')
             <li class="menu-header">Maber</li>
-            <!-- list maber just admin  -->
             <li class="nav-item {{ (request()->is('maber*')) ? 'active' : '' }}">
                 <a href="{{ route('maber') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list Maber</span></a>
             </li>
+          
             <!-- bendahara -->
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
@@ -102,6 +103,7 @@
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Profile</span></a>
             </li>
+            @endrole
             
     </aside>
 </div>
