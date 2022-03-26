@@ -215,9 +215,9 @@
             onChangeSelect('{{ route("cities") }}', $(this).val(), 'tempat_lahir');
         });
 
-        $("#profile-picture").click(function(e) {
-            $("#photo_img").click();
-        });
+        // $("#profile-picture").click(function(e) {
+        //     $("#photo_img").click();
+        // });
 
         $('#photo_img').on('change',function(){
             var fileName = $('#photo_img')[0].files[0].name;

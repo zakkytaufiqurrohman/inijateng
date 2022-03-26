@@ -100,8 +100,8 @@
                         <input type="text" class="form-control" name="wilayah_kerja" id="wilayah_kerja" placeholder="Wilayah Kerja" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Masa Kerja</label>
-                        <input type="text" class="form-control" name="masa_magang" id="masa_magang" placeholder="Masa Kerja" autocomplete="off">
+                        <label>Masa Magang</label>
+                        <input type="text" class="form-control" name="masa_magang" id="masa_magang" placeholder="Masa Magang" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Tgl & No Surat</label>
