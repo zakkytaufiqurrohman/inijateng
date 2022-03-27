@@ -101,10 +101,10 @@ class NotarisController extends Controller
             }
             if(!empty($scan_npwp)){
                 $filename_snpwp = $user_id.'-'.time().'.'.$scan_npwp->getClientOriginalExtension();
-                $data['ktp_img'] = $filename_snpwp;
+                $data['scan_npwp'] = $filename_snpwp;
                 $scan_npwp->move(public_path('upload/scan_npwp'),$filename_snpwp);
             }
-            
+
             $detail = DetailNotaris::updateOrCreate(
                 ['user_id' => $user_id],
                 $data
