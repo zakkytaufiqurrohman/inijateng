@@ -149,7 +149,8 @@ class AlbEventController extends Controller
 
             DB::commit();
             $details = [
-                'name' =>  $user->nama
+                'name' =>  $user->nama,
+                'link' => route('event_alb.id_card',$user->kode)
             ];
             Mail::to($request->email)->send(new RegisterAlb($details));
 
@@ -353,6 +354,20 @@ class AlbEventController extends Controller
     public function eventAlbSuccess($id)
     {
         return view('Admin.alb.register_success',compact('id'));
+    }
+
+    public function eventAlbIdCard($id)
+    {
+        $event = Alb::where('status','1')->first();
+       
+        $alb_trans = AlbTransaction::where('bendahara_status','1')->where('verifikator_status','1')->where('nik',$id)->where('alb_id',$event->id)->first();
+        if(!empty($alb_trans)){
+            return view('Admin.alb.id_card',compact('alb_trans','event'));
+        }
+        else {
+            return view('unferivied',compact('event'));
+        }
+        
     }
 
 }
