@@ -156,7 +156,7 @@
                                                 <label>No. SK Kenotariatan</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$data->sk_notaris}}</p>
+                                                <p>{{$data->no_sk_notaris}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
