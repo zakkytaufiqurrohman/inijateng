@@ -195,6 +195,7 @@ Route::get('/event_magber_success/{id}', [MagberController::class,'eventMagberSu
 Route::get('/event_alb/{id}/daftar', [AlbEventController::class,'eventAlb'])->name('event_alb');
 Route::post('/event_alb/register', [AlbEventController::class,'registerAlb'])->name('event_alb.register');
 Route::get('/event_alb_success/{id}', [AlbEventController::class,'eventAlbSuccess'])->name('event_alb.success');
+Route::get('alb/card/{id}', [AlbEventController::class,'eventAlbIdCard'])->name('event_alb.id_card');
 
 // Route::view('/table', 'components.table');
 // Route::view('/form', 'components.form');
