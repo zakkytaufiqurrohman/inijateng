@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="telephone">No. Telp</label>
-                            <input id="telephone" type="text" class="form-control" name="telephone"  value="{{ $user->telephone }}" >
+                            <input id="telephone" type="text" class="form-control" name="telephone" placeholder="+62"  value="{{ $user->telephone }}" >
                         </div> 
                       
                         <div class="form-group col-md-12 col-lg-6">
@@ -37,7 +37,7 @@
                             <input id="no_kta_ini" type="text" class="form-control" name="no_kta_ini"  value="{{ $user->no_kta_ini }}" >
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
-                            <label for="no_kta_ppt">No. KTA PPT</label>
+                            <label for="no_kta_ppt">No. KTA PPAT</label>
                             <input id="no_kta_ppt" type="text" class="form-control" name="no_kta_ppt"  value="{{ $user->no_kta_ppt }}" >
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
@@ -70,7 +70,7 @@
                             <span>*Kosongi apabila data tidak ingin diubah (Format PDF)</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
-                            <label for="sk_ppt">SK PPT</label>
+                            <label for="sk_ppt">SK PPAT</label>
                             <div class="custom-file">
                                 <input id="sk_ppt" type="file" class="custom-file-input" name="sk_ppt" >
                                 <label class="custom-file-label text-truncate" for="sk_ppt">Choose file</label>

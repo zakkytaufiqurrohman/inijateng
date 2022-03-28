@@ -111,7 +111,7 @@
                             </div>
                         </div> 
                         <div class="form-group col-md-12 col-lg-4">
-                            <label for="ktp_img">SK PPT</label>
+                            <label for="ktp_img">SK PPAT</label>
                             <div class="d-block">
                                 @if(!empty($user->sk_ppt))
                                     <button class="btn btn-success">Sudah Diupload &nbsp;<i class="fa fa-check"></i></button>
