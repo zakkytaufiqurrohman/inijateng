@@ -49,6 +49,9 @@
                                         <button type="submit" id='btn-search' class="btn btn-primary btn-lg btn-block">
                                             Cari
                                         </button>
+                                        <div class="mt-5 text-muted text-center">
+                                            Sudah punya akun? <a href="{{ route('login') }}">Login</a>
+                                        </div>
                                     </div>
                                 </form>
                                 <form id='form-register' class='d-none' action="javascript:void(0)" method="POST">
@@ -84,6 +87,9 @@
                                         <button type="submit" id='btn-register' class="btn btn-primary btn-lg btn-block">
                                             Daftar
                                         </button>
+                                        <div class="mt-5 text-muted text-center">
+                                            Sudah punya akun? <a href="{{ route('login') }}">Login</a>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
