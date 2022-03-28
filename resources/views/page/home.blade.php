@@ -45,6 +45,7 @@ $page_name = 'home';
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INI Jateng</title>
+<link rel="icon" href="{{ asset('assets/img/logo.png') }}">
 </head>
 <body>
 @include('page.layouts.header')

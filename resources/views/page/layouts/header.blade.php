@@ -93,6 +93,12 @@
                 <li><a href='galeri.php'>GALERI</a></li>
                 <li><a href='artikel.php'>ARTIKEL</a></li>
                 <li><a href='kontak.php'>KONTAK</a></li>
+                <li class="has-sub"><a href='#'>PEMUTAKHIRAN</a>
+                        <ul>
+                            <li><a href="{{route('register')}}">Pemutakhiran</a></li>
+                            <li><a href="{{route('login')}}">Login</a></li>
+                        </ul>
+                </li>
             </ul>
         </div>
     </div>
