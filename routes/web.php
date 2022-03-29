@@ -14,6 +14,7 @@ use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\Admin\ALBController;
 use App\Http\Controllers\Admin\RiwayatMagangController;
 use App\Http\Controllers\Admin\AlbEventController;
+use App\Http\Controllers\Admin\AlbTransactionController;
 use App\Http\Controllers\Admin\MagberTransactionController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\PreviewController;
@@ -159,14 +160,21 @@ Route::middleware('auth')->group(function () {
     // end maber
 
     // ALb trans
-    Route::name('alb_event')->prefix('/alb_event')->group(function () {
-        Route::get('/', [AlbEventController::class, 'index'])->name('.index');
-        Route::post('/', [AlbEventController::class, 'store']);
-        Route::put('/', [AlbEventController::class, 'update']);
-        Route::get('/data', [AlbEventController::class, 'data'])->name('.data');
-        Route::delete('/', [AlbEventController::class, 'destroy'])->name('.delete');
-        Route::get('/show', [AlbEventController::class,'show'])->name('.show');
-    });
+        Route::name('alb_event')->prefix('/alb_event')->group(function () {
+            Route::get('/', [AlbEventController::class, 'index'])->name('.index');
+            Route::post('/', [AlbEventController::class, 'store']);
+            Route::put('/', [AlbEventController::class, 'update']);
+            Route::get('/data', [AlbEventController::class, 'data'])->name('.data');
+            Route::delete('/', [AlbEventController::class, 'destroy'])->name('.delete');
+            Route::get('/show', [AlbEventController::class,'show'])->name('.show');
+        });
+
+        Route::name('bendahara_alb')->prefix('/bendahara/alb/')->group(function () {
+            Route::get('/{id}', [AlbTransactionController::class, 'bendaharaIndex'])->name('.index');
+            Route::get('get/datas', [AlbTransactionController::class, 'bendahara'])->name('.data');
+            Route::get('show/{user}', [AlbTransactionController::class, 'show'])->name('.show');
+           
+        });
 
 
     // end alb
