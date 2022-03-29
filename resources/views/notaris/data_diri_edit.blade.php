@@ -59,7 +59,7 @@
                                 <input id="ktp_img" type="file" class="custom-file-input" name="ktp_img" >
                                 <label class="custom-file-label text-truncate" for="ktp_img">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="sk_notaris">SK Notaris</label>
@@ -83,7 +83,7 @@
                                 <input id="scan_npwp" type="file" class="custom-file-input" name="scan_npwp" >
                                 <label class="custom-file-label text-truncate" for="scan_npwp">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div> 
                     </div>
                 </div>

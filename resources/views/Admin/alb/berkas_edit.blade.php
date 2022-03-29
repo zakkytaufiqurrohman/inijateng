@@ -29,7 +29,7 @@
                                 <input id="ktp" type="file" class="custom-file-input" name="ktp" >
                                 <label class="custom-file-label text-truncate" for="ktp">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="pengantar_magang">Pengantar Magang</label>
@@ -37,7 +37,7 @@
                                 <input id="pengantar_magang" type="file" class="custom-file-input" name="pengantar_magang" >
                                 <label class="custom-file-label text-truncate" for="pengantar_magang">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah (Format PDF)</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="suket_pengda">Suket Pengda</label>
@@ -45,7 +45,7 @@
                                 <input id="suket_pengda" type="file" class="custom-file-input" name="suket_pengda" >
                                 <label class="custom-file-label text-truncate" for="suket_pengda">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah (Format PDF)</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="rekomendasi_pengda">Rekomendasi Pengda</label>
@@ -53,7 +53,7 @@
                                 <input id="rekomendasi_pengda" type="file" class="custom-file-input" name="rekomendasi_pengda" >
                                 <label class="custom-file-label text-truncate" for="rekomendasi_pengda">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah (Format PDF)</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="ttmb1">TTMB 1</label>
@@ -61,7 +61,7 @@
                                 <input id="ttmb1" type="file" class="custom-file-input" name="ttmb1" >
                                 <label class="custom-file-label text-truncate" for="ttmb1">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="ttmb2">TTMB 2</label>
@@ -69,7 +69,7 @@
                                 <input id="ttmb2" type="file" class="custom-file-input" name="ttmb2" >
                                 <label class="custom-file-label text-truncate" for="ttmb2">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="ttmb3">TTMB 3</label>
@@ -77,7 +77,7 @@
                                 <input id="ttmb3" type="file" class="custom-file-input" name="ttmb3" >
                                 <label class="custom-file-label text-truncate" for="ttmb3">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="ttmb4">TTMB 4</label>
@@ -85,7 +85,7 @@
                                 <input id="ttmb4" type="file" class="custom-file-input" name="ttmb4" >
                                 <label class="custom-file-label text-truncate" for="ttmb4">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div> 
                         
                     </div>
