@@ -40,7 +40,7 @@
                 <a href="{{ route('alb.magang') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang</span></a>
             </li>
             @endrole
-            @role('admin')
+          
             <li class="menu-header">Maber</li>
             <li class="nav-item {{ (request()->is('maber*')) ? 'active' : '' }}">
                 <a href="{{ route('maber') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list Maber</span></a>
@@ -80,7 +80,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
                   
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Belum Terverifikasi</a></li>
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a href="{{ route('bendahara_alb.index',0) }}" class="nav-link" href="">Belum Terverifikasi</a></li>
                     
                     
                     <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
@@ -103,7 +103,7 @@
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Profile</span></a>
             </li>
-            @endrole
+          
             
     </aside>
 </div>
