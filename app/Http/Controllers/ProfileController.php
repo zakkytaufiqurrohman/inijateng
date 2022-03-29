@@ -120,9 +120,10 @@ class ProfileController extends Controller
     public function update_photo(Request $request)
     {
         $validated = $request->validate([
-            'photo_img' => 'mimes:jpg,bmp,png',
+            'photo_img' => 'mimes:jpg,bmp,png|max:2000',
         ],[
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
+            '*.max' => 'Ukuran tidak boleh lebih dari 2MB, periksa kembali',
         ]);
         DB::beginTransaction();
         try{

@@ -49,9 +49,9 @@ class ALBController extends Controller
             's2' => 'required',
             'tgl_lulus_s1' => 'required',
             'tgl_lulus_s2' => 'required',
-            'ijazah_s1' => 'mimes:jpg,bmp,png',
-            'ijazah_s2' => 'mimes:jpg,bmp,png',
-            'bukti_terdaftar' => 'mimes:jpg,bmp,png',
+            'ijazah_s1' => 'mimes:jpg,bmp,png|max:2000',
+            'ijazah_s2' => 'mimes:jpg,bmp,png|max:2000',
+            'bukti_terdaftar' => 'mimes:jpg,bmp,png|max:2000',
         ],[
             'no_alb.required' => 'npwp tidak boleh kosong',
             's1.required' => 'S1 tidak boleh kosong',
@@ -59,6 +59,7 @@ class ALBController extends Controller
             'tgl_lulus_s1.required' => 'Tgl Lulus S1 tidak boleh kosong',
             'tgl_lulus_s2.required' => 'Tgl Lulus S2 tidak boleh kosong',
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
+            '*.max' => 'Ukuran tidak boleh lebih dari 2MB, periksa kembali',
         ]);
         DB::beginTransaction();
         try{
@@ -125,16 +126,17 @@ class ALBController extends Controller
     public function store_berkas(Request $request)
     {
         $validated = $request->validate([
-            'ktp' => 'mimes:jpg,bmp,png',
-            'suket_pengda' => 'mimes:jpg,bmp,png',
-            'pengantar_magang' => 'mimes:jpg,bmp,png',
-            'rekomendasi_pengda' => 'mimes:jpg,bmp,png',
-            'ttmb1' => 'mimes:jpg,bmp,png',
-            'ttmb2' => 'mimes:jpg,bmp,png',
-            'ttmb3' => 'mimes:jpg,bmp,png',
-            'ttmb4' => 'mimes:jpg,bmp,png',
+            'ktp' => 'mimes:jpg,bmp,png|max:2000',
+            'suket_pengda' => 'mimes:pdf',
+            'pengantar_magang' => 'mimes:pdf',
+            'rekomendasi_pengda' => 'mimes:pdf',
+            'ttmb1' => 'mimes:jpg,bmp,png|max:2000',
+            'ttmb2' => 'mimes:jpg,bmp,png|max:2000',
+            'ttmb3' => 'mimes:jpg,bmp,png|max:2000',
+            'ttmb4' => 'mimes:jpg,bmp,png|max:2000',
         ],[
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
+            '*.max' => 'Ukuran tidak boleh lebih dari 2MB, periksa kembali',
         ]);
         DB::beginTransaction();
         try{
