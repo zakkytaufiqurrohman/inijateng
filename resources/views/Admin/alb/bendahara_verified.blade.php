@@ -8,6 +8,8 @@
 }
 </style>
 <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
+<link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
+
 @endsection
 @section('body')
 @section('title','Verifikasi')
@@ -54,15 +56,57 @@
                 </div>
         </div>
         <hr>
+        <?php
+            $wa = "https://api.whatsapp.com/send?phone=".$data->wa."&text=From: Panitia E-ID Card Klik disini: " .route('event_alb.id_card',$data->kode)." NB: SIMPAN DULU NOMOR INI YA, SUPAYA BISA KLIK LINKNYA";
+
+        ?>
         <div class="text-md-right">
             <div class="float-lg-left mb-lg-0 mb-3">
-                <button class="btn btn-primary btn-icon icon-left"><i class="fas fa-check"></i> Validasi</button>
-                <button class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Cancel</button>
+                <a  onclick="validasi('{{$data->id}}')" class="btn klik btn-primary btn-icon icon-left"><i class="fas fa-check"></i> Validasi</a>
+                <a class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Edit</a>
             </div>
-            <a href='www.googel.com' class="btn btn-warning btn-icon icon-left"><i class="fas fa-paper-plane"></i> Kirim Wa</a>
+            <a href="{{$wa}}" target="_blank" class="btn btn-warning btn-icon icon-left"><i class="fas fa-paper-plane"></i> Kirim Wa</a>
         </div>
     </div>
 </div>
 </section>
 </div>
+@endsection
+@section('bottom-script')
+<script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+<script>
+    function validasi(id){
+        $.ajax({
+            url: "{{ route('bendahara_alb.validasi') }}",
+            type: "POST",
+            dataType: "json",
+            data: {
+                id : id,
+                "_token": "{{ csrf_token() }}",
+            },
+            beforeSend() {
+                $(".klik").attr('disabled', 'disabled');
+            },
+            complete() {
+                $(".klik").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                iziToast.success({
+                    title: result.status,
+                    message: result.message,
+                    position: 'topRight'
+                });
+                window.location = "{{ url()->previous() }}"
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                iziToast.error({
+                    title: 'error',
+                    position: 'topRight'
+                });
+            },
+        });
+    }
+</script>
+
 @endsection
