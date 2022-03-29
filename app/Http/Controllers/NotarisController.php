@@ -54,14 +54,15 @@ class NotarisController extends Controller
         $validated = $request->validate([
             'npwp' => 'required',
             'telephone' => 'required',
-            'ktp_img' => 'mimes:jpg,bmp,png',
+            'ktp_img' => 'mimes:jpg,bmp,png|max:2000',
             'sk_notaris' => 'mimes:pdf',
             'sk_ppt' => 'mimes:pdf',
-            'scan_npwp' => 'mimes:jpg,bmp,png',
+            'scan_npwp' => 'mimes:jpg,bmp,png|max:2000',
         ],[
             'npwp.required' => 'npwp tidak boleh kosong',
             'telephone.required' => 'No Telp tidak boleh kosong',
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
+            '*.max' => 'Ukuran tidak boleh lebih dari 2MB, periksa kembali',
         ]);
         DB::beginTransaction();
         try{
@@ -81,8 +82,6 @@ class NotarisController extends Controller
                 'no_sk_notaris' => $request->no_sk_notaris,
                 'asal_pengda' => $request->asal_pengda,
             ];
-
-
 
             if(!empty($ktp)){
                 $filename_ktp = $user_id.'-'.time().'.'.$ktp->getClientOriginalExtension();

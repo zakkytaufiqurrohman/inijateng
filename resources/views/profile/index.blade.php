@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="form-group col-md-12 col-lg-4">
                                     <label for="tgl_lahir">Tanggal Lahir</label>
-                                    <input id="tgl_lahir" type="text" class="form-control datepicker" name="tgl_lahir" value="{{ $item->tgl_lahir ?? '' }}">
+                                    <input id="tgl_lahir" type="text" class="form-control datepicker" name="tgl_lahir" value="{{ $user->tgl_lahir ?? '' }}">
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
@@ -138,6 +138,7 @@
                                             <input id="photo_img" accept="image/*" type="file" class="custom-file-input" name="photo_img">
                                             <label class="custom-file-label text-truncate" for="photo_img">Pilih Foto</label>
                                         </div>
+                                        <span class="d-block">*ukuran file tidak lebih dari 2MB</span>
                                         <button type="submit" id='btn-update-photo' class="btn btn-primary">Simpan Perubahan</button>
                                     </div>
                                 </div>
