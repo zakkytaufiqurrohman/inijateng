@@ -54,4 +54,12 @@ class AlbTransactionController extends Controller
         $data = AlbTransaction::where('alb_id',$alb_event->id)->where('bendahara_status','0')->first();
         return view('Admin.alb.bendahara_verified',compact('data'));
     }
+
+    public function validasi(Request $request){
+        $alb_event = Alb::where('status','1')->first();
+        $data = AlbTransaction::where('alb_id',$alb_event->id)->where('id',$request->id)->first();
+        $data->bendahara_status = '1';
+        $data->save();
+        return response()->json(['status' => 'success', 'message' => 'Berhasil Merubah Status']);
+    }
 }

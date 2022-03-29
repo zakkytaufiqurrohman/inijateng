@@ -173,6 +173,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{id}', [AlbTransactionController::class, 'bendaharaIndex'])->name('.index');
             Route::get('get/datas', [AlbTransactionController::class, 'bendahara'])->name('.data');
             Route::get('show/{user}', [AlbTransactionController::class, 'show'])->name('.show');
+            Route::post('validasi', [AlbTransactionController::class, 'validasi'])->name('.validasi');
            
         });
 
