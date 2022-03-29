@@ -16,8 +16,10 @@
                                 <th class="text-center"> No</th>
                                 <th>Judul</th>
                                 <th>Banner</th>
-                                <th>Tahun</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                                 <th>Keterangan</th>
+                                <th>Link Group</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -55,12 +57,20 @@
                         <input id="banner" type="file" class="form-control" name="banner" placeholder="Banner">
                     </div>
                     <div class="form-group">
-                        <label>Tahun</label>
-                        <input type="number" class="form-control" name="tahun" id="tahun" placeholder="2022" autocomplete="off">
+                        <label>Start Date</label>
+                        <input type="text" class="form-control datepicker" name="start_date" id="start_date" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="text" class="form-control datepicker" name="end_date" id="end_date" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Keterangan</label>
                         <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Keterangan" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Group</label>
+                        <input type="text" class="form-control" name="link_group" id="link_group" placeholder="link group wa" autocomplete="off">
                     </div>
                    
                 </div>
@@ -94,8 +104,12 @@
                         <input type="text" class="form-control" name="judul" id="update-judul" placeholder="Judul" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Tahun</label>
-                        <input type="number" class="form-control" name="tahun" id="update-tahun" placeholder="tahun" autocomplete="off">
+                        <label>Start Date</label>
+                        <input type="text" class="form-control datepicker" name="start_date" id="start_date" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="text" class="form-control datepicker" name="end_date" id="end_date" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="bukti_bayar">Banner</label>
@@ -111,6 +125,10 @@
                     <div class="form-group">
                         <label>Keterangan</label>
                         <input type="text" class="form-control" name="keterangan" id="update-keterangan" placeholder="Keterangan" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Group</label>
+                        <input type="text" class="form-control" name="link_group" id="update-keterangan" placeholder="link group wa" autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -149,15 +167,23 @@
                     "width": "20%"
                 },
                 {
-                    data: 'year',
-                    "width": "20%"
-                },
-                {
                     data: 'banner',
                     "width": "20%"
                 },
                 {
+                    data: 'start_date',
+                    "width": "20%"
+                },
+                {
+                    data: 'end_date',
+                    "width": "20%"
+                },
+                {
                     data: 'keterangan',
+                    "width": "20%"
+                },
+                {
+                    data: 'link_group',
                     "width": "20%"
                 },
                 {
@@ -255,7 +281,9 @@
             success(result) {
                 $('#modal-edit').find("input[name='id']").val(result['data']['id']);
                 $('#modal-edit').find("input[name='judul']").val(result['data']['judul']);
-                $('#modal-edit').find("input[name='tahun']").val(result['data']['year']);
+                $('#modal-edit').find("input[name='start_date']").val(result['data']['start_date']);
+                $('#modal-edit').find("input[name='end_date']").val(result['data']['end_date']);
+                $('#modal-edit').find("input[name='link_group']").val(result['data']['link_group']);
                 $('#modal-edit').find("input[name='keterangan']").val(result['data']['keterangan']);
                 $('#modal-edit').find("select[name='status']").val(result['data']['status']).trigger('change');
             },

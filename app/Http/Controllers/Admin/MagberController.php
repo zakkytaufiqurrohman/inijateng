@@ -58,14 +58,15 @@ class MagberController extends Controller
     {
         $this->validate($request, [
             'judul' => 'required|unique:magbers,judul',
-            'tahun' => 'required|unique:magbers,year',
+            'start_date' => 'required',
+            'end_date' => 'required',
             'keterangan' => 'required',
-            'banner' => 'required|mimes:jpg,bmp,png',
+            'banner' => 'required|mimes:jpg,bmp,png|max:30000',
         ], [
             'judul.required' => 'Nama tidak boleh kosong',
             'judul.unique' => 'Nama sudah ada',
-            'tahun.required' => 'Tahun tidak boleh kosong',
-            'tahun.unique' => 'Tahun sudah ada',
+            'start_date.required' => 'start_date tidak boleh kosong',
+            'end_date.required' => 'end_date tidak boleh kosong',
             'keterangan.required' => 'Keterangan tidak boleh kosong',
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
         ]);
@@ -76,10 +77,12 @@ class MagberController extends Controller
         try {
             Magber::create([
                 'judul' => $request->input('judul'),
-                'year' => $request->input('tahun'),
+                'start_date' => $request->input('start_date'),
+                'end_date' => $request->input('end_date'),
                 'status' => '0',
                 'banner' => $fotos,
                 'keterangan' => $request->input('keterangan'),
+                'link_group' => $request->input('link_group'),
             ]);
 
             DB::commit();
@@ -121,15 +124,16 @@ class MagberController extends Controller
         $id = $request->id;
         $this->validate($request, [
             'judul' => 'required|unique:magbers,judul,'.$id,
-            'tahun' => 'required|unique:magbers,year,'.$id,
+            'start_date' => 'required',
+            'end_date' => 'required',
             'keterangan' => 'required',
             'status' => 'required',
-            'banner' => 'mimes:jpg,bmp,png',
+            'banner' => 'mimes:jpg,bmp,png|max:30000',
         ], [
             'judul.required' => 'Judul tidak boleh kosong',
             'judul.unique' => 'Judul sudah ada',
-            'tahun.required' => 'Tahun tidak boleh kosong',
-            'tahun.unique' => 'Tahun sudah ada',
+            'start_date.required' => 'start_date tidak boleh kosong',
+            'end_date.required' => 'end_date tidak boleh kosong',
             'keterangan.required' => 'Keterangan tidak boleh kosong',
             'status.required' => 'Status tidak boleh kosong',
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
@@ -157,7 +161,9 @@ class MagberController extends Controller
             }
         try {
             $maber->judul = $request->input('judul');
-            $maber->year = $request->input('tahun');
+            $maber->start_date = $request->start_date;
+            $maber->end_date = $request->end_date;
+            $maber->link_group = $request->link_group;
             $maber->status = $request->input('status');
             $maber->banner = $nama_foto;
             $maber->keterangan = $request->input('keterangan');
@@ -212,6 +218,11 @@ class MagberController extends Controller
 
     public function eventMagber($id)
     {
+        $now = date('Y-m-d');
+        $cek = Magber::where('start_date','<=',$now)->where('end_date','>=',$now)->first();
+        if(empty($cek)){
+            return view('event_close');
+        }
         return view('Admin.magber.event_magber',compact('id'));
     }
 
