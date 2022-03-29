@@ -40,7 +40,7 @@
                 <a href="{{ route('alb.magang') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang</span></a>
             </li>
             @endrole
-          
+            @role('admin')
             <li class="menu-header">Maber</li>
             <li class="nav-item {{ (request()->is('maber*')) ? 'active' : '' }}">
                 <a href="{{ route('maber') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list Maber</span></a>
@@ -103,7 +103,7 @@
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Profile</span></a>
             </li>
-          
+            @endrole
             
     </aside>
 </div>
