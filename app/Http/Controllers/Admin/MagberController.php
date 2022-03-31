@@ -234,15 +234,26 @@ class MagberController extends Controller
 
     public function eventMagberStore(Request $request)
     {
+        //todo lengkapi ini
+        $user = User::where('nik',$request->nik)->first();
+        if(empty($user->wa)){
+            return response()->json(['status' => 'error', 'message' => 'Data Belum Lengkap']);
+        }
+
+        $is_record = MagberTransaction::where('user_id',$user->id)->where('magber_ke',$request->semester)->first();
+        if(!empty($is_record)){
+            return response()->json(['status' => 'ready', 'message' => 'Data Sudah Ada']);
+        }
         $this->validate($request, [
             'nik' => 'required',
             'semester' => 'required',
-            'bukti_bayar' => 'mimes:jpg,bmp,png|max:10000',
+            'bukti_bayar' => 'required|mimes:jpg,bmp,png|max:20000',
         ], [
             'nik.required' => 'nik tidak boleh kosong',
             'semester.required' => 'semester tidak boleh kosong',
             'bukti_bayar.required' => 'bukti bayar tidak boleh kosong',
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
+            'bukti_bayar.max' => 'Maksimal 2 Mb'
         ]);
         DB::beginTransaction();
         $user = User::where('nik',$request->nik)->first();
@@ -251,18 +262,27 @@ class MagberController extends Controller
         $text = str_replace(' ', '',$foto->getClientOriginalName());
         $fotos = time()."_".$text;
         try {
-            MagberTransaction::create([
+            $datas = MagberTransaction::create([
                 'user_id' => $user->id,
                 'magber_id' => $request->event_id,
                 'magber_ke' => $request->semester,
                 'bukti_bayar' => $fotos,
                 'bendahara_status' => 0,
                 'bendahara_status' => 0,
+                'kode' => $user->nik,
             ]);
 
-            DB::commit();
             $foto->move(public_path('upload/bukti_bayar_maber'),$fotos);
+
+            DB::commit();
+            $details = [
+                'name' =>  $datas->name,
+                'link' => route('magber.id_card',$datas->kode)
+            ];
+            Mail::to($user->email)->send(new RegisterMaber($details));
+
             return response()->json(['status' => 'success', 'message' => 'Pendaftaran Berhasil','data'=>$user->name]);
+            // send email 
         } catch (Exception $e) {
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -290,15 +310,23 @@ class MagberController extends Controller
         if(!empty($is_record)){
             return response()->json(['status' => 'ready', 'message' => 'Data Sudah Ada']);
         }
-
-        $details = [
-            'name' =>  $user->name
-        ];
-        // send email 
-        Mail::to($user->email)->send(new RegisterMaber($details));
     
         return response()->json(['status' => 'success', 'message' => 'Berhasil']);
        
+    }
+
+    public function eventMagberIdCard($id)
+    {
+        $event = Magber::where('status','1')->first();
+       
+        $data = MagberTransaction::leftJoin('users','users.id','magber_transactions.user_id')->where('bendahara_status','1')->where('verifikasi_status','1')->where('magber_id',$event->id)->where('nik',$id)->first();
+        if(!empty($data)){
+            return view('Admin.magber.id_card',compact('data','event'));
+        }
+        else {
+            return view('unferivied',compact('event'));
+        }
+        
     }
 
 

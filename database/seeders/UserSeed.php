@@ -14,7 +14,7 @@ class UserSeed extends Seeder
      */
     public function run()
     {
-        User::create([
+        $data = User::create([
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),
             'nik' => '123456789',
@@ -28,5 +28,7 @@ class UserSeed extends Seeder
             'foto'=>'default.png'
 
         ]);
+
+        $data->assignRole('admin');
     }
 }
