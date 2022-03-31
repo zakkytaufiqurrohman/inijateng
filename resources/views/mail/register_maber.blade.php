@@ -30,6 +30,9 @@ footer{bottom:0px;text-align: center;color: white;}
 <br><div class="body">
 <h3>Halo, {{$details['name']}} !</h3>
 <h2>Terimakasih Anda Sudah bergabung di Event Ini</h2>
+<p>berikut link E-ID Card Anda</p><br>
+{{$details['link']}}
+<br>
 Jika ada pertanyaan silahkan hub panitia klik disini <a href="https://api.whatsapp.com/send?phone=6281901463500">Panitia</a> 
 
 

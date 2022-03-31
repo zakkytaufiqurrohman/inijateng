@@ -150,6 +150,9 @@
                 data: formData,
                 beforeSend() {
                     $("#btn-register").addClass("btn-progress");
+                    // $("#semester-register option:not(:selected)").prop("disabled", true);
+
+                    // $("#semester-register").attr('disabled', 'disabled');
                 },
                 complete(){
                     $("#btn-register").removeClass("btn-progress");
@@ -208,7 +211,9 @@
         }
 
         $("#form-register").on("submit", function(e) {
-
+            var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group').removeClass('is-invalid');
             $.ajax({
                 url: "{{ route('event_magber_store') }}",
                 type: "POST",
@@ -225,14 +230,19 @@
                 success(result){
                     $("#form-register")[0].reset();
                                         
-                    iziToast.success({
-                        title: result.status,
-                        message: result.message,
-                        position: 'topRight'
-                    });
-                    var url = '{{ route("event_magber.success", ":id") }}';
-                    url = url.replace(':id', result.data);
-                    to(url)                    
+                    if(result.status != 'success'){
+                        iziToast.error({
+                            title: result.status,
+                            message: result.message,
+                            position: 'topRight'
+                        });
+                    }
+                    else {
+                        var url = '{{ route("event_magber.success", ":id") }}';
+                        url = url.replace(':id', result.data);
+                        to(url)  
+                    }
+                                     
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');

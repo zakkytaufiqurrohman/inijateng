@@ -199,6 +199,7 @@ Route::get('/event_magber/{id}/', [MagberController::class,'eventMagber'])->name
 Route::post('/event_magber', [MagberController::class,'eventMagberStore'])->name('event_magber_store');
 Route::post('/event_magber_check', [MagberController::class,'eventMagberCheck'])->name('event_magber.check');
 Route::get('/event_magber_success/{id}', [MagberController::class,'eventMagberSuccess'])->name('event_magber.success');
+Route::get('maber/card/{id}', [MagberController::class,'eventMagberIdCard'])->name('magber.id_card');
 
 //pendaftaran alb
 Route::get('/event_alb/{id}/daftar', [AlbEventController::class,'eventAlb'])->name('event_alb');
