@@ -45,7 +45,7 @@
                     <div class="profile-widget-name">
                         {{ $user->name }}
                         <div class="text-muted d-inline font-weight-normal">
-                            <div class="slash"></div> Notaris
+                            <div class="slash"></div> ALB
                         </div>
                     </div>
                     <div class="row">
