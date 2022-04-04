@@ -50,9 +50,18 @@ class MagberTransactionController extends Controller
     }
 
     public function show($id){
-        $magberEfent = Magber::where('status','1')->first();
-        $data = MagberTransaction::with('user','detail_alb')->where('magber_id',$magberEfent->id)->where('bendahara_status',0)->first();
-
+        $magberEvent = Magber::where('status','1')->first();
+        $data = MagberTransaction::with('user','detail_alb')->where('id',$id)->where('magber_id',$magberEvent->id)->where('bendahara_status',0)->first();
+        
         return view('Admin.magber.bendahara_verified',compact('data'));
+    }
+
+    public function validasi(Request $request)
+    {
+        $data = MagberTransaction::find($request->id);
+        $data->update([
+            'bendahara_status' => 1
+        ]);
+        return response()->json(['status' => 'success', 'message' => 'Berhasil Merubah Status']);
     }
 }

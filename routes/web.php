@@ -153,6 +153,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{id}', [MagberTransactionController::class, 'bendaharaIndex'])->name('.index');
             Route::get('get/datas', [MagberTransactionController::class, 'bendahara'])->name('.data');
             Route::get('show/{user}', [MagberTransactionController::class, 'show'])->name('.show');
+            Route::post('validasi', [MagberTransactionController::class, 'validasi'])->name('.validasi');
            
         });
     
