@@ -14,6 +14,7 @@ class CreateTableViewAlb extends Migration
     public function up()
     {
         $query = <<<SQL
+            CREATE VIEW `v_alb` AS
             SELECT u.*, 
                 da.id as da_id, da.bukti_terdaftar, da.ijazah_s1, da.ijazah_s2, da.no_alb, da.s1, da.s2, da.tgl_lulus_s1, da.tgl_lulus_s2, 
                 dba.id as dba_id, dba.ktp, dba.pengantar_magang, dba.suket_pengda, dba.ttmb1, dba.ttmb2, dba.ttmb3, dba.ttmb4,
