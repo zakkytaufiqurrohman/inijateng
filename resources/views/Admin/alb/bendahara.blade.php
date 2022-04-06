@@ -11,7 +11,7 @@
         $st = 'Verified';
     }
 ?>
-@section('title','List Data ALB '.$st)
+@section('title','List Bendahara ALB '.$st)
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -66,7 +66,7 @@
                     "width": "5%"
                 },
                 {
-                    data: 'name',
+                    data: 'nama',
                     "width": "20%"
                 },
                 {

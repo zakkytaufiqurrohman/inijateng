@@ -83,7 +83,7 @@
                     <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a href="{{ route('bendahara_alb.index',0) }}" class="nav-link" href="">Belum Terverifikasi</a></li>
                     
                     
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
+                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_alb.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
             <li class="nav-item dropdown">
