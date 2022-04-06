@@ -62,8 +62,12 @@
         ?>
         <div class="text-md-right">
             <div class="float-lg-left mb-lg-0 mb-3">
-                <a  onclick="validasi('{{$data->id}}')" class="btn klik btn-primary btn-icon icon-left"><i class="fas fa-check"></i> Validasi</a>
-                <a class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Edit</a>
+                @if($data->bendahara_status == 0)
+                    <a  href="#" onclick="validasi('{{$data->id}}','{{$data->bendahara_status}}')" class="btn klik btn-primary btn-icon icon-left"><i class="fas fa-check"></i> Validasi</a>
+                @else 
+                <a href="#" onclick="validasi('{{$data->id}}','{{$data->bendahara_status}}')" class="btn klik btn-primary btn-icon icon-left"><i class="fas fa-check"></i> Cancel Validasi</a>
+                @endif
+                <a href="" class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Edit</a>
             </div>
             <a href="{{$wa}}" target="_blank" class="btn btn-warning btn-icon icon-left"><i class="fas fa-paper-plane"></i> Kirim Wa</a>
         </div>
@@ -75,13 +79,14 @@
 @section('bottom-script')
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
 <script>
-    function validasi(id){
+    function validasi(id,status){
         $.ajax({
             url: "{{ route('bendahara_alb.validasi') }}",
             type: "POST",
             dataType: "json",
             data: {
                 id : id,
+                status: status,
                 "_token": "{{ csrf_token() }}",
             },
             beforeSend() {
@@ -94,9 +99,12 @@
                 iziToast.success({
                     title: result.status,
                     message: result.message,
-                    position: 'topRight'
+                    position: 'topRight',
+                    onOpened: function () {
+                        window.location = "{{ url()->previous() }}"
+                    }
                 });
-                window.location = "{{ url()->previous() }}"
+                // window.location = "{{ url()->previous() }}"
             },
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
