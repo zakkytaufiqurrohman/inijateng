@@ -19,7 +19,7 @@ class MagberTransactionController extends Controller
         //tampilakan data dengan event magber yang aktif
         $magberEfent = Magber::where('status','1')->first();
         //filter maber ke berapa ?
-        $data = MagberTransaction::with('user')->where('magber_id',$magberEfent->id)->where('bendahara_status',$request->status)->get();
+        $data = MagberTransaction::with('user')->where('magber_id',$magberEfent->id)->where('verifikasi_status',$request->status)->get();
         // $data->orderBy('id', 'DESC');
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
@@ -51,8 +51,8 @@ class MagberTransactionController extends Controller
 
     public function show($id){
         $magberEvent = Magber::where('status','1')->first();
-        $data = MagberTransaction::with('user','detail_alb')->where('id',$id)->where('magber_id',$magberEvent->id)->where('bendahara_status',0)->first();
-        
+        $data = MagberTransaction::with('user','detail_alb','detail_berkas_alb')->where('id',$id)->where('magber_id',$magberEvent->id)->where('verifikasi_status',0)->first();
+
         return view('Admin.magber.bendahara_verified',compact('data'));
     }
 
@@ -60,7 +60,7 @@ class MagberTransactionController extends Controller
     {
         $data = MagberTransaction::find($request->id);
         $data->update([
-            'bendahara_status' => 1
+            'verifikasi_status' => 1
         ]);
         return response()->json(['status' => 'success', 'message' => 'Berhasil Merubah Status']);
     }
