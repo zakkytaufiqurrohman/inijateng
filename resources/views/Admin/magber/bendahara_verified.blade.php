@@ -51,7 +51,7 @@
                             <span>{{ $data->user->tempat_lahir }}, {{ $data->user->tgl_lahir}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                           <button class="btn btn-md btn-info">Download Suket Pengda&nbsp;<i class="fa fa-download"></i></button>
+                           <a href='{{ asset('upload/suket_pengda/'.$data->detail_berkas_alb->suket_pengda) }}' target='_blank' class="btn btn-md btn-info">Download Suket Pengda&nbsp;<i class="fa fa-download"></i></a>
                         </li>
                         <li class="list-group-item">
                             <button class="btn btn-mf btn-success w-100"><i class="fa fa-paper-plane"></i>&nbsp;Undang Grup WA</button>
