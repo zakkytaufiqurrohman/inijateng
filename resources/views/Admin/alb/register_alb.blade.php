@@ -150,7 +150,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="s2_tahun">Tahun Lulus S1</label>
+                                            <label for="s2_tahun">Tahun Lulus S2</label>
                                             <input id="s2_tahun" type="number" class="form-control" placeholder="contoh 2022" name="s2_tahun">
                                             <div class="invalid-feedback">
                                             </div>
@@ -176,16 +176,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="ijazah_s1">Foto Formal</label>
+                                            <label for="ijazah_s1">Scan Ijazah Notariat (S1)</label>
                                             <input id="ijazah_s1" type="file" class="form-control" name="ijazah_s1">
-                                            <span>*Upload foto formal berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
+                                            <span>*Upload Ijazah S1 berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
                                             <div class="invalid-feedback">
                                             </div>
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="ijazah_s2">Scan Ijazah Notariat (S2)</label>
                                             <input id="ijazah_s2" type="file" class="form-control" name="ijazah_s2">
-                                            <span>*Upload foto formal berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
+                                            <span>*Upload Ijazah S2 formal berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
                                             <div class="invalid-feedback">
                                             </div>
                                         </div>
@@ -194,14 +194,14 @@
                                         <div class="form-group col-6">
                                             <label for="ktp">Ktp</label>
                                             <input id="ktp" type="file" class="form-control" name="ktp">
-                                            <span>*Upload foto formal berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
+                                            <span>*Upload Ktp berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
                                             <div class="invalid-feedback">
                                             </div>
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="bukti_bayar">Bukti Bayar</label>
                                             <input id="bukti_bayar" type="file" class="form-control" name="bukti_bayar">
-                                            <span>*Upload foto formal berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
+                                            <span>*Upload Bukti Bayar formal berformat Jpg, Jpeg, Png . ukuran file tidak lebih dari 2MB</span>
                                             <div class="invalid-feedback">
                                             </div>
                                         </div>
