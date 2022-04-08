@@ -1,7 +1,7 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="/home">INI JATENG</a>
+            <a href="/dashboard"><img src="{{asset('assets/img/logo.png')}}" width="70px" height="70px" alt=""></a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="/">INI</a>
@@ -24,14 +24,17 @@
                 </ul>
             </li>
             @endrole
+            <li class="nav-item {{ (request()->is('profile*')) ? 'active' : '' }}">
+                <a href="{{ route('profile') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>{{auth()->user()->name}}</span></a>
+            </li>
             @role('notaris')
             <li class="nav-item {{ (request()->is('notaris*')) ? 'active' : '' }}">
-                <a href="{{ route('notaris.data_diri') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Data Diri</span></a>
+                <a href="{{ route('notaris.data_diri') }}" class="nav-link"><i class="fas fa-address-book"></i><span>Data Diri</span></a>
             </li>
             @endrole
             @role('alb')
             <li class="nav-item {{ (request()->is('alb/data_diri*')) ? 'active' : '' }}">
-                <a href="{{ route('alb.data_diri') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Data Diri</span></a>
+                <a href="{{ route('alb.data_diri') }}" class="nav-link"><i class="fas fa-address-book"></i><span>Data Diri</span></a>
             </li>
             <li class="nav-item {{ (request()->is('alb/berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('alb.berkas') }}" class="nav-link"><i class="fas fa-file-alt"></i><span>Berkas</span></a>
