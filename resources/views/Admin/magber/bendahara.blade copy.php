@@ -11,20 +11,11 @@
         $st = 'Verified';
     }
 ?>
-@section('title','List Data Bendahara Magber '.$st)
+@section('title','List Data Magber '.$st)
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="col-lg-2">
-                        <select class="form-control" width="50px"  name="filter" id="filter">
-                        <option value="">All Data</option>
-                        <option value="1">Maber 1 </option>
-                        <option value="2">Maber 2 </option>
-                        <option value="3">Maber 3 </option>
-                        <option value="4">Maber 4 </option>
-                        </select>
-                </div>
                 <div class="table-responsive mt-4">
                     <table id="role" class="table table-bordered table-hover">
                         <thead>
@@ -54,26 +45,18 @@
     })
 
     // get data
-    function getData(id) {
+    function getData() {
         var status = '{{$id}}';
         $("#role").removeAttr('width').dataTable({
             processing: true,
             serverSide: true,
             destroy: true,
-            // ajax: {
-            //     url: "{{route('bendahara_maber.data')}}",
-            //     type: "get",
-            //     data: {
-            //         id: id,
-            //         status = status
-            //     }
-            // },
             ajax: {
                 url: "{{route('bendahara_maber.data')}}",
-                data: {
-                    id: id,
-                    status : status
-                }
+                type: "get",
+                data: function (d) {
+                    d.status = status;
+                },
             },
             // ajax: "{{route('bendahara_maber.data')}}",
             columns: [{
@@ -105,11 +88,6 @@
             ]
         });
     }
-
-    $("#filter").change(function(){
-        var id = $(this).val();
-        getData(id);
-    });
 
     
 </script>
