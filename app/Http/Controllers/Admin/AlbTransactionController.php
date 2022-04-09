@@ -51,14 +51,21 @@ class AlbTransactionController extends Controller
 
     public function show($id){
         $alb_event = Alb::where('status','1')->first();
-        $data = AlbTransaction::where('alb_id',$alb_event->id)->where('bendahara_status','0')->first();
+        $data = AlbTransaction::where('alb_id',$alb_event->id)->where('id',$id)->first();
         return view('Admin.alb.bendahara_verified',compact('data'));
     }
 
     public function validasi(Request $request){
+        $statuss = '0';
+        if($request->status == 0){
+            $statuss = '1';
+        }
+        if($request->status == 1){
+            $statuss = '0';
+        }
         $alb_event = Alb::where('status','1')->first();
         $data = AlbTransaction::where('alb_id',$alb_event->id)->where('id',$request->id)->first();
-        $data->bendahara_status = '1';
+        $data->bendahara_status = $statuss;
         $data->save();
         return response()->json(['status' => 'success', 'message' => 'Berhasil Merubah Status']);
     }

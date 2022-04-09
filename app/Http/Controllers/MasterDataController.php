@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use DB;
 use Exception;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,9 +23,12 @@ class MasterDataController extends Controller
         return view('master_data.index',compact('roles'));
     }
 
-    public function data()
+    public function data(Request $request)
     {
         $data = User::query();
+        if($request->id){
+            $data->where('status_anggota',$request->id);
+        }
         $data->orderBy('id', 'DESC');
         return DataTables::eloquent($data)
             ->addColumn('action', function ($data) {
@@ -62,6 +66,18 @@ class MasterDataController extends Controller
                     }
                 }
                 return $roles;
+            })
+            ->addColumn('status',function ($data) {
+                if($data->status_anggota == 'notaris'){
+                    $status = "<label class='badge badge-warning'>Belum Lengkap</label>&nbsp;";
+                    $datas = DB::table('v_notaris_count')->where('id',$data->id)->first();
+                    if($datas->empty_count == 0){
+                        $status = "<label class='badge badge-success'>Sudah Lengkap</label>&nbsp;";
+                    }
+                    return $status;
+                }
+                
+               
             })
             ->escapeColumns([])
             ->addIndexColumn()
