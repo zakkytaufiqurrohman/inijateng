@@ -8,8 +8,27 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <button class="btn btn-md btn-primary" onclick="OpenModalAdd()"><i class='fa fa-plus'></i>&nbsp;Tambah</button>
-                <button class="btn btn-md btn-primary" onclick=""><i class='fa fa-upload'></i>&nbsp;Import</button>
+                <div class="form-group row" style="margin-left: 1px;">
+                    <div class="col-lg-2">
+                            <select class="form-control" width="50px"  name="filter" id="filter">
+                            <option value="">All Data</option>
+                            <option value="notaris">Notaris</option>
+                            <option value="alb">Alb</option>
+                            </select>
+                    </div>
+                    <div class="col-lg-7">
+
+                    </div>
+                    <div class="col-lg-3">
+                    <button class="btn btn-md btn-primary" onclick="OpenModalAdd()"><i class='fa fa-plus'></i>&nbsp;Tambah</button>
+
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                        
+                </div>
+                <!-- <button class="btn btn-md btn-primary" onclick="OpenModalAdd()"><i class='fa fa-plus'></i>&nbsp;Tambah</button> -->
+                <!-- <button class="btn btn-md btn-primary" onclick=""><i class='fa fa-upload'></i>&nbsp;Import</button> -->
                 <div class="table-responsive mt-4">
                     <table id="role" class="table table-bordered table-hover">
                         <thead>
@@ -173,12 +192,17 @@
     })
 
     // get data
-    function getData() {
+    function getData(id) {
         $("#role").removeAttr('width').dataTable({
             processing: true,
             serverSide: true,
             destroy: true,
-            ajax: "{{route('master_data.data')}}",
+            ajax: {
+                url: "{{route('master_data.data')}}",
+                data: {
+                    id: id
+                }
+            },
             columns: [{
                     data: 'DT_RowIndex',
                     orderable: false,
@@ -203,7 +227,8 @@
                 },
                 {
                     data: 'roles',
-                    "width": "20%"
+                    "width": "20%",
+                    "searchable": false
                 },
                 {
                     data: 'barcode',
@@ -410,5 +435,10 @@
                 }
             });
     }
+
+    $("#filter").change(function(){
+        var id = $(this).val();
+        getData(id);
+    });
 </script>
 @endsection

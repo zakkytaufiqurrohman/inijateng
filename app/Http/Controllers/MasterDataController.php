@@ -22,9 +22,12 @@ class MasterDataController extends Controller
         return view('master_data.index',compact('roles'));
     }
 
-    public function data()
+    public function data(Request $request)
     {
         $data = User::query();
+        if($request->id){
+            $data->where('status_anggota',$request->id);
+        }
         $data->orderBy('id', 'DESC');
         return DataTables::eloquent($data)
             ->addColumn('action', function ($data) {
