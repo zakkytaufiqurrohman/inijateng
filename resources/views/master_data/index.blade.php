@@ -37,6 +37,7 @@
                                 <th>Nama</th>
                                 <th>Nik</th>
                                 <th>Email</th>
+                                <th>Status Data</th>
                                 <th>Status Anggota</th>
                                 <th>Role</th>
                                 <th>Barcode</th>
@@ -223,6 +224,10 @@
                 },
                 {
                     data: 'status_anggota',
+                    "width": "20%"
+                },
+                {
+                    data: 'status',
                     "width": "20%"
                 },
                 {

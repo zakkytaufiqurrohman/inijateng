@@ -22,7 +22,7 @@ class VAlbCount extends Migration
             IF (kota IS NULL OR kota = '', 1, 0) + 
             IF (provinsi IS NULL OR provinsi = '', 1, 0)+
             IF (tempat_lahir IS NULL OR tempat_lahir = '', 1, 0) + 
-            IF (tgl_lahir IS NULL OR tgl_lahir = '0000-00-00', 1, 0) + 
+            IF (tgl_lahir IS NULL, 1, 0) + 
             IF (foto IS NULL OR foto = '', 1, 0) + 
             -- begin detail
             IF (bukti_terdaftar IS NULL OR bukti_terdaftar = '', 1, 0) + 
