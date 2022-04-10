@@ -49,12 +49,14 @@ class ALBController extends Controller
             's2' => 'required',
             'tgl_lulus_s1' => 'required',
             'tgl_lulus_s2' => 'required',
+            'alamat' => 'required',
             'ijazah_s1' => 'mimes:jpg,bmp,png|max:2000',
             'ijazah_s2' => 'mimes:jpg,bmp,png|max:2000',
             'bukti_terdaftar' => 'mimes:jpg,bmp,png|max:2000',
         ],[
             'no_alb.required' => 'npwp tidak boleh kosong',
             's1.required' => 'S1 tidak boleh kosong',
+            'alamat.required' => 'S1 tidak boleh kosong',
             's2.required' => 'S2 tidak boleh kosong',
             'tgl_lulus_s1.required' => 'Tgl Lulus S1 tidak boleh kosong',
             'tgl_lulus_s2.required' => 'Tgl Lulus S2 tidak boleh kosong',
@@ -69,6 +71,7 @@ class ALBController extends Controller
             $bukti_terdaftar = $request->bukti_terdaftar;
             
             $data =  [
+                'alamat' => $request->alamat,
                 'no_alb' => $request->no_alb,
                 'tgl_lulus_s1' => $request->tgl_lulus_s1,
                 'tgl_lulus_s2' => $request->tgl_lulus_s2,

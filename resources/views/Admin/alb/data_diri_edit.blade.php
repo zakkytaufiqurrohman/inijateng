@@ -34,7 +34,11 @@
                                 <label class="custom-file-label text-truncate" for="bukti_terdaftar">Choose file</label>
                             </div>
                             <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
-                        </div> 
+                        </div>
+                        <div class="form-group col-md-12 col-lg-12">
+                            <label for="alamat">Alamat</label>
+                            <input id="alamat" type="text" class="form-control" name="alamat"  value="{{ $user->alamat }}" >
+                        </div>
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="s1">S1</label>
                             <input id="s1" type="text" class="form-control" name="s1"  value="{{ $user->s1 }}" placeholder="Contoh : Universitas Diponegoro"  >

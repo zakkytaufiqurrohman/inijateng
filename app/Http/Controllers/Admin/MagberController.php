@@ -234,16 +234,6 @@ class MagberController extends Controller
 
     public function eventMagberStore(Request $request)
     {
-        //todo lengkapi ini
-        $user = User::where('nik',$request->nik)->first();
-        if(empty($user->wa)){
-            return response()->json(['status' => 'error', 'message' => 'Data Belum Lengkap']);
-        }
-
-        $is_record = MagberTransaction::where('user_id',$user->id)->where('magber_ke',$request->semester)->first();
-        if(!empty($is_record)){
-            return response()->json(['status' => 'ready', 'message' => 'Data Sudah Ada']);
-        }
         $this->validate($request, [
             'nik' => 'required',
             'semester' => 'required',
@@ -255,6 +245,20 @@ class MagberController extends Controller
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
             'bukti_bayar.max' => 'Maksimal 2 Mb'
         ]);
+        $user = User::where('nik',$request->nik)->first();
+        if(empty($user)){
+            return response()->json(['status' => 'error', 'message' => 'Data Tidak Di Temukan']);
+        }
+        $cek = DB::table('v_alb_count')->where('id',$user->id)->first();
+        if($cek->empty_count != 0){
+            return response()->json(['status' => 'error', 'message' => 'Data Belum Lengkap']);
+        }
+
+        $is_record = MagberTransaction::where('user_id',$user->id)->where('magber_ke',$request->semester)->first();
+        if(!empty($is_record)){
+            return response()->json(['status' => 'ready', 'message' => 'Data Sudah Ada']);
+        }
+       
         DB::beginTransaction();
         $user = User::where('nik',$request->nik)->first();
 
@@ -301,7 +305,11 @@ class MagberController extends Controller
 
         //cek apakah atribut nya lengkap param nik
         $user = User::where('nik',$request->nik)->first();
-        if(empty($user->wa)){
+        if(empty($user)){
+            return response()->json(['status' => 'error', 'message' => 'Data Tidak Di Temukan']);
+        }
+        $cek = DB::table('v_alb_count')->where('id',$user->id)->first();
+        if($cek->empty_count != 0){
             return response()->json(['status' => 'error', 'message' => 'Data Belum Lengkap']);
         }
 
