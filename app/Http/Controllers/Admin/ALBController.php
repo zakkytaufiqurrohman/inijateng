@@ -82,7 +82,7 @@ class ALBController extends Controller
             if(!empty($ijazah_s1)){
                 $data['ijazah_s1'] = $this->move_file($ijazah_s1,'ijazah_s1','upload/ijazah/s1');
             }
-            if(!empty($ijazah_s1)){
+            if(!empty($ijazah_s2)){
                 $data['ijazah_s2'] = $this->move_file($ijazah_s2,'ijazah_s2','upload/ijazah/s2');
             }
             if(!empty($bukti_terdaftar)){
