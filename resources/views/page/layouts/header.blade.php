@@ -14,7 +14,7 @@
                             ?>
                             @foreach($datas as $data)
                             <li>
-                                <a href=''>{{$data->judul}}ss</a>
+                                <a href='{{route('detail.detail',$data->id)}}'>{{$data->judul}}ss</a>
                             </li>
                             @endforeach
                             <li>
@@ -66,7 +66,7 @@
                         ?>
                         @foreach($datas as $data)
                             <li>
-                                <a href=''>{{$data->judul}}ss</a>
+                                <a href='{{route('detail.detail',$data->id)}}'>{{$data->judul}}ss</a>
                             </li>
                         @endforeach
                        

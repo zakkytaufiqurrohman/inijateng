@@ -169,4 +169,10 @@ class ProfileController extends Controller
             ->addIndexColumn()
             ->make(true);
     }
+
+    public function detail($id)
+    {
+        $data = Profile::find($id);
+        return view('page.detail_profile',compact('data'));
+    }
 }
