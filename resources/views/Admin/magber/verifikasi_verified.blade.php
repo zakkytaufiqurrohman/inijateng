@@ -6,6 +6,10 @@
     height: auto;
     max-height: 500px;
 }
+.gallery.gallery-md.gallery-item-custom{
+    width: 200px;
+    height: 200px;
+}
 </style>
 <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
 <link rel="stylesheet" href="{{ asset('node_modules/chocolat/dist/css/chocolat.css') }}">
@@ -23,7 +27,7 @@ $status = (($data->verifikasi_status==0)&&$data->verifikasi_status<>1) ? 'Verifi
                 <div class="invoice-number">{{$data->user->nik}}</div>
             </div>
             <div class="row mt-4">
-                <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="col-lg-4 col-md-12 col-sm-12 mb-2">
                     <ul class="list-group text-dark">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             NIK:
@@ -69,14 +73,15 @@ $status = (($data->verifikasi_status==0)&&$data->verifikasi_status<>1) ? 'Verifi
                     </ul>
                 </div>
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div class="gallery gallery-md">
-                        <div class="gallery-item" data-image="{{ asset('upload/foto/'.$data->user->foto) }}" data-title="Foto"></div>
-                        <div class="gallery-item" data-image="{{ asset('upload/ktp_img/'.$data->detail_berkas_alb->ktp) }}" data-title="Scan KTP"></div>
-                        <div class="gallery-item" data-image="{{ asset('upload/ijazah/s1/'.$data->detail_alb->ijazah_s1) }}" data-title="Ijazah S1"></div>
-                        <div class="gallery-item" data-image="{{ asset('upload/ijazah/s2/'.$data->detail_alb->ijazah_s2) }}" data-title="Ijazah S2"></div>
+                    <div class="gallery gallery-fw" data-item-height="200">
+                        <div class="gallery-item" style="width: 45%" data-image="{{ asset('upload/foto/'.$data->user->foto) }}" data-title="Foto" alt='Foto'></div>
+                        <div class="gallery-item" style="width: 45%" data-image="{{ asset('upload/ktp_img/'.$data->detail_berkas_alb->ktp) }}" data-title="Scan KTP" alt='Scan KTP'></div>
+                        <div class="gallery-item" style="width: 45%" data-image="{{ asset('upload/bukti/'.$data->detail_alb->bukti_terdaftar) }}" data-title="Bukti Terdaftar" alt='Bukti Terdaftar'></div>
+                        <div class="gallery-item" style="width: 45%" data-image="{{ asset('upload/bukti_bayar_maber/'.$data->bukti_bayar) }}" data-title="Bukti Bayar" alt='Bukti Bayar'></div>
+                        <div class="gallery-item" style="width: 45%" data-image="{{ asset('upload/ijazah/s1/'.$data->detail_alb->ijazah_s1) }}" data-title="Ijazah S1" alt='Ijazah S1'></div>
+                        <div class="gallery-item" style="width: 45%" data-image="{{ asset('upload/ijazah/s2/'.$data->detail_alb->ijazah_s2) }}" data-title="Ijazah S2" alt='Ijazah S2'></div>
                     </div>
                     <div class="gallery gallery-fw" data-item-height="350">
-                        <div class="gallery-item" data-image="{{ asset('upload/bukti_bayar_maber/'.$data->bukti_bayar) }}" data-title="Bukti Bayar"></div>
                     </div>
                 </div>
             </div>
