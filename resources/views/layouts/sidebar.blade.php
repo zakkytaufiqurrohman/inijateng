@@ -61,14 +61,18 @@
                 </ul>
             </li>
             <!-- verivikator -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ (request()->is('verifikasi*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
                   
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Maber 1</a></li>
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Maber 2</a></li>
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Maber 3</a></li>
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Maber 4</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/1*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,0]) }}">Maber 1 (Belum Verifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/1*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,1]) }}">Maber 1 (Terverifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/2*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,0]) }}">Maber 2 (Belum Verifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/2*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,1]) }}">Maber 2 (Terverifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/3*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[3,0]) }}">Maber 3 (Belum Verifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/3*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[3,1]) }}">Maber 3 (Terverifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/4*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,0]) }}">Maber 4 (Belum Verifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/4*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,1]) }}">Maber 4 (Terverifikasi)</a></li>
                 </ul>
             </li>
 
