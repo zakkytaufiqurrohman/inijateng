@@ -156,7 +156,13 @@ Route::middleware('auth')->group(function () {
             Route::post('validasi', [MagberTransactionController::class, 'validasi'])->name('.validasi');
            
         });
-    
+
+        Route::name('verifikasi_maber')->prefix('/verifikasi/maber')->group(function () {
+            Route::get('/{maber}/{status}', [MagberTransactionController::class, 'verifikasiIndex'])->name('.index');
+            Route::get('/data', [MagberTransactionController::class, 'verifikasi'])->name('.data');
+            Route::get('/{maber}/show/{user}', [MagberTransactionController::class, 'verifikasi_show'])->name('.show');
+            Route::post('/validasi', [MagberTransactionController::class, 'verifikasi_validasi'])->name('.validasi');
+        });    
 
     // end maber
 

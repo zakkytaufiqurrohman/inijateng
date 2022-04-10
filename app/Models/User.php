@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(DetailNotaris::class,'user_id','id');
     }
+
+    public function v_alb()
+    {
+        return $this->hasOne(VAlb::class,'id','id');
+    }
 }
