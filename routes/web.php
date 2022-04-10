@@ -211,3 +211,9 @@ Route::get('alb/card/{id}', [AlbEventController::class,'eventAlbIdCard'])->name(
 // Route::view('/table', 'components.table');
 // Route::view('/form', 'components.form');
 // Route::view('/register', 'components.register');
+
+// begin Page depan
+    Route::name('detail')->prefix('/detail')->group(function () {
+        Route::get('/{id}', [FrontPageProfileController::class, 'detail'])->name('.detail');
+    });
+// end page
