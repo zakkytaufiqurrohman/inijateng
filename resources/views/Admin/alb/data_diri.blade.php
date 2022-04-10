@@ -81,7 +81,11 @@
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="tgl_lulus_s2">Tgl. Lulus S2</label>
                             <input id="tgl_lulus_s2" type="text" class="form-control" name="tgl_lulus_s2"  value="{{ $user->tgl_lulus_s2 }}" disabled>
-                        </div> 
+                        </div>
+                        <div class="form-group col-md-12 col-lg-4">
+                            <label for="alamat">Alamat</label>
+                            <input id="alamat" type="text" class="form-control" name="alamat"  value="{{ $user->alamat }}" disabled>
+                        </div>  
                         <div class="form-group col-md-12 col-lg-4">
                             <label for="bukti_terdaftar">Bukti Terdaftar</label>
                             <div class="d-block">
