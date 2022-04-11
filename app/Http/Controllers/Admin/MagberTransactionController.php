@@ -55,7 +55,10 @@ class MagberTransactionController extends Controller
 
     public function show($id){
         $magberEvent = Magber::where('status','1')->first();
-        $data = MagberTransaction::with('user','detail_alb','detail_berkas_alb')->where('id',$id)->where('magber_id',$magberEvent->id)->where('verifikasi_status',0)->first();
+        $data = MagberTransaction::with(['user' => function($user){
+            $user->with(['kotas','provincies','lahir'])->first();
+        },'detail_alb','detail_berkas_alb'])
+        ->where('id',$id)->where('magber_id',$magberEvent->id)->first();
 
         return view('Admin.magber.bendahara_verified',compact('data'));
     }
