@@ -59,7 +59,7 @@
                         <div class="col-md-4">
                             <address>
                                 <strong>TTl</strong><br>
-                                {{$data->user->tgl_lahir}}<br>
+                                {{optional($data->user->lahir)->name}}<br>
                             </address>
                         </div>
                     </div>
@@ -67,19 +67,19 @@
                         <div class="col-md-4 border-bottom-0 ">
                             <address>
                                 <strong>Provinsi:</strong><br>
-                                {{$data->detail_alb->s1}}<br>
+                                {{optional($data->user->provincies)->name}}<br>
                             </address>
                         </div>
                         <div class="col-md-4">
                             <address>
                                 <strong>Kota</strong><br>
-                                {{$data->user->kota}}<br>
+                                {{optional($data->user->kotas)->name}}<br>
                             </address>
                         </div>
                         <div class="col-md-4">
                             <address>
                                 <strong>Alamat</strong><br>
-                                {{$data->user->kota}}<br>
+                                {{$data->detail_alb->alamat}}<br>
                             </address>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
         </div>
         <hr>
         <?php
-            $wa = "https://api.whatsapp.com/send?phone=".$data->wa."&text=From: Panitia E-ID Card Klik disini: " .route('event_alb.id_card',$data->kode)." NB: SIMPAN DULU NOMOR INI YA, SUPAYA BISA KLIK LINKNYA";
+            $wa = "https://api.whatsapp.com/send?phone=".$data->user->wa;
 
         ?>
         <div class="text-md-right">
@@ -107,9 +107,9 @@
                 @else 
                 <a href="#" onclick="validasi('{{$data->id}}','{{$data->bendahara_status}}')" class="btn klik btn-primary btn-icon icon-left"><i class="fas fa-check"></i> Cancel Validasi</a>
                 @endif
-                <!-- <a href="" class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Edit</a> -->
+                <!-- <a href="#" onclick="edit()" class="btn btn-danger btn-icon icon-left"><i class="fas fa-edit"></i> Edit</a> -->
             </div>
-            <!-- <a href="{{$wa}}" target="_blank" class="btn btn-warning btn-icon icon-left"><i class="fas fa-paper-plane"></i> Kirim Wa</a> -->
+            <a href="{{$wa}}" target="_blank" class="btn btn-warning btn-icon icon-left"><i class="fas fa-paper-plane"></i> Kirim Wa</a>
         </div>
         <br>
     </div>
