@@ -25,6 +25,7 @@ class CreateTableViewAlb extends Migration
                 da.s2, 
                 da.tgl_lulus_s1, 
                 da.tgl_lulus_s2, 
+                da.alamat,
                 dba.id as dba_id, 
                 dba.ktp,
                 dba.pengantar_magang, 
