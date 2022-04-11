@@ -181,6 +181,7 @@ Route::middleware('auth')->group(function () {
             Route::get('get/datas', [AlbTransactionController::class, 'bendahara'])->name('.data');
             Route::get('show/{user}', [AlbTransactionController::class, 'show'])->name('.show');
             Route::post('validasi', [AlbTransactionController::class, 'validasi'])->name('.validasi');
+            Route::put('edit', [AlbTransactionController::class, 'edit'])->name('.edit');
            
         });
 

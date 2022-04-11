@@ -69,4 +69,12 @@ class AlbTransactionController extends Controller
         $data->save();
         return response()->json(['status' => 'success', 'message' => 'Berhasil Merubah Status']);
     }
+
+    public function edit(Request $request){
+
+        $data = AlbTransaction::find($request->id);
+        $data->wa = $request->wa;
+        $data->save();
+        return response()->json(['status' => 'success', 'message' => 'Berhasil Merubah Data']);
+    }
 }
