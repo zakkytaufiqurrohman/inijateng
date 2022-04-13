@@ -14,7 +14,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center"> No</th>
-                                <th>Nama</th>
+                                <th>Namas</th>
                                 <th>Permission</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
