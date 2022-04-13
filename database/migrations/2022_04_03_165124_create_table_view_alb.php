@@ -60,14 +60,14 @@ class CreateTableViewAlb extends Migration
                     SELECT rm.id as id_rm, rm.* FROM riwayat_magang rm 
                     JOIN (
                         SELECT user_id, max(magang_ke) as mk
-                        FROM riwayat_magang rm 
+                        FROM riwayat_magang rm group by user_id
                     ) b on b.user_id=rm.user_id and b.mk=rm.magang_ke
                 ) rm on rm.user_id=u.id
                 LEFT JOIN (
                     SELECT rt.* FROM riwayat_ttmb rt
                     JOIN (
                         SELECT user_id, max(magang_ke) as mk
-                        FROM riwayat_ttmb rt
+                        FROM riwayat_ttmb rt group by user_id
                     ) b on b.user_id=rt.user_id and b.mk=rt.magang_ke
                 ) rt on rt.user_id=u.id 
             SQL;
