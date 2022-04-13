@@ -41,8 +41,7 @@ class VAlbCount extends Migration
             IF (masa_magang IS NULL OR masa_magang = '', 1, 0) + 
             IF (tempat_magang IS NULL OR tempat_magang = '', 1, 0) + 
             IF (tgl_no_surat IS NULL, 1, 0) + 
-            IF (magang_ke IS NULL OR magang_ke = '', 1, 0) + 
-            IF (pengwil IS NULL OR pengwil = '', 1, 0) 
+            IF (magang_ke IS NULL OR magang_ke = '', 1, 0) 
             as empty_count from v_alb
             SQL;
 

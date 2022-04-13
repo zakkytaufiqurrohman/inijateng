@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\RegisterMaber;
 use App\Models\Magber;
 use App\Models\MagberTransaction;
+use App\Models\RiwayatTTMB;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DB;
@@ -245,9 +246,28 @@ class MagberController extends Controller
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
             'bukti_bayar.max' => 'Maksimal 2 Mb'
         ]);
+
         $user = User::where('nik',$request->nik)->first();
         if(empty($user)){
             return response()->json(['status' => 'error', 'message' => 'Data Tidak Di Temukan']);
+        }
+        //cek ttmb
+        if($request->semester != '1'){
+            $where_ttmb = '1';
+            if($request->semester == '2') {
+                $where_ttmb = '1';
+            }
+            if($request->semester == '3') {
+                $where_ttmb = '2';
+            }
+            if($request->semester == '4') {
+                $where_ttmb = '3';
+            }
+
+            $cek_ttmb = RiwayatTTMB::where('magang_ke',$where_ttmb)->where('user_id',$user->id)->count();
+            if($cek_ttmb == 0){
+                return response()->json(['status' => 'error', 'message' => 'Data Belum Lengkap']);
+            }
         }
         $cek = DB::table('v_alb_count')->where('id',$user->id)->first();
         if($cek->empty_count != 0){
