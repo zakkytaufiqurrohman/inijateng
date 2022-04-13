@@ -92,8 +92,8 @@
                         <input type="text" class="form-control" name="penerima_magang" id="penerima_magang" placeholder="Penerima Magang" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Tempat Magang</label>
-                        <input type="text" class="form-control" name="tempat_magang" id="tempat_magang" placeholder="Tempat Magang" autocomplete="off">
+                        <label>Tempat Kedudukan</label>
+                        <input type="text" class="form-control" name="tempat_magang" id="tempat_magang" placeholder="contoh: Kota Semarang" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Wilayah Kerja</label>
