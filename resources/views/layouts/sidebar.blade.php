@@ -83,7 +83,7 @@
                 <a href="{{ route('alb_event') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list ALB</span></a>
             </li>
             <!-- bendahara -->
-            <li class="nav-item dropdown {{ (request()->is('bendahara/alb/*')) ? 'active' : '' }}"">
+            <li class="nav-item dropdown {{ (request()->is('bendahara/alb/*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
                   
@@ -107,6 +107,9 @@
             <li class="menu-header">Laporan</li>
             <li class="nav-item {{ (request()->is('laporan*')) ? 'active' : '' }}">
                 <a href="{{ route('laporan.transaksi') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Lap Transaksi</span></a>
+            </li>
+            <li class="nav-item {{ (request()->is('preview_riwayat*')) ? 'active' : '' }}">
+                <a href="{{ route('preview_riwayat.index') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Preview Ttmb & Riwayat</span></a>
             </li>
 
             <!-- front page -->
