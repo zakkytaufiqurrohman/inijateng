@@ -58,8 +58,41 @@ $status = (($data->verifikasi_status==0)&&$data->verifikasi_status<>1) ? 'Verifi
                             <span class='text-left'>{{ $data->user->v_alb->tempat_lahir_name }}, {{ $data->user->tgl_lahir}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                           <a href='{{ asset('upload/suket_pengda/'.$data->detail_berkas_alb->suket_pengda) }}' target='_blank' class="btn btn-md btn-info">Download Suket Pengda&nbsp;<i class="fa fa-download"></i></a>
+                            <a href='{{ asset('upload/ktp_img/'.$data->detail_berkas_alb->ktp) }}' target='_blank' class="btn btn-md btn-info w-100" download>Download Scan KTP&nbsp;<i class="fa fa-download"></i></a>
                         </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href='{{ asset('upload/bukti/'.$data->detail_alb->bukti_terdaftar) }}' target='_blank' class="btn btn-md btn-info w-100" download>Download Bukti Terdaftar&nbsp;<i class="fa fa-download"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href='{{ asset('upload/ijazah/s1/'.$data->detail_alb->ijazah_s1) }}' target='_blank' class="btn btn-md btn-info w-100" download>Download Ijazah S1&nbsp;<i class="fa fa-download"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href='{{ asset('upload/ijazah/s2/'.$data->detail_alb->ijazah_s2) }}' target='_blank' class="btn btn-md btn-info w-100" download>Download Ijazah S2&nbsp;<i class="fa fa-download"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                           <a href='{{ asset('upload/suket_pengda/'.$data->detail_berkas_alb->suket_pengda) }}' target='_blank' class="btn btn-md btn-info w-100" download>Download Suket Pengda&nbsp;<i class="fa fa-download"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href='{{ asset('upload/pengantar_magang/'.$data->detail_berkas_alb->pengantar_magang) }}' target='_blank' class="btn btn-md btn-info w-100" download>Download Pengantar Magang&nbsp;<i class="fa fa-download"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href='{{ asset('upload/rekomendasi_pengda/'.$data->detail_berkas_alb->rekomendasi_pengda) }}' target='_blank' class="btn btn-md btn-info w-100" download>Download Rekomendasi Pengda&nbsp;<i class="fa fa-download"></i></a>
+                        </li>
+                        @php 
+                            $magberList = [
+                                '1'=> $data->detail_berkas_alb->ttmb1,
+                                '2'=> $data->detail_berkas_alb->ttmb2,
+                                '3'=> $data->detail_berkas_alb->ttmb3,
+                                '4'=> $data->detail_berkas_alb->ttmb4
+                            ];
+                        @endphp
+                        @foreach ($magberList as $item => $val)
+                            @if($maber>=$item)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href='{{ asset('upload/ttmb/'.$item.'/'.$val) }}' target='_blank' class="btn btn-md btn-info w-100" download>Download Magber {{$item}}&nbsp;<i class="fa fa-download"></i></a>
+                                </li>
+                            @endif
+                        @endforeach
                         <li class="list-group-item">
                             @php 
                                 $text = "Link Group Wa ".$data->link_group;
@@ -68,7 +101,10 @@ $status = (($data->verifikasi_status==0)&&$data->verifikasi_status<>1) ? 'Verifi
                             <a href="{{ $url }}" class="btn btn-mf btn-success w-100"><i class="fa fa-paper-plane"></i>&nbsp;Undang Grup WA</a>
                         </li>
                         <li class="list-group-item">
-                            <button class="btn btn-mf btn-primary w-100" onclick="validasi('{{$maber}}','{{$data->id}}','{{$data->verifikasi_status}}')"><i class="fa fa-check"></i>&nbsp;Verifikasi</button>
+                            @php
+                               $txt = ($data->verifikasi_status==0) ? 'Verifikasi' : 'Batal Verifikasi';
+                            @endphp
+                            <button class="btn btn-mf btn-primary w-100" onclick="validasi('{{$maber}}','{{$data->id}}','{{$data->verifikasi_status}}')"><i class="fa fa-check"></i>&nbsp;{{ $txt }}</button>
                         </li>
                     </ul>
                 </div>
@@ -102,40 +138,53 @@ $status = (($data->verifikasi_status==0)&&$data->verifikasi_status<>1) ? 'Verifi
 @section('bottom-script')
 
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+<script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
 <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 <script>
     function validasi(maber,id,status){
-        $.ajax({
-            url: "{{ route('verifikasi_maber.validasi') }}",
-            type: "POST",
-            dataType: "json",
-            data: {
-                maber : maber,
-                id : id,
-                status : status,
-                "_token": "{{ csrf_token() }}",
-            },
-            beforeSend() {
-                $(".klik").attr('disabled', 'disabled');
-            },
-            complete() {
-                $(".klik").removeAttr('disabled', 'disabled');
-            },
-            success(result) {
-                iziToast.success({
-                    title: result.status,
-                    message: result.message,
-                    position: 'topRight'
+
+        swal({
+            title: 'Verifikasi?',
+            text: 'Apakah anda yakin ingin mengubah status?',
+            icon: 'info',
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{ route('verifikasi_maber.validasi') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        maber : maber,
+                        id : id,
+                        status : status,
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    beforeSend() {
+                        $(".klik").attr('disabled', 'disabled');
+                    },
+                    complete() {
+                        $(".klik").removeAttr('disabled', 'disabled');
+                    },
+                    success(result) {
+                        iziToast.success({
+                            title: result.status,
+                            message: result.message,
+                            position: 'topRight'
+                        });
+                        window.location = "{{ url()->previous() }}"
+                    },
+                    error(xhr, status, error) {
+                        var err = eval('(' + xhr.responseText + ')');
+                        iziToast.error({
+                            title: 'error',
+                            position: 'topRight'
+                        });
+                    },
                 });
-                window.location = "{{ url()->previous() }}"
-            },
-            error(xhr, status, error) {
-                var err = eval('(' + xhr.responseText + ')');
-                iziToast.error({
-                    title: 'error',
-                    position: 'topRight'
-                });
-            },
+            }
         });
     }
 </script>
