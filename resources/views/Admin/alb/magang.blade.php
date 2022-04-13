@@ -97,19 +97,19 @@
                     </div>
                     <div class="form-group">
                         <label>Wilayah Kerja</label>
-                        <input type="text" class="form-control" name="wilayah_kerja" id="wilayah_kerja" placeholder="Wilayah Kerja" autocomplete="off">
+                        <input type="text" class="form-control" name="wilayah_kerja" id="wilayah_kerja" placeholder="Contoh : Jawa Tengah" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Masa Magang</label>
-                        <input type="text" class="form-control" name="masa_magang" id="masa_magang" placeholder="Masa Magang" autocomplete="off">
+                        <input type="text" class="form-control" name="masa_magang" id="masa_magang" placeholder="contoh : 27 November 2019 – 27 November 2021 (24 Bulan)" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Tgl & No Surat</label>
-                        <input type="text" class="form-control" name="tgl_no_surat" id="tgl_no_surat" placeholder="Tgl & No Surat" autocomplete="off">
+                        <input type="text" class="form-control" name="tgl_no_surat" id="tgl_no_surat" placeholder="contoh : Tanggal: 6 Desember 2021 No : (Nomor Surat)" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Magang Ke</label>
-                        <input type="number" class="form-control" name="magang_ke" id="magang_ke" placeholder="Magang Ke" autocomplete="off">
+                        <input type="number" class="form-control" name="magang_ke" id="magang_ke" placeholder="contoh : 1" autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke">
@@ -137,7 +137,7 @@
                     @csrf
                     <div class="form-group">
                         <label>Pengwil</label>
-                        <input type="text" class="form-control" name="pengwil" id="pengwil" placeholder="Pengwil" autocomplete="off">
+                        <input type="text" class="form-control" name="pengwil" id="pengwil" placeholder="contoh : Jawa Tengah" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Tgl Pelaksanaan</label>
@@ -145,19 +145,19 @@
                     </div>
                     <div class="form-group">
                         <label>Materi</label>
-                        <input type="text" class="form-control" name="materi" id="materi" placeholder="Materi" autocomplete="off">
+                        <input type="text" class="form-control" name="materi" id="materi" placeholder="contoh : Kesatu" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Nilai</label>
-                        <input type="text" class="form-control" name="nilai" id="nilai" placeholder="Nilai" autocomplete="off">
+                        <input type="text" class="form-control" name="nilai" id="nilai" placeholder="contoh : Baik" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Tgl & Nomor</label>
-                        <input type="text" class="form-control" name="tgl_nomor" id="tgl_nomor" placeholder="Tgl & Nomor" autocomplete="off">
+                        <input type="text" class="form-control" name="tgl_nomor" id="tgl_nomor" placeholder="contoh : 25 Agustus 2020 No : (Nomor TTMB)" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Magang Ke</label>
-                        <input type="number" class="form-control" name="magang_ke" id="magang_ke" placeholder="Magang Ke" autocomplete="off">
+                        <input type="number" class="form-control" name="magang_ke" id="magang_ke" placeholder="contoh : 1" autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke">
