@@ -20,4 +20,8 @@ class RiwayatTTMB extends Model
         'magang_ke',
         'user_id'
     ];
+    
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
