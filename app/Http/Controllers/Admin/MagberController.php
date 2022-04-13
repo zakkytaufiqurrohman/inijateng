@@ -219,7 +219,7 @@ class MagberController extends Controller
     public function eventMagber($id)
     {
         $now = date('Y-m-d');
-        $cek = Magber::where('start_date','<=',$now)->where('end_date','>=',$now)->first();
+        $cek = Magber::where('start_date','<=',$now)->where('end_date','>=',$now)->where('status','1')->where('id',$id)->first();
         if(empty($cek)){
             return view('event_close');
         }
