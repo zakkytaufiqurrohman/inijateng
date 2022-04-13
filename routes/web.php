@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ALBController;
 use App\Http\Controllers\Admin\RiwayatMagangController;
 use App\Http\Controllers\Admin\AlbEventController;
 use App\Http\Controllers\Admin\AlbTransactionController;
+use App\Http\Controllers\Admin\LapTransaksiController;
 use App\Http\Controllers\Admin\MagberTransactionController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\PreviewController;
@@ -188,6 +189,12 @@ Route::middleware('auth')->group(function () {
 
     // end alb
     
+    //Laporan
+        Route::name('laporan')->prefix('/laporan')->group(function () {
+            Route::get('/transaksi', [LapTransaksiController::class, 'index'])->name('.transaksi');
+        });
+
+    // end laporan
 
     /** begin FRONT PAGE */
         //profile

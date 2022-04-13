@@ -1,7 +1,7 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
-        <div class="sidebar-brand">
-            <a href="/dashboard"><img src="{{asset('assets/img/logo.png')}}" width="70px" height="70px" alt=""></a>
+        <div class="sidebar-brand" style="margin-bottom: 10px;">
+            <a href="/dashboard"><img src="{{asset('assets/img/nav.png')}}" width="200px" height="30px" alt=""></a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="/">INI</a>
@@ -25,7 +25,7 @@
             </li>
             @endrole
             <li class="nav-item {{ (request()->is('profile*')) ? 'active' : '' }}">
-                <a href="{{ route('profile') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>{{auth()->user()->name}}</span></a>
+                <a href="{{ route('profile') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Profile</span></a>
             </li>
             @role('notaris')
             <li class="nav-item {{ (request()->is('notaris*')) ? 'active' : '' }}">
@@ -40,7 +40,7 @@
                 <a href="{{ route('alb.berkas') }}" class="nav-link"><i class="fas fa-file-alt"></i><span>Berkas</span></a>
             </li>
             <li class="nav-item {{ (request()->is('alb/magang*')) ? 'active' : '' }}">
-                <a href="{{ route('alb.magang') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Magang</span></a>
+                <a href="{{ route('alb.magang') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Riwayat Magang</span></a>
             </li>
             @endrole
             @role('admin')
@@ -50,14 +50,14 @@
             </li>
           
             <!-- bendahara -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ (request()->is('bendahara/maber/*')) ? 'active' : '' }}"">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
                   
-                    <li class="{{ (request()->is('bendahara_maber*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',0) }}">Belum Terverifikasi</a></li>
+                    <li class="{{ (request()->is('bendahara/maber/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',0) }}">Belum Terverifikasi</a></li>
                     
                     
-                    <li class="{{ (request()->is('bendahara_maber*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',1) }}">Sudah Terverifikasi</a></li>   
+                    <li class="{{ (request()->is('bendahara/maber/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
             <!-- verivikator -->
@@ -65,14 +65,14 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
                   
-                    <li class="{{ (request()->is('verifikasi/maber/1*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,0]) }}">Maber 1 (Belum Verifikasi)</a></li>
-                    <li class="{{ (request()->is('verifikasi/maber/1*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,1]) }}">Maber 1 (Terverifikasi)</a></li>
-                    <li class="{{ (request()->is('verifikasi/maber/2*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,0]) }}">Maber 2 (Belum Verifikasi)</a></li>
-                    <li class="{{ (request()->is('verifikasi/maber/2*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,1]) }}">Maber 2 (Terverifikasi)</a></li>
-                    <li class="{{ (request()->is('verifikasi/maber/3*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[3,0]) }}">Maber 3 (Belum Verifikasi)</a></li>
-                    <li class="{{ (request()->is('verifikasi/maber/3*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[3,1]) }}">Maber 3 (Terverifikasi)</a></li>
-                    <li class="{{ (request()->is('verifikasi/maber/4*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,0]) }}">Maber 4 (Belum Verifikasi)</a></li>
-                    <li class="{{ (request()->is('verifikasi/maber/4*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,1]) }}">Maber 4 (Terverifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/1/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,0]) }}">Maber 1 (Belum Verifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/1/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,1]) }}">Maber 1 (Terverifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/2/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,0]) }}">Maber 2 (Belum Verifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/2/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,1]) }}">Maber 2 (Terverifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/3/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[3,0]) }}">Maber 3 (Belum Verifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/3/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[3,1]) }}">Maber 3 (Terverifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/4/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,0]) }}">Maber 4 (Belum Verifikasi)</a></li>
+                    <li class="{{ (request()->is('verifikasi/maber/4/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,1]) }}">Maber 4 (Terverifikasi)</a></li>
                 </ul>
             </li>
 
@@ -83,14 +83,14 @@
                 <a href="{{ route('alb_event') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list ALB</span></a>
             </li>
             <!-- bendahara -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ (request()->is('bendahara/alb/*')) ? 'active' : '' }}"">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
                   
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a href="{{ route('bendahara_alb.index',0) }}" class="nav-link" href="">Belum Terverifikasi</a></li>
+                    <li class="{{ (request()->is('bendahara/alb/0')) ? 'active' : '' }}"><a href="{{ route('bendahara_alb.index',0) }}" class="nav-link" href="">Belum Terverifikasi</a></li>
                     
                     
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_alb.index',1) }}">Sudah Terverifikasi</a></li>   
+                    <li class="{{ (request()->is('bendahara/alb/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_alb.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -102,6 +102,11 @@
                     
                     <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
                 </ul>
+            </li>
+
+            <li class="menu-header">Laporan</li>
+            <li class="nav-item {{ (request()->is('laporan*')) ? 'active' : '' }}">
+                <a href="{{ route('laporan.transaksi') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Lap Transaksi</span></a>
             </li>
 
             <!-- front page -->
