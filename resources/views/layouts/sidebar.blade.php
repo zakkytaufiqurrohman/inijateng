@@ -51,7 +51,7 @@
           
             <!-- bendahara -->
             <li class="nav-item dropdown {{ (request()->is('bendahara/maber/*')) ? 'active' : '' }}"">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
                   
                     <li class="{{ (request()->is('bendahara/maber/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',0) }}">Belum Terverifikasi</a></li>
@@ -62,7 +62,7 @@
             </li>
             <!-- verivikator -->
             <li class="nav-item dropdown {{ (request()->is('verifikasi*')) ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Verifikator</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
                   
                     <li class="{{ (request()->is('verifikasi/maber/1/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,0]) }}">Maber 1 (Belum Verifikasi)</a></li>
@@ -80,11 +80,11 @@
             <li class="menu-header">ALB</li>
             <!-- list maber just admin  -->
             <li class="nav-item {{ (request()->is('alb_event*')) ? 'active' : '' }}">
-                <a href="{{ route('alb_event') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list ALB</span></a>
+                <a href="{{ route('alb_event') }}" class="nav-link"><i class="fas fa-user-graduate	"></i><span>list ALB</span></a>
             </li>
             <!-- bendahara -->
             <li class="nav-item dropdown {{ (request()->is('bendahara/alb/*')) ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Bendahara</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
                   
                     <li class="{{ (request()->is('bendahara/alb/0')) ? 'active' : '' }}"><a href="{{ route('bendahara_alb.index',0) }}" class="nav-link" href="">Belum Terverifikasi</a></li>
@@ -94,7 +94,7 @@
                 </ul>
             </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Verifikator</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
                   
                     <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Belum Terverifikasi</a></li>
@@ -106,17 +106,17 @@
 
             <li class="menu-header">Laporan</li>
             <li class="nav-item {{ (request()->is('laporan*')) ? 'active' : '' }}">
-                <a href="{{ route('laporan.transaksi') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Lap Transaksi</span></a>
+                <a href="{{ route('laporan.transaksi') }}" class="nav-link"><i class="fas fa-newspaper"></i><span>Lap Transaksi</span></a>
             </li>
             <li class="nav-item {{ (request()->is('preview_riwayat*')) ? 'active' : '' }}">
-                <a href="{{ route('preview_riwayat.index') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Preview Ttmb & Riwayat</span></a>
+                <a href="{{ route('preview_riwayat.index') }}" class="nav-link"><i class="fas fa-history"></i><span>Preview Ttmb & Riwayat</span></a>
             </li>
 
             <!-- front page -->
             <li class="menu-header">Front Page</li>
             <!-- list maber just admin  -->
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
-                <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Profile</span></a>
+                <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-user-cog"></i><span>Profile</span></a>
             </li>
             @endrole
             
