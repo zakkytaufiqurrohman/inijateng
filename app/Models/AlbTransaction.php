@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\Province;
 
 class AlbTransaction extends Model
 {
@@ -34,4 +36,14 @@ class AlbTransaction extends Model
         'verifikator_status',
         'alamat'
     ];
+
+    public function provincies()
+    {
+        return $this->belongsTo(Province::class,'provinsi','id');
+    }
+
+    public function kotas()
+    {
+        return $this->belongsTo(City::class,'kota','id');
+    }
 }

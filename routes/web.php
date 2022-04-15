@@ -178,13 +178,21 @@ Route::middleware('auth')->group(function () {
             Route::get('/show', [AlbEventController::class,'show'])->name('.show');
         });
 
-        Route::name('preview_riwayat')->prefix('/preview_riwayat')->group(function () {
-            Route::get('/', [PreviewTmmbAndRiwayatController::class, 'index'])->name('.index');
-            Route::get('get/datas', [PreviewTmmbAndRiwayatController::class, 'data'])->name('.data');
-            Route::get('/{id}', [PreviewTmmbAndRiwayatController::class, 'detail'])->name('.detail');
+        Route::name('bendahara_alb')->prefix('/bendahara/alb/')->group(function () {
+            Route::get('/{id}', [AlbTransactionController::class, 'bendaharaIndex'])->name('.index');
+            Route::get('get/datas', [AlbTransactionController::class, 'bendahara'])->name('.data');
+            Route::get('show/{user}', [AlbTransactionController::class, 'show'])->name('.show');
+            Route::post('validasi', [AlbTransactionController::class, 'validasi'])->name('.validasi');
+            Route::put('edit', [AlbTransactionController::class, 'edit'])->name('.edit');
            
         });
 
+        Route::name('verifikasi_alb')->prefix('/verifikasi/alb')->group(function () {
+            Route::get('/{id}', [AlbTransactionController::class, 'verifikasiIndex'])->name('.index');
+            Route::get('get/data', [AlbTransactionController::class, 'verifikasi'])->name('.data');
+            Route::get('show/{user}', [AlbTransactionController::class, 'verifikasi_show'])->name('.show');
+            Route::post('/validasi', [AlbTransactionController::class, 'verifikasi_validasi'])->name('.validasi');
+        });
 
     // end alb
     
@@ -193,12 +201,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/transaksi', [LapTransaksiController::class, 'index'])->name('.transaksi');
         });
 
-        Route::name('bendahara_alb')->prefix('/bendahara/alb/')->group(function () {
-            Route::get('/{id}', [AlbTransactionController::class, 'bendaharaIndex'])->name('.index');
-            Route::get('get/datas', [AlbTransactionController::class, 'bendahara'])->name('.data');
-            Route::get('show/{user}', [AlbTransactionController::class, 'show'])->name('.show');
-            Route::post('validasi', [AlbTransactionController::class, 'validasi'])->name('.validasi');
-            Route::put('edit', [AlbTransactionController::class, 'edit'])->name('.edit');
+        Route::name('preview_riwayat')->prefix('/preview_riwayat')->group(function () {
+            Route::get('/', [PreviewTmmbAndRiwayatController::class, 'index'])->name('.index');
+            Route::get('get/datas', [PreviewTmmbAndRiwayatController::class, 'data'])->name('.data');
+            Route::get('/{id}', [PreviewTmmbAndRiwayatController::class, 'detail'])->name('.detail');
            
         });
 

@@ -97,22 +97,22 @@ class AlbEventController extends Controller
             $foto =  $request->foto;
             $suket =  $request->suket;
             if(!empty($ktp)){
-                $text = str_replace(' ', '',$foto->getClientOriginalName());
+                $text = str_replace(' ', '',$ktp->getClientOriginalName());
                 $nama_ktp = rand(10,100).time()."_".$text;
                 $ktp->move(public_path('upload/alb_register'),$nama_ktp);
             }
             if(!empty($bukti)){
-                $text = str_replace(' ', '',$foto->getClientOriginalName());
+                $text = str_replace(' ', '',$bukti->getClientOriginalName());
                 $nama_bukti = rand(10,100).time()."_".$text;
                 $bukti->move(public_path('upload/alb_register'),$nama_bukti);
             }
             if(!empty($ijazah_s1)){
-                $text = str_replace(' ', '',$foto->getClientOriginalName());
+                $text = str_replace(' ', '',$ijazah_s1->getClientOriginalName());
                 $nama_ijazah_s1 = rand(10,100).time()."_".$text;
                 $ijazah_s1->move(public_path('upload/alb_register'),$nama_ijazah_s1);
             }
             if(!empty($ijazah_s2)){
-                $text = str_replace(' ', '',$foto->getClientOriginalName());
+                $text = str_replace(' ', '',$ijazah_s2->getClientOriginalName());
                 $nama_ijazah_s2 = rand(10,100).time()."_".$text;
                 $ijazah_s2->move(public_path('upload/alb_register'),$nama_ijazah_s2);
             }
@@ -122,7 +122,7 @@ class AlbEventController extends Controller
                 $foto->move(public_path('upload/alb_register'),$nama_foto);
             }
             if(!empty($suket)){
-                $text = str_replace(' ', '',$foto->getClientOriginalName());
+                $text = str_replace(' ', '',$suket->getClientOriginalName());
                 $nama_suket = rand(10,100).time()."_".$text;
                 $suket->move(public_path('upload/alb_register'),$nama_suket);
             }

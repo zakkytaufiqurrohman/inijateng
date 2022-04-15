@@ -61,7 +61,7 @@
                 </ul>
             </li>
             <!-- verivikator -->
-            <li class="nav-item dropdown {{ (request()->is('verifikasi*')) ? 'active' : '' }}">
+            <li class="nav-item dropdown {{ (request()->is('verifikasi/maber*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
                   
@@ -93,14 +93,14 @@
                     <li class="{{ (request()->is('bendahara/alb/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_alb.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ (request()->is('verifikasi/alb*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
                   
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="">Belum Terverifikasi</a></li>
+                    <li class="{{ (request()->is('verifikasi/alb/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_alb.index',0) }}">Belum Terverifikasi</a></li>
                     
                     
-                    <li class="{{ (request()->is('role*')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('role') }}">SUdah Terverifikasi</a></li>   
+                    <li class="{{ (request()->is('verifikasi/alb/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_alb.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
 
