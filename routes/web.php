@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AlbEventController;
 use App\Http\Controllers\Admin\AlbTransactionController;
 use App\Http\Controllers\Admin\LapTransaksiController;
 use App\Http\Controllers\Admin\MagberTransactionController;
+use App\Http\Controllers\Admin\NilaiAlbController;
 use App\Http\Controllers\Admin\PreviewTmmbAndRiwayatController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\PreviewController;
@@ -192,6 +193,15 @@ Route::middleware('auth')->group(function () {
             Route::get('get/data', [AlbTransactionController::class, 'verifikasi'])->name('.data');
             Route::get('show/{user}', [AlbTransactionController::class, 'verifikasi_show'])->name('.show');
             Route::post('/validasi', [AlbTransactionController::class, 'verifikasi_validasi'])->name('.validasi');
+        });
+
+        // penilaian alb
+        Route::name('nilai')->prefix('nilai/alb')->group(function () {
+            Route::get('/{id}', [NilaiAlbController::class, 'index'])->name('.index');
+            Route::get('get/datas', [NilaiAlbController::class, 'data'])->name('.data');
+            Route::post('/', [NilaiAlbController::class, 'store']);
+
+           
         });
 
     // end alb

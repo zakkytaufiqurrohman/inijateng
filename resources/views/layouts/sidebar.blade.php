@@ -103,6 +103,17 @@
                     <li class="{{ (request()->is('verifikasi/alb/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_alb.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ (request()->is('nilai/alb*')) ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Penilaian</span></a>
+                <ul class="dropdown-menu">
+                  
+                    <li class="{{ (request()->is('nilai/alb/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('nilai.index',0) }}">Belum Dinilai</a></li>
+                    
+                    
+                    <li class="{{ (request()->is('nilai/alb/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('nilai.index',1) }}">Sudah Dinilai</a></li>   
+                </ul>
+            </li>
+
 
             <li class="menu-header">Laporan</li>
             <li class="nav-item {{ (request()->is('laporan*')) ? 'active' : '' }}">

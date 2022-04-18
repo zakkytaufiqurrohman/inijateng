@@ -1,0 +1,4 @@
+deployment:
+	tasks:
+    	- export DEPLOYPATH=/home/inijaten/public_html/inijateng.org/
+ 		- /usr/bin/rsync -Paz * $DEPLOYPATH --delete
