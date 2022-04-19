@@ -44,12 +44,14 @@
             </li>
             @endrole
             <li class="menu-header">Maber</li>
-
+            @if(auth()->user()->can('all') )
             <li class="nav-item {{ (request()->is('maber*')) ? 'active' : '' }}">
                 <a href="{{ route('maber') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list Maber</span></a>
             </li>
+            @endif
           
             <!-- bendahara -->
+            @if(auth()->user()->can('all') || auth()->user()->can('bendahara_maber'))
             <li class="nav-item dropdown {{ (request()->is('bendahara/maber/*')) ? 'active' : '' }}"">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
@@ -60,21 +62,31 @@
                     <li class="{{ (request()->is('bendahara/maber/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
+            @endif
             <!-- verivikator -->
+            @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_1') || auth()->user()->can('verifikator_maber_2') || auth()->user()->can('verifikator_maber_3') || auth()->user()->can('verifikator_maber_4'))
             <li class="nav-item dropdown {{ (request()->is('verifikasi/maber*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
-                  
+                @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_1'))
                     <li class="{{ (request()->is('verifikasi/maber/1/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,0]) }}">Maber 1 (Belum Verifikasi)</a></li>
                     <li class="{{ (request()->is('verifikasi/maber/1/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,1]) }}">Maber 1 (Terverifikasi)</a></li>
+                @end
+                @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_2'))
                     <li class="{{ (request()->is('verifikasi/maber/2/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,0]) }}">Maber 2 (Belum Verifikasi)</a></li>
                     <li class="{{ (request()->is('verifikasi/maber/2/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,1]) }}">Maber 2 (Terverifikasi)</a></li>
+                @endif
+                @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_3'))
                     <li class="{{ (request()->is('verifikasi/maber/3/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[3,0]) }}">Maber 3 (Belum Verifikasi)</a></li>
                     <li class="{{ (request()->is('verifikasi/maber/3/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[3,1]) }}">Maber 3 (Terverifikasi)</a></li>
+                @endif
+                @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_4'))
                     <li class="{{ (request()->is('verifikasi/maber/4/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,0]) }}">Maber 4 (Belum Verifikasi)</a></li>
                     <li class="{{ (request()->is('verifikasi/maber/4/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,1]) }}">Maber 4 (Terverifikasi)</a></li>
+                @end
                 </ul>
             </li>
+            @endif
     <!-- alb -->
             @if(auth()->user()->can('all') || auth()->user()->can('bendahara_alb') ||  auth()->user()->can('verifikator_alb') )
             <li class="menu-header">ALB</li>
@@ -123,6 +135,7 @@
             @endif
 
         @endif
+        @if(auth()->user()->can('all') )
             <li class="menu-header">Laporan</li>
             <li class="nav-item {{ (request()->is('laporan*')) ? 'active' : '' }}">
                 <a href="{{ route('laporan.transaksi') }}" class="nav-link"><i class="fas fa-newspaper"></i><span>Lap Transaksi</span></a>
@@ -136,6 +149,7 @@
             <!-- list maber just admin  -->
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-user-cog"></i><span>Profile</span></a>
-            </li>            
+            </li>
+        @endif        
     </aside>
 </div>
