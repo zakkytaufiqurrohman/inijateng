@@ -76,7 +76,7 @@
                 </ul>
             </li>
     <!-- alb -->
-            @if(auth()->user()->can('all') ||  @if(auth()->user()->can('bendahara_alb')) ||  @if(auth()->user()->can('verifikator_alb') )
+            @if(auth()->user()->can('all') || auth()->user()->can('bendahara_alb') ||  auth()->user()->can('verifikator_alb') )
             <li class="menu-header">ALB</li>
             <!-- list maber just admin  -->
             @if(auth()->user()->can('all'))
@@ -85,7 +85,7 @@
             </li>
             @endif
             <!-- bendahara -->
-            @if(auth()->user()->can('all') || @if(auth()->user()->can('bendahara_alb'))
+            @if(auth()->user()->can('all') || auth()->user()->can('bendahara_alb'))
             <li class="nav-item dropdown {{ (request()->is('bendahara/alb/*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
@@ -97,7 +97,7 @@
                 </ul>
             </li>
             @endif
-            @if(auth()->user()->can('all') || @if(auth()->user()->can('verifikator_alb'))
+            @if(auth()->user()->can('all') || auth()->user()->can('verifikator_alb'))
             <li class="nav-item dropdown {{ (request()->is('verifikasi/alb*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
