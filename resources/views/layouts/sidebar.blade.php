@@ -43,8 +43,8 @@
                 <a href="{{ route('alb.magang') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>Riwayat Magang</span></a>
             </li>
             @endrole
-            @role('admin')
             <li class="menu-header">Maber</li>
+
             <li class="nav-item {{ (request()->is('maber*')) ? 'active' : '' }}">
                 <a href="{{ route('maber') }}" class="nav-link"><i class="fas fa-graduation-cap"></i><span>list Maber</span></a>
             </li>
@@ -75,14 +75,17 @@
                     <li class="{{ (request()->is('verifikasi/maber/4/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,1]) }}">Maber 4 (Terverifikasi)</a></li>
                 </ul>
             </li>
-
-            <!-- alb -->
+    <!-- alb -->
+            @if(auth()->user()->can('all') ||  @if(auth()->user()->can('bendahara_alb')) ||  @if(auth()->user()->can('verifikator_alb') )
             <li class="menu-header">ALB</li>
             <!-- list maber just admin  -->
+            @if(auth()->user()->can('all'))
             <li class="nav-item {{ (request()->is('alb_event*')) ? 'active' : '' }}">
                 <a href="{{ route('alb_event') }}" class="nav-link"><i class="fas fa-user-graduate	"></i><span>list ALB</span></a>
             </li>
+            @endif
             <!-- bendahara -->
+            @if(auth()->user()->can('all') || @if(auth()->user()->can('bendahara_alb'))
             <li class="nav-item dropdown {{ (request()->is('bendahara/alb/*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Bendahara</span></a>
                 <ul class="dropdown-menu">
@@ -93,6 +96,8 @@
                     <li class="{{ (request()->is('bendahara/alb/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_alb.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
+            @endif
+            @if(auth()->user()->can('all') || @if(auth()->user()->can('verifikator_alb'))
             <li class="nav-item dropdown {{ (request()->is('verifikasi/alb*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Verifikator</span></a>
                 <ul class="dropdown-menu">
@@ -103,6 +108,8 @@
                     <li class="{{ (request()->is('verifikasi/alb/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_alb.index',1) }}">Sudah Terverifikasi</a></li>   
                 </ul>
             </li>
+            @endif
+            @if(auth()->user()->can('all'))
             <li class="nav-item dropdown {{ (request()->is('nilai/alb*')) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Penilaian</span></a>
                 <ul class="dropdown-menu">
@@ -113,8 +120,9 @@
                     <li class="{{ (request()->is('nilai/alb/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('nilai.index',1) }}">Sudah Dinilai</a></li>   
                 </ul>
             </li>
+            @endif
 
-
+        @endif
             <li class="menu-header">Laporan</li>
             <li class="nav-item {{ (request()->is('laporan*')) ? 'active' : '' }}">
                 <a href="{{ route('laporan.transaksi') }}" class="nav-link"><i class="fas fa-newspaper"></i><span>Lap Transaksi</span></a>
@@ -128,8 +136,6 @@
             <!-- list maber just admin  -->
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-user-cog"></i><span>Profile</span></a>
-            </li>
-            @endrole
-            
+            </li>            
     </aside>
 </div>
