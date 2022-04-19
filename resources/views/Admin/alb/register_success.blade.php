@@ -1,50 +1,35 @@
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<link rel="shortcut icon" href="img/oss.png">
-<style>
-.a{ list-style-type: none;
-    overflow: hidden;
-    background-color: #c30914;
-	color:white;
-	width:100%;
-	font-size:20px;
-display: block;
-    }
-.j{
-	text-align: center;
-    padding: 14px 16px;
-}
-.s{
-	float:left;
-	width:74%;
-}
-footer{bottom:0px;text-align: center;color: white;}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</style>
-<title>Pendaftaran Berhasil</title>
-<div class="a" >
-<h  class="j s" style='width: 100%;text-align: center;'> Ikatan Notaris
-</h>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-</div>
-<br><div class="body">
-<h2>Hai {{$id}}</h2>
-<h2>Terimakasih Anda Sudah bergabung di Event Kami</h2>
-<h4>SIlahkan Cek Email Anda.
-<!--<h4>Silahkan bayar transfer ke nomor Rek. MANDIRI 1570000003 An.  PENA SARANA INFORMATIKA
-<br>
-<b>Rp. 250.000</b>
-<!--Rp. 300.023</h4>
-<h4>Silahkan Transfer sesuai angka cantik di belakang untuk mempermudah pengecekkan rekening agar segera mendapatkan id card.
-<br>Setelah transfer silahkan konfirmasi pembayaran di sertai nama pendaftar dan dikirim via WA 0819 0124 5333</h4>
-<br><B>Registrasi ini harap di screenshot, dan disertakan dalam konfirmasi pembayaran.</B>
-
-<br>-->
-<h2>Panitia</h2>
-</div>
-
-<br>
-<br>
-
-<div style="left:0px; color:white; text-align:center; padding: 12px;">
-Suport By &copy; Ini Jateng
-</div>
+    <title>inijateng.org</title>
+  </head>
+  <body>
+      <div class="container mt-5">
+        {{-- <div class="row align-items-center shadow"> --}}
+            <div class="col align-self-center"></div>
+            <div class="card text-center shadow w-60">
+                <div class="card-header">
+             <h3>   Hai {{$id}} </h3>
+                </div>
+                <div class="card-body mt-3 mb-3">
+				<h2>Terimakasih Anda Sudah bergabung di Event Kami</h2>
+				<h4>Silahkan Cek Email Anda untuk melihat E-Card (proses validasi 1x24 jam)
+                </div>
+                <div class="card-footer text-muted">
+                    inijateng.org
+                </div>
+            </div>
+            {{-- </div> --}}
+        </div>
+    </div>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
