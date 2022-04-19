@@ -14,7 +14,8 @@ class MasterDataController extends Controller
 {
     function __construct()
     {
-        $this->middleware('role:admin');
+        // $this->middleware('role:admin');
+        $this->middleware('permission:all');
     }
 
     public function index()

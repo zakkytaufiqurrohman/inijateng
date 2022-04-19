@@ -16,6 +16,12 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MagberController extends Controller
 {
+    function __construct()
+    {
+        // $this->middleware('role:admin');
+        $this->middleware('role:admin',['only' => ['index']]);
+    }
+
     public function index(Request $request)
     {
         return view('Admin.magber.index');

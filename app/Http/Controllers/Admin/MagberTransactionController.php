@@ -10,6 +10,19 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MagberTransactionController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:bendahara_alb', ['only' => [
+            'bendaharaIndex',
+            'bendahara',
+        ]]);
+        $this->middleware('permission:verifikator_maber_1|verifikator_maber_2|verifikator_maber_3|verifikator_maber_4', ['only' => [
+            'verifikasiIndex',
+            'verifikasi_validasi',
+        ]]);
+
+
+    }
     public function bendaharaIndex($id)
     {
         return view('Admin.magber.bendahara',compact('id'));
@@ -87,7 +100,7 @@ class MagberTransactionController extends Controller
         //tampilakan data dengan event magber yang aktif
         $magberEfent = Magber::where('status','1')->first();
         //filter maber ke berapa ?
-        $data = MagberTransaction::with('user')->where('magber_ke',$request->id)->where('magber_id',$magberEfent->id)->where('bendahara_status',1)->where('verifikasi_status',$request->status)->get();
+        $data = MagberTransaction::with('user')->where('magber_ke',$request->id)->where('magber_id',$magberEfent->id)->where('verifikasi_status',$request->status)->get();
         // $data->orderBy('id', 'DESC');
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
