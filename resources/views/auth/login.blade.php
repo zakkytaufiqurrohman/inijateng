@@ -39,7 +39,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="nik">NIK</label>
-                                        <input id="nik" type="number" class="form-control" name="nik" tabindex="1" required autofocus>
+                                        <input id="nik" type="text" class="form-control" name="nik" tabindex="1" required autofocus>
                                         <div class="invalid-feedback">
                                             nik Tidak Boleh Kosong
                                         </div>
