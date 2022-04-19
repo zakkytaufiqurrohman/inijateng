@@ -71,7 +71,7 @@
                 @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_1'))
                     <li class="{{ (request()->is('verifikasi/maber/1/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,0]) }}">Maber 1 (Belum Verifikasi)</a></li>
                     <li class="{{ (request()->is('verifikasi/maber/1/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[1,1]) }}">Maber 1 (Terverifikasi)</a></li>
-                @end
+                @endif
                 @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_2'))
                     <li class="{{ (request()->is('verifikasi/maber/2/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,0]) }}">Maber 2 (Belum Verifikasi)</a></li>
                     <li class="{{ (request()->is('verifikasi/maber/2/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[2,1]) }}">Maber 2 (Terverifikasi)</a></li>
@@ -83,7 +83,7 @@
                 @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_4'))
                     <li class="{{ (request()->is('verifikasi/maber/4/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,0]) }}">Maber 4 (Belum Verifikasi)</a></li>
                     <li class="{{ (request()->is('verifikasi/maber/4/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('verifikasi_maber.index',[4,1]) }}">Maber 4 (Terverifikasi)</a></li>
-                @end
+                @endif
                 </ul>
             </li>
             @endif
