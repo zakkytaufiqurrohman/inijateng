@@ -53,6 +53,9 @@ Route::get('/register', [RegisterCostumeController::class, 'index'])->name('regi
 Route::post('/register', [RegisterCostumeController::class, 'register'])->name('register');
 Route::post('/register/check', [RegisterCostumeController::class, 'check_user'])->name('register.check');
 
+Route::get('/register/inijateng', [RegisterCostumeController::class, 'reg_account'])->name('reg_account');
+Route::post('/register/inijateng/submit', [RegisterCostumeController::class, 'store_account'])->name('store_account');
+
 // Laravolt/indonesia
 Route::get('provinces', [DependantDropdownController::class, 'provinces'])->name('provinces');
 Route::get('cities', [DependantDropdownController::class, 'cities'])->name('cities');
