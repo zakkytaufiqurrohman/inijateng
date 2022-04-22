@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>INI Jateng</title>
+    <link rel="icon" href="{{ asset('assets/img/logo.png') }}">
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -87,7 +88,7 @@
             <!-- Main Content end-->
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy;2021 - {{date('Y')}} IPPAT</a>
+                    Copyright {{date('Y')}} © Ikatan Notaris Indonesia Pengurus Wilayah Jawa Tengah. All rights reserved</a>
                 </div>
                 <div class="footer-right">
                     2.3.0

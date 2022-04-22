@@ -54,14 +54,15 @@ class NotarisController extends Controller
         $validated = $request->validate([
             'npwp' => 'required',
             'telephone' => 'required',
-            'ktp_img' => 'mimes:jpg,bmp,png',
+            'ktp_img' => 'mimes:jpg,bmp,png|max:2000',
             'sk_notaris' => 'mimes:pdf',
             'sk_ppt' => 'mimes:pdf',
-            'scan_npwp' => 'mimes:jpg,bmp,png',
+            'scan_npwp' => 'mimes:jpg,bmp,png|max:2000',
         ],[
             'npwp.required' => 'npwp tidak boleh kosong',
             'telephone.required' => 'No Telp tidak boleh kosong',
             '*.mimes' => 'Format tidak sesuai, periksa kembali',
+            '*.max' => 'Ukuran tidak boleh lebih dari 2MB, periksa kembali',
         ]);
         DB::beginTransaction();
         try{
@@ -82,8 +83,6 @@ class NotarisController extends Controller
                 'asal_pengda' => $request->asal_pengda,
             ];
 
-
-
             if(!empty($ktp)){
                 $filename_ktp = $user_id.'-'.time().'.'.$ktp->getClientOriginalExtension();
                 $data['ktp_img'] = $filename_ktp;
@@ -101,10 +100,10 @@ class NotarisController extends Controller
             }
             if(!empty($scan_npwp)){
                 $filename_snpwp = $user_id.'-'.time().'.'.$scan_npwp->getClientOriginalExtension();
-                $data['ktp_img'] = $filename_snpwp;
+                $data['scan_npwp'] = $filename_snpwp;
                 $scan_npwp->move(public_path('upload/scan_npwp'),$filename_snpwp);
             }
-            
+
             $detail = DetailNotaris::updateOrCreate(
                 ['user_id' => $user_id],
                 $data

@@ -12,7 +12,13 @@ use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\Admin\ALBController;
-
+use App\Http\Controllers\Admin\RiwayatMagangController;
+use App\Http\Controllers\Admin\AlbEventController;
+use App\Http\Controllers\Admin\AlbTransactionController;
+use App\Http\Controllers\Admin\LapTransaksiController;
+use App\Http\Controllers\Admin\MagberTransactionController;
+use App\Http\Controllers\Admin\NilaiAlbController;
+use App\Http\Controllers\Admin\PreviewTmmbAndRiwayatController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\PreviewController;
 
@@ -33,32 +39,37 @@ use App\Http\Controllers\PreviewController;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class,'index']);
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/login', [LoginCustomeController::class,'index'])->name('login');
-Route::post('/login', [LoginCustomeController::class,'login'])->name('login');
+Route::get('/DataPeserta', [LapTransaksiController::class, 'dataPeserta'])->name('dataPeserta');
 
-Route::get('/register1', [RegisterCostumeController::class,'index'])->name('register1');
-Route::post('/register1', [RegisterCostumeController::class,'register'])->name('register1');
+Route::get('/login', [LoginCustomeController::class, 'index'])->name('login');
+Route::post('/login', [LoginCustomeController::class, 'login'])->name('login');
 
-Route::get('/register', [RegisterCostumeController::class,'index'])->name('register');
-Route::post('/register', [RegisterCostumeController::class,'register'])->name('register');
-Route::post('/register/check', [RegisterCostumeController::class,'check_user'])->name('register.check');
+Route::get('/register1', [RegisterCostumeController::class, 'index'])->name('register1');
+Route::post('/register1', [RegisterCostumeController::class, 'register'])->name('register1');
+
+Route::get('/register', [RegisterCostumeController::class, 'index'])->name('register');
+Route::post('/register', [RegisterCostumeController::class, 'register'])->name('register');
+Route::post('/register/check', [RegisterCostumeController::class, 'check_user'])->name('register.check');
+
+Route::get('/register/inijateng', [RegisterCostumeController::class, 'reg_account'])->name('reg_account');
+Route::post('/register/inijateng/submit', [RegisterCostumeController::class, 'store_account'])->name('store_account');
 
 // Laravolt/indonesia
-Route::get('provinces', [DependantDropdownController::class,'provinces'])->name('provinces');
-Route::get('cities', [DependantDropdownController::class,'cities'])->name('cities');
-Route::get('districts', [DependantDropdownController::class,'districts'])->name('districts');
-Route::get('villages', [DependantDropdownController::class,'villages'])->name('villages');
+Route::get('provinces', [DependantDropdownController::class, 'provinces'])->name('provinces');
+Route::get('cities', [DependantDropdownController::class, 'cities'])->name('cities');
+Route::get('districts', [DependantDropdownController::class, 'districts'])->name('districts');
+Route::get('villages', [DependantDropdownController::class, 'villages'])->name('villages');
 
 // read dari qc code
-Route::get('/barcode/{id}', [PreviewController::class,'readQr'])->name('.read_qr');
+Route::get('/barcode/{id}', [PreviewController::class, 'readQr'])->name('.read_qr');
 
 Route::middleware('auth')->group(function () {
     // Route::get('/homes', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/profile', [ProfileController::class,'index'])->name('profile');
-    Route::put('/profile', [ProfileController::class,'update'])->name('profile');
-    Route::put('/profile/password', [ProfileController::class,'update_password'])->name('profile.password');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile');
+    Route::put('/profile/password', [ProfileController::class, 'update_password'])->name('profile.password');
     // Route::put('/profile/attr', [ProfileController::class,'update'])->name('profile');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
@@ -70,19 +81,17 @@ Route::middleware('auth')->group(function () {
     });
 
     //logout
-    Route::post('/logout', [LoginCustomeController::class,'logout'])->name('logout');
+    Route::post('/logout', [LoginCustomeController::class, 'logout'])->name('logout');
 
     // role
-    Route::name('role')->prefix('roles')->group(function(){
-        Route::get('/', [RoleController::class,'index']);
+    Route::name('role')->prefix('roles')->group(function () {
+        Route::get('/', [RoleController::class, 'index']);
         Route::post('/', [RoleController::class, 'store']);
         Route::delete('/', [RoleController::class, 'destroy']);
         Route::put('/', [RoleController::class, 'update']);
-        Route::get('/data', [RoleController::class,'data'])->name('.data');
-        Route::get('/getPermission', [RoleController::class,'getPermission'])->name('.getPermission');
-        Route::get('/show', [RoleController::class,'show'])->name('.show');
-
-    
+        Route::get('/data', [RoleController::class, 'data'])->name('.data');
+        Route::get('/getPermission', [RoleController::class, 'getPermission'])->name('.getPermission');
+        Route::get('/show', [RoleController::class, 'show'])->name('.show');
     });
     //permission
     Route::name('permission')->prefix('/permission')->group(function () {
@@ -91,7 +100,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/', [PermissionController::class, 'update']);
         Route::get('/data', [PermissionController::class, 'data'])->name('.data');
         Route::delete('/', [PermissionController::class, 'destroy'])->name('.delete');
-        Route::get('/show', [PermissionController::class,'show'])->name('.show');
+        Route::get('/show', [PermissionController::class, 'show'])->name('.show');
     });
     //masterdata
     Route::name('master_data')->prefix('/master_data')->group(function () {
@@ -100,9 +109,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/', [MasterDataController::class, 'update']);
         Route::get('/data', [MasterDataController::class, 'data'])->name('.data');
         Route::delete('/', [MasterDataController::class, 'destroy'])->name('.delete');
-        Route::get('/show', [MasterDataController::class,'show'])->name('.show');
-        Route::get('/download/{id}', [MasterDataController::class,'download'])->name('.download');
-       
+        Route::get('/show', [MasterDataController::class, 'show'])->name('.show');
+        Route::get('/download/{id}', [MasterDataController::class, 'download'])->name('.download');
     });
 
     //Notaris
@@ -117,6 +125,23 @@ Route::middleware('auth')->group(function () {
         Route::get('/data_diri', [ALBController::class, 'data_diri'])->name('.data_diri');
         Route::post('/data_diri', [ALBController::class, 'store'])->name('.data_diri');
         Route::get('/data_diri/edit', [ALBController::class, 'data_diri_edit'])->name('.data_diri.edit');
+
+        Route::get('/berkas', [ALBController::class, 'berkas'])->name('.berkas');
+        Route::post('/berkas', [ALBController::class, 'store_berkas'])->name('.berkas');
+        Route::get('/berkas/edit', [ALBController::class, 'berkas_edit'])->name('.berkas.edit');
+
+        Route::get('/magang', [RiwayatMagangController::class, 'index'])->name('.magang');
+        Route::get('/magang/riwayat', [RiwayatMagangController::class, 'data'])->name('.magang.riwayat');
+        Route::post('/magang/riwayat', [RiwayatMagangController::class, 'store'])->name('.magang.riwayat');
+        Route::get('/magang/riwayat/show', [RiwayatMagangController::class, 'show'])->name('.magang.show');
+        Route::put('/magang/riwayat', [RiwayatMagangController::class, 'update'])->name('.magang.riwayat');
+        Route::delete('/magang/riwayat', [RiwayatMagangController::class, 'destroy'])->name('.magang.riwayat');
+
+        Route::get('/ttmb/riwayat', [RiwayatMagangController::class, 'data_ttmb'])->name('.ttmb.riwayat');
+        Route::post('/ttmb/riwayat', [RiwayatMagangController::class, 'store_ttmb'])->name('.ttmb.riwayat');
+        Route::get('/ttmb/riwayat/show', [RiwayatMagangController::class, 'show_ttmb'])->name('.ttmb.show');
+        Route::put('/ttmb/riwayat', [RiwayatMagangController::class, 'update_ttmb'])->name('.ttmb.riwayat');
+        Route::delete('/ttmb/riwayat', [RiwayatMagangController::class, 'destroy_ttmb'])->name('.ttmb.riwayat');
     });
 
     // Maber
@@ -127,33 +152,103 @@ Route::middleware('auth')->group(function () {
         Route::put('/', [MagberController::class, 'update']);
         Route::get('/data', [MagberController::class, 'data'])->name('.data');
         Route::delete('/', [MagberController::class, 'destroy'])->name('.delete');
-        Route::get('/show', [MagberController::class,'show'])->name('.show');
+        Route::get('/show', [MagberController::class, 'show'])->name('.show');
     });
-    
+    Route::name('bendahara_maber')->prefix('/bendahara/maber/')->group(function () {
+        Route::get('/{id}', [MagberTransactionController::class, 'bendaharaIndex'])->name('.index');
+        Route::get('get/datas', [MagberTransactionController::class, 'bendahara'])->name('.data');
+        Route::get('show/{user}', [MagberTransactionController::class, 'show'])->name('.show');
+        Route::post('validasi', [MagberTransactionController::class, 'validasi'])->name('.validasi');
+    });
+
+    Route::name('verifikasi_maber')->prefix('/verifikasi/maber')->group(function () {
+        Route::get('/{maber}/{status}', [MagberTransactionController::class, 'verifikasiIndex'])->name('.index');
+        Route::get('/data', [MagberTransactionController::class, 'verifikasi'])->name('.data');
+        Route::get('/{maber}/show/{user}', [MagberTransactionController::class, 'verifikasi_show'])->name('.show');
+        Route::post('/validasi', [MagberTransactionController::class, 'verifikasi_validasi'])->name('.validasi');
+    });
 
     // end maber
-    
+
+    // ALb trans
+    Route::name('alb_event')->prefix('/alb_event')->group(function () {
+        Route::get('/', [AlbEventController::class, 'index'])->name('.index');
+        Route::post('/', [AlbEventController::class, 'store']);
+        Route::put('/', [AlbEventController::class, 'update']);
+        Route::get('/data', [AlbEventController::class, 'data'])->name('.data');
+        Route::delete('/', [AlbEventController::class, 'destroy'])->name('.delete');
+        Route::get('/show', [AlbEventController::class, 'show'])->name('.show');
+    });
+
+    Route::name('bendahara_alb')->prefix('/bendahara/alb/')->group(function () {
+        Route::get('/{id}', [AlbTransactionController::class, 'bendaharaIndex'])->name('.index');
+        Route::get('get/datas', [AlbTransactionController::class, 'bendahara'])->name('.data');
+        Route::get('show/{user}', [AlbTransactionController::class, 'show'])->name('.show');
+        Route::post('validasi', [AlbTransactionController::class, 'validasi'])->name('.validasi');
+        Route::put('edit', [AlbTransactionController::class, 'edit'])->name('.edit');
+    });
+
+    Route::name('verifikasi_alb')->prefix('/verifikasi/alb')->group(function () {
+        Route::get('/{id}', [AlbTransactionController::class, 'verifikasiIndex'])->name('.index');
+        Route::get('get/data', [AlbTransactionController::class, 'verifikasi'])->name('.data');
+        Route::get('show/{user}', [AlbTransactionController::class, 'verifikasi_show'])->name('.show');
+        Route::post('/validasi', [AlbTransactionController::class, 'verifikasi_validasi'])->name('.validasi');
+    });
+
+    // penilaian alb
+    Route::name('nilai')->prefix('nilai/alb')->group(function () {
+        Route::get('/{id}', [NilaiAlbController::class, 'index'])->name('.index');
+        Route::get('get/datas', [NilaiAlbController::class, 'data'])->name('.data');
+        Route::post('/', [NilaiAlbController::class, 'store']);
+    });
+
+    // end alb
+
+    //Laporan
+    Route::name('laporan')->prefix('/laporan')->group(function () {
+        Route::get('/transaksi', [LapTransaksiController::class, 'index'])->name('.transaksi');
+    });
+
+    Route::name('preview_riwayat')->prefix('/preview_riwayat')->group(function () {
+        Route::get('/', [PreviewTmmbAndRiwayatController::class, 'index'])->name('.index');
+        Route::get('get/datas', [PreviewTmmbAndRiwayatController::class, 'data'])->name('.data');
+        Route::get('/{id}', [PreviewTmmbAndRiwayatController::class, 'detail'])->name('.detail');
+    });
+
+    // end laporan
 
     /** begin FRONT PAGE */
-        //profile
-        Route::name('profile_page')->prefix('/profile_page')->group(function () {
-            Route::get('/', [FrontPageProfileController::class, 'index'])->name('.index');
-            Route::post('/', [FrontPageProfileController::class, 'store']);
-            Route::put('/', [FrontPageProfileController::class, 'update']);
-            Route::get('/data', [FrontPageProfileController::class, 'data'])->name('.data');
-            Route::delete('/', [FrontPageProfileController::class, 'destroy'])->name('.delete');
-            Route::get('/show', [FrontPageProfileController::class,'show'])->name('.show');
-        });
+    //profile
+    Route::name('profile_page')->prefix('/profile_page')->group(function () {
+        Route::get('/', [FrontPageProfileController::class, 'index'])->name('.index');
+        Route::post('/', [FrontPageProfileController::class, 'store']);
+        Route::put('/', [FrontPageProfileController::class, 'update']);
+        Route::get('/data', [FrontPageProfileController::class, 'data'])->name('.data');
+        Route::delete('/', [FrontPageProfileController::class, 'destroy'])->name('.delete');
+        Route::get('/show', [FrontPageProfileController::class, 'show'])->name('.show');
+    });
 
     /** end FRONT PAGE */
 });
 //pendaftaran maber
-Route::get('/event_magber/{id}/', [MagberController::class,'eventMagber'])->name('event_magber');
-Route::post('/event_magber', [MagberController::class,'eventMagberStore'])->name('event_magber_store');
-Route::post('/event_magber_check', [MagberController::class,'eventMagberCheck'])->name('event_magber.check');
-Route::get('/event_magber_success/{id}', [MagberController::class,'eventMagberSuccess'])->name('event_magber.success');
+Route::get('/event_magber/{id}/', [MagberController::class, 'eventMagber'])->name('event_magber');
+Route::post('/event_magber', [MagberController::class, 'eventMagberStore'])->name('event_magber_store');
+Route::post('/event_magber_check', [MagberController::class, 'eventMagberCheck'])->name('event_magber.check');
+Route::get('/event_magber_success/{id}', [MagberController::class, 'eventMagberSuccess'])->name('event_magber.success');
+Route::get('maber/card/{id}', [MagberController::class, 'eventMagberIdCard'])->name('magber.id_card');
 
+//pendaftaran alb
+Route::get('/event_alb/{id}/daftar', [AlbEventController::class, 'eventAlb'])->name('event_alb');
+Route::post('/event_alb/register', [AlbEventController::class, 'registerAlb'])->name('event_alb.register');
+Route::get('/event_alb_success/{id}', [AlbEventController::class, 'eventAlbSuccess'])->name('event_alb.success');
+Route::get('alb/card/{id}', [AlbEventController::class, 'eventAlbIdCard'])->name('event_alb.id_card');
 
 // Route::view('/table', 'components.table');
 // Route::view('/form', 'components.form');
 // Route::view('/register', 'components.register');
+
+// begin Page depan
+Route::name('detail')->prefix('/detail')->group(function () {
+    Route::get('/{id}', [FrontPageProfileController::class, 'detail'])->name('.detail');
+});
+// end page

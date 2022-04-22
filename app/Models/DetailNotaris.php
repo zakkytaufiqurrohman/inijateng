@@ -21,5 +21,6 @@ class DetailNotaris extends Model
         'sk_ppt',
         'no_sk_notaris',
         'asal_pengda',
+        'scan_npwp',
     ];
 }

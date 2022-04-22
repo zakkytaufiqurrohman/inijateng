@@ -15,8 +15,11 @@
                             <tr>
                                 <th class="text-center"> No</th>
                                 <th>Judul</th>
-                                <th>Tahun</th>
+                                <th>Banner</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                                 <th>Keterangan</th>
+                                <th>Link Group</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -50,12 +53,24 @@
                         <input type="text" class="form-control" name="judul" id="judul" placeholder="Judul Maber" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Tahun</label>
-                        <input type="number" class="form-control" name="tahun" id="tahun" placeholder="2022" autocomplete="off">
+                        <label for="bukti_bayar">Banner</label>
+                        <input id="banner" type="file" class="form-control" name="banner" placeholder="Banner">
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date</label>
+                        <input type="text" class="form-control datepicker" name="start_date" id="start_date" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="text" class="form-control datepicker" name="end_date" id="end_date" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Keterangan</label>
                         <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Keterangan" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Group</label>
+                        <input type="text" class="form-control" name="link_group" id="link_group" placeholder="link group wa" autocomplete="off">
                     </div>
                    
                 </div>
@@ -89,8 +104,16 @@
                         <input type="text" class="form-control" name="judul" id="update-judul" placeholder="Judul" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Tahun</label>
-                        <input type="number" class="form-control" name="tahun" id="update-tahun" placeholder="tahun" autocomplete="off">
+                        <label>Start Date</label>
+                        <input type="text" class="form-control datepicker" name="start_date" id="start_date" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="text" class="form-control datepicker" name="end_date" id="end_date" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="bukti_bayar">Banner</label>
+                        <input id="banner-edit" type="file" class="form-control" name="banner" placeholder="Banner">
                     </div>
                     <div class="form-group">
                         <label>Status</label>
@@ -102,6 +125,10 @@
                     <div class="form-group">
                         <label>Keterangan</label>
                         <input type="text" class="form-control" name="keterangan" id="update-keterangan" placeholder="Keterangan" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Group</label>
+                        <input type="text" class="form-control" name="link_group" id="update-keterangan" placeholder="link group wa" autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -120,18 +147,6 @@
 <script>
     $(function() {
         getData();
-
-        // preven add
-        $("#form-add").on("submit", function(e) {
-            e.preventDefault();
-            AddData();
-        });
-
-        // preven update
-        $("#form-update").on("submit", function(e) {
-                e.preventDefault();
-                update();
-        });
     })
 
     // get data
@@ -152,11 +167,23 @@
                     "width": "20%"
                 },
                 {
-                    data: 'year',
+                    data: 'banner',
+                    "width": "20%"
+                },
+                {
+                    data: 'start_date',
+                    "width": "20%"
+                },
+                {
+                    data: 'end_date',
                     "width": "20%"
                 },
                 {
                     data: 'keterangan',
+                    "width": "20%"
+                },
+                {
+                    data: 'link_group',
                     "width": "20%"
                 },
                 {
@@ -182,7 +209,7 @@
             form.find('.form-group .is-invalid').removeClass('is-invalid');
     }
 
-    function AddData() {
+    $("#form-add").on("submit", function(e) {
         var form=$("body");
             form.find('.invalid-feedback').remove();
             form.find('.form-group .is-invalid').removeClass('is-invalid');
@@ -191,7 +218,9 @@
             url: "{{ route('maber') }}",
             type: "POST",
             dataType: "json",
-            data: formData,
+            processData: false,
+            contentType: false,
+            data:  new FormData(this),
             beforeSend() {
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
@@ -221,7 +250,7 @@
                 })
             }
         });
-    }
+    })
 
     // edit show/asign data
     function edit(object) {
@@ -252,7 +281,9 @@
             success(result) {
                 $('#modal-edit').find("input[name='id']").val(result['data']['id']);
                 $('#modal-edit').find("input[name='judul']").val(result['data']['judul']);
-                $('#modal-edit').find("input[name='tahun']").val(result['data']['year']);
+                $('#modal-edit').find("input[name='start_date']").val(result['data']['start_date']);
+                $('#modal-edit').find("input[name='end_date']").val(result['data']['end_date']);
+                $('#modal-edit').find("input[name='link_group']").val(result['data']['link_group']);
                 $('#modal-edit').find("input[name='keterangan']").val(result['data']['keterangan']);
                 $('#modal-edit').find("select[name='status']").val(result['data']['status']).trigger('change');
             },
@@ -265,17 +296,19 @@
     }
 
     // update
-    function update() {
+    $("#form-update").on("submit", function(e) {
         var form=$("body");
             form.find('.invalid-feedback').remove();
             form.find('.form-group').removeClass('is-invalid');
-        var formData = $("#form-update").serialize();
+        // var formData = $("#form-update").serialize();
 
         $.ajax({
             url: "{{ route('maber') }}",
             type: "POST",
             dataType: "json",
-            data: formData,
+            processData: false,
+            contentType: false,
+            data:  new FormData(this),
             beforeSend() {
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
@@ -305,7 +338,7 @@
                 })
             }
         });
-    }
+    })
 
 
     function Delete(object) {

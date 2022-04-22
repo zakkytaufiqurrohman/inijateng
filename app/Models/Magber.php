@@ -12,6 +12,9 @@ class Magber extends Model
         'judul',
         'keterangan',
         'status',
-        'year'
+        'start_date',
+        'end_date',
+        'link_group',
+        'banner'
     ];
 }

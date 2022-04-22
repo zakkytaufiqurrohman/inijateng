@@ -12,6 +12,7 @@ class DetailAlb extends Model
     protected $table = 'detail_alb';
 
     protected $fillable = [
+        'alamat',
         'user_id',
         'no_alb',
         's1',

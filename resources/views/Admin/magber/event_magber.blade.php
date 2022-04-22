@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Register &mdash; IPPAT</title>
+    <title>Register &mdash; INI Jateng</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="simple-footer">
-                        Copyright &copy;2021 - {{date('Y')}} IPPAT
+                            Copyright {{date('Y')}} © Ikatan Notaris Indonesia Pengurus Wilayah Jawa Tengah. All rights reserved</a>
                         </div>
                     </div>
                 </div>
@@ -150,6 +150,9 @@
                 data: formData,
                 beforeSend() {
                     $("#btn-register").addClass("btn-progress");
+                    // $("#semester-register option:not(:selected)").prop("disabled", true);
+
+                    // $("#semester-register").attr('disabled', 'disabled');
                 },
                 complete(){
                     $("#btn-register").removeClass("btn-progress");
@@ -180,7 +183,7 @@
                         })
                         
                     }
-                    else{
+                    if(result.status =='success'){
                         $('#form-search').addClass('d-none');
                         $('#form-register').removeClass('d-none');
                         $('#nik').attr('readonly',true);
@@ -208,7 +211,9 @@
         }
 
         $("#form-register").on("submit", function(e) {
-
+            var form=$("body");
+            form.find('.invalid-feedback').remove();
+            form.find('.form-group').removeClass('is-invalid');
             $.ajax({
                 url: "{{ route('event_magber_store') }}",
                 type: "POST",
@@ -225,14 +230,19 @@
                 success(result){
                     $("#form-register")[0].reset();
                                         
-                    iziToast.success({
-                        title: result.status,
-                        message: result.message,
-                        position: 'topRight'
-                    });
-                    var url = '{{ route("event_magber.success", ":id") }}';
-                    url = url.replace(':id', result.data);
-                    to(url)                    
+                    if(result.status != 'success'){
+                        iziToast.error({
+                            title: result.status,
+                            message: result.message,
+                            position: 'topRight'
+                        });
+                    }
+                    else {
+                        var url = '{{ route("event_magber.success", ":id") }}';
+                        url = url.replace(':id', result.data);
+                        to(url)  
+                    }
+                                     
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');

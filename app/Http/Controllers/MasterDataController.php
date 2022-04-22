@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use DB;
 use Exception;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -13,18 +14,22 @@ class MasterDataController extends Controller
 {
     function __construct()
     {
-        $this->middleware('role:admin');
+        // $this->middleware('role:admin');
+        $this->middleware('permission:all');
     }
 
     public function index()
     {
         $roles = Role::all();
-        return view('master_data.index',compact('roles'));
+        return view('master_data.index', compact('roles'));
     }
 
-    public function data()
+    public function data(Request $request)
     {
         $data = User::query();
+        if ($request->id) {
+            $data->where('status_anggota', $request->id);
+        }
         $data->orderBy('id', 'DESC');
         return DataTables::eloquent($data)
             ->addColumn('action', function ($data) {
@@ -35,33 +40,42 @@ class MasterDataController extends Controller
 
                 return $action;
             })
-            ->addColumn('barcode',function ($data) {
-                if($data->status_anggota == 'notaris'){
-                   $kode = $data->nik;
-                   $kode = $this->base64url_encode($kode);
-                   $kode =  config('app.url').'/barcode/'.$kode;
-                   // generate barcode
-                   $images = \DNS2D::getBarcodePNGPath($kode, 'QRCODE',5,5);
-                   // get image patch
-                   $nameImage = $images;
-                   $nameImage = str_replace("/barcode", "", $nameImage);
-                   $url= asset("barcode/$nameImage");
-   
-                   $barcode = '';
-                   $barcode .= "<a href='master_data/download$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
-   
-                   return $barcode;
+            ->addColumn('barcode', function ($data) {
+                if ($data->status_anggota == 'notaris') {
+                    $kode = $data->nik;
+                    $kode = $this->base64url_encode($kode);
+                    $kode =  config('app.url') . '/barcode/' . $kode;
+                    // generate barcode
+                    $images = \DNS2D::getBarcodePNGPath($kode, 'QRCODE', 5, 5);
+                    // get image patch
+                    $nameImage = $images;
+                    $nameImage = str_replace("/barcode", "", $nameImage);
+                    $url = asset("barcode/$nameImage");
 
+                    $barcode = '';
+                    $barcode .= "<a href='master_data/download$nameImage'><img src=" . $url . " border='0' width='100' class='img' align='center' />'</a>";
+
+                    return $barcode;
                 }
             })
-            ->editColumn('roles', function($row) {
+            ->editColumn('roles', function ($row) {
                 $roles = '';
-                if(!empty($row->getRoleNames())){
-                    foreach($row->getRoleNames() as $role){
+                if (!empty($row->getRoleNames())) {
+                    foreach ($row->getRoleNames() as $role) {
                         $roles .= "<label class='badge badge-primary'>{$role}</label>&nbsp;";
                     }
                 }
                 return $roles;
+            })
+            ->addColumn('status', function ($data) {
+                if ($data->status_anggota == 'notaris') {
+                    $status = "<label class='badge badge-warning'>Belum Lengkap</label>&nbsp;";
+                    $datas = DB::table('v_notaris_count')->where('id', $data->id)->first();
+                    if ($datas->empty_count == 0) {
+                        $status = "<label class='badge badge-success'>Sudah Lengkap</label>&nbsp;";
+                    }
+                    return $status;
+                }
             })
             ->escapeColumns([])
             ->addIndexColumn()
@@ -103,6 +117,7 @@ class MasterDataController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -132,9 +147,9 @@ class MasterDataController extends Controller
     {
         $id = $request->id;
         $this->validate($request, [
-            'name' => 'required|unique:users,name,'.$id,
-            'nik' => 'required|digits:16|unique:users,nik,'.$id,
-            'email' => 'required|unique:users,email,'.$id,
+            'name' => 'required|unique:users,name,' . $id,
+            'nik' => 'required|digits:16|unique:users,nik,' . $id,
+            'email' => 'required|unique:users,email,' . $id,
             'status_anggota' => 'required',
             'roleEdit' => 'required',
         ], [
@@ -162,8 +177,7 @@ class MasterDataController extends Controller
 
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil Mengubah Permission']);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
@@ -192,7 +206,7 @@ class MasterDataController extends Controller
 
     public function download($filepath)
     {
-        $url=  public_path(). '/barcode/'. $filepath;
+        $url =  public_path() . '/barcode/' . $filepath;
         return \Response::download($url);
     }
 
@@ -203,6 +217,6 @@ class MasterDataController extends Controller
 
     function base64url_decode($b64Text)
     {
-        return base64_decode(strtr($b64Text, '-_,','+='));
+        return base64_decode(strtr($b64Text, '-_,', '+='));
     }
 }

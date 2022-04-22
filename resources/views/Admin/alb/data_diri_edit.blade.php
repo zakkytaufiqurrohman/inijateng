@@ -33,8 +33,12 @@
                                 <input id="bukti_terdaftar" type="file" class="custom-file-input" name="bukti_terdaftar" >
                                 <label class="custom-file-label text-truncate" for="bukti_terdaftar">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
-                        </div> 
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
+                        </div>
+                        <div class="form-group col-md-12 col-lg-12">
+                            <label for="alamat">Alamat</label>
+                            <input id="alamat" type="text" class="form-control" name="alamat"  value="{{ $user->alamat }}" >
+                        </div>
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="s1">S1</label>
                             <input id="s1" type="text" class="form-control" name="s1"  value="{{ $user->s1 }}" placeholder="Contoh : Universitas Diponegoro"  >
@@ -57,7 +61,7 @@
                                 <input id="ijazah_s1" type="file" class="custom-file-input" name="ijazah_s1" >
                                 <label class="custom-file-label text-truncate" for="ijazah_s1">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div> 
                         <div class="form-group col-md-12 col-lg-6">
                             <label for="ijazah_s2">Ijazah S2</label>
@@ -65,7 +69,7 @@
                                 <input id="ijazah_s2" type="file" class="custom-file-input" name="ijazah_s2" >
                                 <label class="custom-file-label text-truncate" for="ijazah_s2">Choose file</label>
                             </div>
-                            <span>*Kosongi apabila data tidak ingin diubah (Format jpg, png)</span>
+                            <span>*Kosongi apabila data tidak ingin diubah, Format jpg/png, Ukuran Maximal 2MB</span>
                         </div>
                     </div>
                 </div>

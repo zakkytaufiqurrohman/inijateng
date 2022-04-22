@@ -3,7 +3,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <head>
-<title>IPPAT</title>
+<title>INI Jateng</title>
 </head>
 <style>
     body{
@@ -156,7 +156,7 @@
                                                 <label>No. SK Kenotariatan</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$data->sk_notaris}}</p>
+                                                <p>{{$data->no_sk_notaris}}</p>
                                             </div>
                                         </div>
                                         <div class="row">

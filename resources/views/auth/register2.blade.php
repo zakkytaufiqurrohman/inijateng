@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Register &mdash; IPPAT</title>
+    <title>Register &mdash; INI Jateng</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -35,6 +35,15 @@
                             <div class="card-header">
                                 <h4>Pengwil Jateng Ikatan Notaris Indonesia</h4>
                             </div>
+                            @if ($message = Session::get('success'))
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="alert alert-success alert-block">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
 
                             <div class="card-body">
                                 <form id='form-search' action="javascript:void(0)" method="POST">
@@ -49,6 +58,9 @@
                                         <button type="submit" id='btn-search' class="btn btn-primary btn-lg btn-block">
                                             Cari
                                         </button>
+                                        <div class="mt-5 text-muted text-center">
+                                            Sudah punya akun? <a href="{{ route('login') }}">Login</a>
+                                        </div>
                                     </div>
                                 </form>
                                 <form id='form-register' class='d-none' action="javascript:void(0)" method="POST">
@@ -63,33 +75,47 @@
                                         <div class="form-group col-12">
                                             <label for="email">Email</label>
                                             <input id="email" type="text" class="form-control" name="email" placeholder="Email">
-                                            <input id="user_id" type="hidden" class="form-control" name="user_id" >
+                                            <input id="user_id" type="hidden" class="form-control" name="user_id">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="password" class="d-block">Password   <div class="far fa-eye" id="togglePassword" style="margin-left: 0px; cursor: pointer;"></div></label>
+                                            <label for="password" class="d-block">Password <div class="far fa-eye" id="togglePassword" style="margin-left: 0px; cursor: pointer;"></div></label>
                                             <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password" autocomplete="off">
                                             <div id="pwindicator" class="pwindicator">
-                                            <div class="bar"></div>
+                                                <div class="bar"></div>
                                                 <div class="label"></div>
                                             </div>
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="password_confirm" class="d-block">Konfirmasi Password <div class="far fa-eye" id="togglePassword1" style="margin-left: 0px; cursor: pointer;"></div></label>
-                                            <input id="password_confirm" type="password" class="form-control" name="password_confirm"  autocomplete="off">
+                                            <input id="password_confirm" type="password" class="form-control" name="password_confirm" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" id='btn-register' class="btn btn-primary btn-lg btn-block">
                                             Daftar
                                         </button>
+                                        <div class="mt-5 text-muted text-center">
+                                            Sudah punya akun? <a href="{{ route('login') }}">Login</a>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
+                        <div class="container mt-3">
+                            <div class="row justify-content-center">
+                                <div class="card text-center shadow">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-warning">Pengumuman!</h5>
+                                        <p class="card-text">Apabila Nik Belum Terdaftar / Tidak mengikuti Magang Bersama Sebelumnya di Solo, silahkan daftarkan data terlebih dahulu!</p>
+                                        <a href="/register/inijateng" class="btn btn-primary">Daftarkan Data</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="simple-footer">
-                        Copyright &copy;2021 - {{date('Y')}} IPPAT
+                            Copyright {{date('Y')}} © Ikatan Notaris Indonesia Pengurus Wilayah Jawa Tengah. All rights reserved</a>
                         </div>
                     </div>
                 </div>
@@ -117,8 +143,8 @@
     <script>
         const togglePassword = document.querySelector('#togglePassword');
         const password = document.querySelector('#password');
-        
-        togglePassword.addEventListener('click', function (e) {
+
+        togglePassword.addEventListener('click', function(e) {
             // toggle the type attribute
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
             password.setAttribute('type', type);
@@ -129,8 +155,8 @@
         // konfirmasi
         const togglePassword1 = document.querySelector('#togglePassword1');
         const password1 = document.querySelector('#password_confirm');
-        
-        togglePassword1.addEventListener('click', function (e) {
+
+        togglePassword1.addEventListener('click', function(e) {
             // toggle the type attribute
             const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
             password1.setAttribute('type', type);
@@ -152,11 +178,11 @@
             });
         });
 
-        function to(url){
+        function to(url) {
             window.location.href = url;
         }
 
-        function searchUser(){
+        function searchUser() {
             var formData = $("#form-search").serialize();
 
             $.ajax({
@@ -170,26 +196,26 @@
                     $('input').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
                 },
-                complete(){
+                complete() {
                     $("input").removeAttr('disabled', 'disabled');
                     $("button").removeAttr('disabled', 'disabled');
                 },
-                success(result){
+                success(result) {
                     mess = result.message;
-                    if(result.status!='success'){
-                        $("input[name='nik']").addClass('is-invalid').after('<div class="invalid-feedback">'+mess+'</div>')
-                    }else{
-                        if(mess.is_check!=1){
+                    if (result.status != 'success') {
+                        $("input[name='nik']").addClass('is-invalid').after('<div class="invalid-feedback">' + mess + '</div>')
+                    } else {
+                        if (mess.is_check != 1) {
                             $('#btn-form-search').addClass('d-none');
                             $('#form-register').removeClass('d-none');
-                            $('#nik').attr('readonly',true);
+                            $('#nik').attr('readonly', true);
 
                             $('#user_id').val(mess.id);
                             $('#email').val(mess.email);
                             $('#nama').val(mess.name);
                             $('#password').val('');
                             $('#password_confirm').val('');
-                        }else{
+                        } else {
                             to("{{ route('login') }}");
                         }
                     }
@@ -202,15 +228,15 @@
                         position: 'topRight'
                     });
                 },
-                error:function (response){
-                    $.each(response.responseJSON.errors,function(key,value){
-                        $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                error: function(response) {
+                    $.each(response.responseJSON.errors, function(key, value) {
+                        $("input[name=" + key + "]").addClass('is-invalid').after('<div class="invalid-feedback">' + value + '</div>');
                     })
                 }
             });
         }
 
-        function register(){
+        function register() {
             var formData = $("#form-register").serialize();
 
             $.ajax({
@@ -225,21 +251,21 @@
                     $('input').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
                 },
-                complete(){
+                complete() {
                     $("input").removeAttr('disabled', 'disabled');
                     $("button").removeAttr('disabled', 'disabled');
                     $("select").removeAttr('disabled', 'disabled');
                 },
-                success(result){
+                success(result) {
                     $("#form-register")[0].reset();
-                                        
+
                     iziToast.success({
                         title: result.status,
                         message: result.message,
                         position: 'topRight'
                     });
 
-                    to('{{ route("dashboard") }}')                    
+                    to('{{ route("dashboard") }}')
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
@@ -249,9 +275,9 @@
                         position: 'topRight'
                     });
                 },
-                error:function (response){
-                    $.each(response.responseJSON.errors,function(key,value){
-                        $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                error: function(response) {
+                    $.each(response.responseJSON.errors, function(key, value) {
+                        $("input[name=" + key + "]").addClass('is-invalid').after('<div class="invalid-feedback">' + value + '</div>');
                     })
                 }
             });

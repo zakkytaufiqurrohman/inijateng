@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\PasswordReset;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\Province;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -60,5 +62,25 @@ class User extends Authenticatable
     public function detail_notaris()
     {
         return $this->hasOne(DetailNotaris::class,'user_id','id');
+    }
+
+    public function v_alb()
+    {
+        return $this->hasOne(VAlb::class,'id','id');
+    }
+
+    public function kotas()
+    {
+        return $this->belongsTo(City::class,'kota','id');
+    }
+
+    public function provincies()
+    {
+        return $this->belongsTo(Province::class,'provinsi','id');
+    }
+
+    public function lahir()
+    {
+        return $this->belongsTo(City::class,'tempat_lahir','id');
     }
 }
