@@ -32,7 +32,14 @@
                 <a href="{{ route('notaris.data_diri') }}" class="nav-link"><i class="fas fa-address-book"></i><span>Data Diri</span></a>
             </li>
             @endrole
+            <?php
+                use App\Models\Magber;
+                $magbers = Magber::where('status','1')->first();
+            ?>
             @role('alb')
+            <li class="nav-item">
+                <a href="{{route('event_magber',$magbers->id)}}" class="nav-link"><i class="fas fa-registered"></i><span>Daftar Magber</span></a>
+            </li>
             <li class="nav-item {{ (request()->is('alb/data_diri*')) ? 'active' : '' }}">
                 <a href="{{ route('alb.data_diri') }}" class="nav-link"><i class="fas fa-address-book"></i><span>Data Diri</span></a>
             </li>
