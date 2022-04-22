@@ -31,6 +31,6 @@ class RegisterMaber extends Mailable
     {
         return $this->from('support@inijawatengah.com')
                    ->view('mail.register_maber')
-                   ->subject('Pendaftaran Maber (No Repplay)');
+                   ->subject('Pendaftaran Mabers (No Repplay)');
     }
 }
