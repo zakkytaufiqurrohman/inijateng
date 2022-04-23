@@ -26,7 +26,7 @@
 
     <div class="container mt-3">
         <div class="row justify-content-center">
-            <div class="col-5">
+            <div class="col-sm-5">
                 <div class="card shadow">
                     <div class="login-brand">
                         <img src="{{ asset('assets/img/logo.png') }}" alt="logo" width="70" class="shadow-light rounded-circle">
