@@ -9,6 +9,7 @@
 </style>
 <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
 <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
+<link rel="stylesheet" href="{{ asset('node_modules/chocolat/dist/css/chocolat.css') }}">
 
 @endsection
 @section('body')
@@ -88,12 +89,17 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <img src="{{asset('upload/foto/'.$data->user->foto)}}" alt="foto" width="100%" title="" height="400px" ></img>
                 </div>
                 <div class="col-md-6">
                     <img src="{{asset('upload/bukti_bayar_maber/'.$data->bukti_bayar)}}"  alt="butki" width="100%"  height="400px" title=""></a>
+                </div> -->
+                <div class="gallery gallery-fw" data-item-height="300">
+                    <div class="gallery-item col-lg-5 col-md-12 col-sm-12" data-image="{{ asset('upload/foto/'.$data->user->foto) }}" data-title="Foto" alt='Foto'></div>
+                    <div class="gallery-item col-lg-5 col-md-12 col-sm-12" data-image="{{ asset('upload/bukti_bayar_maber/'.$data->bukti_bayar) }}" data-title="bukti bayar" alt='bukti bayar'></div>
                 </div>
+            </div>
         </div>
         <hr>
         <?php
@@ -119,6 +125,7 @@
 @endsection
 @section('bottom-script')
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+<script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 <script>
     function validasi(id,status){
         $.ajax({
