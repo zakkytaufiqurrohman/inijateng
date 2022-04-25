@@ -24,6 +24,13 @@
                                 <th>Nama</th>
                                 <th>Nik</th>
                                 <th>Wa</th>
+                                <th>Alamat</th>
+                                <th>Gelar S1</th>
+                                <th>Gelar S2</th>
+                                <th>Tahun Mkn</th>
+                                <th>Nilai Tertulis</th>
+                                <th>Nilai Wawancara</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -123,9 +130,37 @@
                     "width": "20%"
                 },
                 {
+                    data: 'alamat',
+                    "width": "20%"
+                },
+                {
+                    data: 's1',
+                    "width": "20%"
+                },
+                {
+                    data: 's2',
+                    "width": "20%"
+                },
+                {
+                    data: 'tahun_s2',
+                    "width": "20%"
+                },
+                {
+                    data: 'nilai_t',
+                    "width": "20%"
+                },
+                {
+                    data: 'nilai_w',
+                    "width": "20%"
+                },
+                {
+                    data: 'status',
+                    "width": "20%"
+                },
+                {
                     data: 'action',
                     "width": "20%"
-                }
+                },
             ],
             fixedColumns: true,
             order: [

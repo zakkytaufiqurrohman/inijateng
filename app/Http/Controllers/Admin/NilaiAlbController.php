@@ -32,7 +32,7 @@ class NilaiAlbController extends Controller
         }
         if($request->status == 1){
             $data = AlbTransaction::leftJoin('nilai_albs','nilai_albs.alb_transaction_id','alb_transactions.id')
-            ->select(['alb_transactions.*','nilai_albs.nilai_wawancara'])
+            ->select(['alb_transactions.*','nilai_albs.nilai_wawancara','nilai_albs.nilai_tertulis','nilai_albs.status_lulus'])
             ->whereNotNull('nilai_albs.nilai_wawancara')
             ->where('bendahara_status','1')
             ->where('verifikator_status','1')
@@ -47,7 +47,10 @@ class NilaiAlbController extends Controller
                     $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id}' onclick='nilai(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 }
                 else {
-                    
+                    if($data->status_lulus) {
+                        $link = route('sertifikat_alb',$data->id);
+                        $action .= "<a href='$link' class='btn btn-icon btn-primary'><i class='fa fa-print'></i>Setifikat</a>&nbsp;";
+                    }
                 }
 
                 return $action;
@@ -63,9 +66,16 @@ class NilaiAlbController extends Controller
                 return $data->wa;
             })
             ->addColumn('name', function ($data) {
-
-
                 return $data->nama;
+            })
+            ->addColumn('nilai_t', function ($data) {
+                return $data->nilai_tertulis;
+            })
+            ->addColumn('nilai_w', function ($data) {
+                return $data->nilai_wawancara;
+            })
+            ->addColumn('status', function ($data) {
+                return $data->status_lulus;
             })
             ->escapeColumns([])
             ->addIndexColumn()

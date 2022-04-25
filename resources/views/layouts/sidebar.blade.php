@@ -130,7 +130,7 @@
             @endif
             @if(auth()->user()->can('all'))
             <li class="nav-item dropdown {{ (request()->is('nilai/alb*')) ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Penilaian</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-eye-dropper"></i><span>Penilaian</span></a>
                 <ul class="dropdown-menu">
                   
                     <li class="{{ (request()->is('nilai/alb/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('nilai.index',0) }}">Belum Dinilai</a></li>

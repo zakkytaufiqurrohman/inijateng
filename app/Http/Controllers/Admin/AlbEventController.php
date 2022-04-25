@@ -385,4 +385,9 @@ class AlbEventController extends Controller
         
     }
 
+    public function sertifikat($id)
+    {
+        return view('Admin.alb.sertifikat',compact('id'));
+    }
+
 }
