@@ -9,6 +9,7 @@
 </style>
 <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
 <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
+<link rel="stylesheet" href="{{ asset('node_modules/chocolat/dist/css/chocolat.css') }}">
 
 @endsection
 @section('body')
@@ -48,12 +49,11 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-md-6">
-                    <img src="{{asset('upload/alb_register/'.$data->foto)}}" class="img-fluid" title=""></a>
+                <div class="gallery gallery-fw" data-item-height="300">
+                    <div class="gallery-item col-lg-5 col-md-12 col-sm-12" data-image="{{ asset('upload/alb_register/'.$data->foto) }}" data-title="Foto" alt='Foto'></div>
+                    <div class="gallery-item col-lg-5 col-md-12 col-sm-12" data-image="{{ asset('upload/alb_register/'.$data->bukti_bayar) }}" data-title="bukti bayar" alt='bukti bayar'></div>
                 </div>
-                <div class="col-md-6">
-                    <img src="{{asset('upload/alb_register/'.$data->bukti_bayar)}}"  alt="butki" class="img-fluid" title=""></a>
-                </div>
+            </div>
         </div>
         <hr>
         <?php
@@ -107,6 +107,8 @@
 @endsection
 @section('bottom-script')
 <script src="{{ asset('node_modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+<script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+
 <script>
     $("#form-update").on("submit", function(e) {
                 e.preventDefault();

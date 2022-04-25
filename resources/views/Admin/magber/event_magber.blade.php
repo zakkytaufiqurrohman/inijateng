@@ -136,11 +136,11 @@
             });
         });
 
-        function to(url){
+        function to(url) {
             window.location.href = url;
         }
 
-        function searchUser(){
+        function searchUser() {
             var formData = $("#form-search").serialize();
 
             $.ajax({
@@ -154,26 +154,26 @@
 
                     // $("#semester-register").attr('disabled', 'disabled');
                 },
-                complete(){
+                complete() {
                     $("#btn-register").removeClass("btn-progress");
                 },
-                success(result){
+                success(result) {
                     mess = result.message;
-                    if(result.status =='error'){
+                    if (result.status == 'error') {
                         swal({
-                            title: 'Data Belum Lengkap',
-                            text: 'Silahkan Login dan lengkapi data terlebih dahulu',
-                            icon: 'error',
-                            buttons: true,
-                            dangerMode: true,
-                        })
-                        .then((willDelete) => {
-                            if (willDelete) {
-                                to('/login');
-                            }
-                        });
+                                title: 'Data Belum Lengkap',
+                                text: 'Silahkan Login dan lengkapi data terlebih dahulu',
+                                icon: 'error',
+                                buttons: true,
+                                dangerMode: true,
+                            })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    to('/register');
+                                }
+                            });
                     }
-                    if(result.status=='ready'){
+                    if (result.status == 'ready') {
                         swal({
                             title: 'Sudah Terdaftar',
                             text: 'Anda Sudah Terdaftar Di Event Ini Silahkan Cek Email',
@@ -181,18 +181,18 @@
                             buttons: true,
                             dangerMode: true,
                         })
-                        
+
                     }
-                    if(result.status =='success'){
+                    if (result.status == 'success') {
                         $('#form-search').addClass('d-none');
                         $('#form-register').removeClass('d-none');
-                        $('#nik').attr('readonly',true);
+                        $('#nik').attr('readonly', true);
 
                         $('#user_id').val(mess.id);
-                        $('#nik-register').val( $("#nik").val());
-                        $('#semester-register').val( $("#semester").val()).trigger('change');
+                        $('#nik-register').val($("#nik").val());
+                        $('#semester-register').val($("#semester").val()).trigger('change');
                     }
-                    
+
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
@@ -202,16 +202,16 @@
                         position: 'topRight'
                     });
                 },
-                error:function (response){
-                    $.each(response.responseJSON.errors,function(key,value){
-                        $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                error: function(response) {
+                    $.each(response.responseJSON.errors, function(key, value) {
+                        $("input[name=" + key + "]").addClass('is-invalid').after('<div class="invalid-feedback">' + value + '</div>');
                     })
                 }
             });
         }
 
         $("#form-register").on("submit", function(e) {
-            var form=$("body");
+            var form = $("body");
             form.find('.invalid-feedback').remove();
             form.find('.form-group').removeClass('is-invalid');
             $.ajax({
@@ -220,29 +220,28 @@
                 dataType: "json",
                 processData: false,
                 contentType: false,
-                data:  new FormData(this),
+                data: new FormData(this),
                 beforeSend() {
                     $("#btn-register").addClass("btn-progress");
                 },
-                complete(){
+                complete() {
                     $("#btn-register").removeClass("btn-progress");
                 },
-                success(result){
+                success(result) {
                     $("#form-register")[0].reset();
-                                        
-                    if(result.status != 'success'){
+
+                    if (result.status != 'success') {
                         iziToast.error({
                             title: result.status,
                             message: result.message,
                             position: 'topRight'
                         });
-                    }
-                    else {
+                    } else {
                         var url = '{{ route("event_magber.success", ":id") }}';
                         url = url.replace(':id', result.data);
-                        to(url)  
+                        to(url)
                     }
-                                     
+
                 },
                 error(xhr, status, error) {
                     var err = eval('(' + xhr.responseText + ')');
@@ -252,9 +251,9 @@
                         position: 'topRight'
                     });
                 },
-                error:function (response){
-                    $.each(response.responseJSON.errors,function(key,value){
-                        $("input[name="+key+"]").addClass('is-invalid').after('<div class="invalid-feedback">'+value+'</div>');
+                error: function(response) {
+                    $.each(response.responseJSON.errors, function(key, value) {
+                        $("input[name=" + key + "]").addClass('is-invalid').after('<div class="invalid-feedback">' + value + '</div>');
                     })
                 }
             });
