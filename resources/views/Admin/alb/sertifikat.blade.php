@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Sertifikat A4</title>
+    <title>Sertifikat</title>
     <style>
         body {
             width: 230mm;
@@ -26,7 +26,7 @@
 
         .main-page {
             width: 210mm;
-            min-height: 297mm;
+            /* min-height: 297mm; */
             margin: 10mm auto;
             background: white;
             /* background-image: url('/assets/img/logo.png'); */
@@ -47,8 +47,14 @@
             opacity: 0.1;
             position: absolute;
             top: 50%;
-            margin-left: 10%;
+            margin-left: 11%;
             font-size: 18px;
+        }
+        p* {
+            font-family: "Times New Roman" !important;
+        }
+        hr {
+            border-top: solid 1px #000 !important;
         }
 
         .sub-page {
@@ -58,16 +64,16 @@
 
         @page {
             size: A4;
-            margin: 0;
+            height: 210;
+            /* margin: 0; */
         }
 
         @media print {
 
-            html,
-            body {
-                width: 210mm;
-                height: 297mm;
-            }
+           .container{
+                /* margin-left: 10%; */
+                width: initial;
+           }
 
             .main-page {
                 margin: 0;
@@ -82,9 +88,48 @@
             .demo-bg {
                 opacity: 0.1;
                 position: absolute;
-                /* top: 50%; */
-                /* margin-left: 10%; */
+                top: 30%;
+                margin-left: 25%;
                 font-size: 18px;
+            }
+            .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+                    float: left;
+            }
+            .col-sm-12 {
+                    width: 100%;
+            }
+            .col-sm-11 {
+                    width: 91.66666667%;
+            }
+            .col-sm-10 {
+                    width: 83.33333333%;
+            }
+            .col-sm-9 {
+                    width: 75%;
+            }
+            .col-sm-8 {
+                    width: 66.66666667%;
+            }
+            .col-sm-7 {
+                    width: 58.33333333%;
+            }
+            .col-sm-6 {
+                    width: 50%;
+            }
+            .col-sm-5 {
+                    width: 41.66666667%;
+            }
+            .col-sm-4 {
+                    width: 33.33333333%;
+            }
+            .col-sm-3 {
+                    width: 25%;
+            }
+            .col-sm-2 {
+                    width: 16.66666667%;
+            }
+            .col-sm-1 {
+                    width: 8.33333333%;
             }
         }
     </style>
@@ -108,7 +153,7 @@
             <img src="{{ asset('/assets/img/logo.png') }}">
             </div>
           
-            <div class="container mt-5">
+            <div class="container mt-2">
                 <div class="p-2 flex-fill bd-highlight text-center">
                     <h5>
                         SURAT KETERANGAN LULUS <br>
@@ -118,8 +163,8 @@
                 </div>
             </div>
             <div class="container mt-4">
-                <div class="p-2 flex-fill bd-highlight text-start">
-                    Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia dengan ini menyatakan bahwa: <br><br>
+                <div>
+                    Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia bekerja dengan ini menyatakan bahwa: <br><br>
                     <div class="row">
                         <div class="col-4">
                             Nama
@@ -161,12 +206,12 @@
                         </div>
                     </div>
                     <br>
-                    Telah lulus Seleksi ALB INI berdasarkan Peraturan Perkumpulan INI Nomor: 22/PERKUM/INI/2021 tentang Pendaftaran Anggota Luar Biasa INI sesuai Surat ALB/INIJATENG/XI/2021, Tanggal 25 November 2021
+                    Telah lulus Seleksi ALB INI berdasarkan Peraturan Perkumpulan INI Nomor: 22/PERKUM/INI/2021 tentang Pendaftaran Anggota Luar Biasa INI sesuai Surat Keputusan ALB/INIJATENG/XI/2021, Tanggal 25 November 2021
                     <br>
                     <br>
                     Surat Keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
 
-                    <div class="container mt-5">
+                    <div class="container mt-2">
                         <div class="p-2 flex-fill bd-highlight text-center">
 
                             Semarang, 25 November 2021 <br>
@@ -175,31 +220,54 @@
 
                         </div>
                     </div>
-
-                    <div class="row mt-5">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row mt-3">
                         <div class="col-sm-6">
-                            <div class=" mt-4">
-                                <div class="card-body">
+                            <div class="mt-4">
+                                <!-- <div class="card-body"> -->
                                     <h5 class="text-center text-decoration-underline">Nama Ketua</h5>
                                     <h6 class="text-center">KETUA</h6>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mt-4">
-                                <div class="card-body">
-                                <h5 class="text-center text-decoration-underline">Nama Sekretaris</h5>
-                                <h6 class="text-center ">SEKRETARIS</h6>
-                                </div>
+                                <!-- <div class="card-body"> -->
+                                    <h5 class="text-center text-decoration-underline">Nama Sekretaris</h5>
+                                    <h6 class="text-center ">SEKRETARIS</h6>
+                                <!-- </div> -->
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
+            <br>
+            <br>
+        <hr>
+        <table style="margin-left:-10px">
+            <tr>
+                <td>Sekretariat:</td>
+                <td colspan="3">- Jl.Setiabudi 12 Kompleks Alam Indah Semarang</td>
+                <!-- <td>a</td>
+                <td>a</td> -->
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">- Panorama Ruko/PR NO.19 jl.Bukit Panorama Graha Candi Golf Kasipah,Jangli Semarang</td>
+                <!-- <td></td>
+                <td></td> -->
+            </tr>
+            <tr>
+                <td></td>
+                <td><img width="20px" src="{{asset('assets/img/kontak.png')}}" alt="">  024 7474203</td>
+                <td><img width="20px" src="{{asset('assets/img/wa.png')}}" alt="">  088801907702</td>
+                <td><img width="20px" src="{{asset('assets/img/email.png')}}" alt="">  pengwiljatengini@gmail.com</td>
+            </tr>
+        </table>
         </div>
+      
     </div>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
