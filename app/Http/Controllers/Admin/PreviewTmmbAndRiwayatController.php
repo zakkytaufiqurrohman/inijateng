@@ -20,9 +20,9 @@ class PreviewTmmbAndRiwayatController extends Controller
     {
         $data = User::query();
         $data->where('status_anggota','alb');
-        if($request->id){
-            $data->where('status_anggota',$request->id);
-        }
+        // if($request->id){
+        //     $data->where('status_anggota',$request->id);
+        // }
         $data->orderBy('id', 'DESC');
         return DataTables::eloquent($data)
             ->addColumn('action', function ($data) {

@@ -8,7 +8,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="col-lg-2">
+                <!-- <div class="col-lg-2">
                         <select class="form-control" width="50px"  name="filter" id="filter">
                         <option value="">All Data</option>
                         <option value="1">Maber 1 </option>
@@ -16,7 +16,7 @@
                         <option value="3">Maber 3 </option>
                         <option value="4">Maber 4 </option>
                         </select>
-                </div>
+                </div> -->
                 <div class="table-responsive mt-4">
                     <table id="role" class="table table-bordered table-hover">
                         <thead>
