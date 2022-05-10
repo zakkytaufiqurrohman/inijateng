@@ -26,32 +26,20 @@
 
         .main-page {
             width: 210mm;
-            /* min-height: 297mm; */
-            margin: 10mm auto;
+            /* height: 297mm; */
+            /* margin: 10mm auto; */
             background: white;
-            /* background-image: url('/assets/img/logo.png'); */
-            /* Full height */
-            /* height: 100%; */
-            /* position: relative; */
-
-            /* Center and scale the image nicely */
-            /* background-position: center;
-            background-repeat: no-repeat;
-            background-size: inherit; */
-            /* width: 100vh;
-            height: 100vh; */
-            /* background-image: rgba(0, 0, 0, 0.5); */
-            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+            /* box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); */
         }
         .demo-bg {
             opacity: 0.1;
             position: absolute;
             top: 50%;
-            margin-left: 11%;
+            margin-left: 10%;
             font-size: 18px;
         }
         p* {
-            font-family: "Times New Roman" !important;
+            font-family: 'Calibri Light' !important;
         }
         hr {
             border-top: solid 1px #000 !important;
@@ -59,13 +47,12 @@
 
         .sub-page {
             padding: 1cm;
-            height: 297mm;
+            /* height: 297mm; */
         }
 
         @page {
             size: A4;
             height: 210;
-            /* margin: 0; */
         }
 
         @media print {
@@ -89,7 +76,7 @@
                 opacity: 0.1;
                 position: absolute;
                 top: 30%;
-                margin-left: 25%;
+                margin-left: 15%;
                 font-size: 18px;
             }
             .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
@@ -135,7 +122,7 @@
     </style>
 </head>
 
-<body>
+<body onload='window.print()' onafterprint="window.close()" >
     <div class="main-page">
         <div class="sub-page">
             <div class="container-fluid">
@@ -150,7 +137,7 @@
             </div>
             <hr>
             <div class="demo-bg">
-            <img src="{{ asset('/assets/img/logo.png') }}">
+            <img width="500px" src="{{ asset('/assets/img/logo.png') }}">
             </div>
           
             <div class="container mt-2">
@@ -164,13 +151,16 @@
             </div>
             <div class="container mt-4">
                 <div>
-                    Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia bekerja dengan ini menyatakan bahwa: <br><br>
+                Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia bekerja sama dengan Pengurus
+                Daerah Kota Surakarta dan Pengurus Daerah Kabupaten Karanganyar Ikatan Notaris
+                Indonesia, dengan ini menerangkan bahwa : <br><br><br>
+                <div class="anak">
                     <div class="row">
                         <div class="col-4">
                             Nama
                         </div>
                         <div class="col">
-                            : 
+                            : {{$alb->nama}}
                         </div>
                     </div>
                     <div class="row">
@@ -178,7 +168,7 @@
                             Alamat Rumah
                         </div>
                         <div class="col">
-                            : 
+                            : {{$alb->alamat}}
                         </div>
                     </div>
                     <div class="row">
@@ -186,7 +176,7 @@
                             Asal Perguruan Tinggi
                         </div>
                         <div class="col">
-                            : 
+                            : {{$alb->s1}}
                         </div>
                     </div>
                     <div class="row">
@@ -194,7 +184,7 @@
                             Progdi MKn
                         </div>
                         <div class="col">
-                            : 
+                            : {{$alb->s2}}
                         </div>
                     </div>
                     <div class="row">
@@ -202,15 +192,17 @@
                             Tanggal Lulus Progdi MKn
                         </div>
                         <div class="col">
-                            : 
+                            : {{$alb->tahun_s2}}
                         </div>
                     </div>
+                </div>
                     <br>
                     Telah lulus Seleksi ALB INI berdasarkan Peraturan Perkumpulan INI Nomor: 22/PERKUM/INI/2021 tentang Pendaftaran Anggota Luar Biasa INI sesuai Surat Keputusan ALB/INIJATENG/XI/2021, Tanggal 25 November 2021
                     <br>
                     <br>
                     Surat Keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
-
+                    <br>
+                    <br>
                     <div class="container mt-2">
                         <div class="p-2 flex-fill bd-highlight text-center">
 
@@ -223,11 +215,12 @@
                     <br>
                     <br>
                     <br>
+                    <br>
                     <div class="row mt-3">
                         <div class="col-sm-6">
                             <div class="mt-4">
                                 <!-- <div class="card-body"> -->
-                                    <h5 class="text-center text-decoration-underline">Nama Ketua</h5>
+                                    <h6 class="text-center text-decoration-underline">Dr. WIDHI HANDOKO, S.H., Sp.N</h6>
                                     <h6 class="text-center">KETUA</h6>
                                 <!-- </div> -->
                             </div>
@@ -235,7 +228,7 @@
                         <div class="col-sm-6">
                             <div class="mt-4">
                                 <!-- <div class="card-body"> -->
-                                    <h5 class="text-center text-decoration-underline">Nama Sekretaris</h5>
+                                    <h6 class="text-center text-decoration-underline">Dr. CATHARINA MULYANI SANTOSO, S.H., M.H</h6>
                                     <h6 class="text-center ">SEKRETARIS</h6>
                                 <!-- </div> -->
                             </div>
@@ -248,14 +241,14 @@
         <hr>
         <table style="margin-left:-10px">
             <tr>
-                <td>Sekretariat:</td>
-                <td colspan="3">- Jl.Setiabudi 12 Kompleks Alam Indah Semarang</td>
+                <td>Sekretariat: </td>
+                <td colspan="3"><img width="20px" src="{{asset('assets/img/alamat.png')}}" alt=""> Jl.Setiabudi 12 Kompleks Alam Indah Semarang</td>
                 <!-- <td>a</td>
                 <td>a</td> -->
             </tr>
             <tr>
                 <td></td>
-                <td colspan="3">- Panorama Ruko/PR NO.19 jl.Bukit Panorama Graha Candi Golf Kasipah,Jangli Semarang</td>
+                <td colspan="3"> <img width="20px" src="{{asset('assets/img/alamat.png')}}" alt=""> Panorama Ruko/PR NO.19 jl.Bukit Panorama Graha Candi Golf Kasipah,Jangli Semarang</td>
                 <!-- <td></td>
                 <td></td> -->
             </tr>

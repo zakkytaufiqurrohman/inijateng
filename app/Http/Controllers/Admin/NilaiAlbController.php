@@ -49,7 +49,7 @@ class NilaiAlbController extends Controller
                 else {
                     if($data->status_lulus) {
                         $link = route('sertifikat_alb',$data->id);
-                        $action .= "<a href='$link' class='btn btn-icon btn-primary'><i class='fa fa-print'></i>Setifikat</a>&nbsp;";
+                        $action .= "<a target='_blank' href='$link' class='btn btn-icon btn-primary'>Setifikat Depan</a>&nbsp;";
                     }
                 }
 
