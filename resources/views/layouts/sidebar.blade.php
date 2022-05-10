@@ -151,14 +151,14 @@
                 <a href="{{ route('preview_riwayat.index') }}" class="nav-link"><i class="fas fa-history"></i><span>Preview Ttmb & Riwayat</span></a>
             </li>
             @if(auth()->user()->can('all'))
-            <li class="nav-item dropdown {{ (request()->is('bendahara/maber/*')) ? 'active' : '' }}"">
+            <li class="nav-item dropdown {{ (request()->is('sertifikat/maber/*')) ? 'active' : '' }}"">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Sertifikat TTMB</span></a>
                 <ul class="dropdown-menu">
                   
-                    <li class="{{ (request()->is('bendahara/maber/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',0) }}">TTMB 1</a></li>
-                    <li class="{{ (request()->is('bendahara/maber/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',0) }}">TTMB 2</a></li>
-                    <li class="{{ (request()->is('bendahara/maber/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',0) }}">TTMB 3</a></li>
-                    <li class="{{ (request()->is('bendahara/maber/0')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('bendahara_maber.index',0) }}">TTMB 4</a></li>
+                    <li class="{{ (request()->is('sertifikat/maber/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',1) }}">TTMB 1</a></li>
+                    <li class="{{ (request()->is('sertifikat/maber/2')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',2) }}">TTMB 2</a></li>
+                    <li class="{{ (request()->is('sertifikat/maber/3')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',3) }}">TTMB 3</a></li>
+                    <li class="{{ (request()->is('sertifikat/maber/4')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',4) }}">TTMB 4</a></li>
                 </ul>
             </li>
             @endif

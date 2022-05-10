@@ -148,4 +148,43 @@ class MagberTransactionController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Berhasil Merubah Status']);
     }
+
+    public function sertifikatIndex($maber)
+    {
+        return view('Admin.magber.sertifikat.index',compact('maber'));
+    }
+
+    public function sertifikatData(Request $request){
+        //tampilakan data dengan event magber yang aktif
+        $magberEfent = Magber::where('status','1')->first();
+        //filter maber ke berapa ?
+        $data = MagberTransaction::with('user')->where('magber_ke',$request->id)->where('magber_id',$magberEfent->id)->where('verifikasi_status',1)->where('bendahara_status',1)->get();
+        // $data->orderBy('id', 'DESC');
+        return DataTables::of($data)
+            ->addColumn('action', function ($data) {
+                $link = route('verifikasi_maber.show',['maber'=>$data->magber_ke,'user'=>$data->id]);
+                $action = '';
+                $action .= "<a href='$link' class='btn btn-icon btn-primary'><i class='fa fa-edit'></i></a>&nbsp;";
+
+                return $action;
+            })
+            ->addColumn('nik',function ($data) {
+                return $data->user->nik;
+            })
+            ->addColumn('wa', function ($data) {
+                return $data->user->wa;
+            })
+            ->addColumn('name', function ($data) {
+                return $data->user->name;
+            })
+            ->addColumn('kota', function ($data) {
+                return $data->user->v_alb->kota_name;
+            })
+            ->addColumn('provinsi', function ($data) {
+                return $data->user->v_alb->provinsi_name;
+            })
+            ->escapeColumns([])
+            ->addIndexColumn()
+            ->make(true);
+    }
 }
