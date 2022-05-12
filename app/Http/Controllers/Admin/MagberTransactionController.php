@@ -162,9 +162,8 @@ class MagberTransactionController extends Controller
         // $data->orderBy('id', 'DESC');
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $link = route('verifikasi_maber.show',['maber'=>$data->magber_ke,'user'=>$data->id]);
-                $action = '';
-                $action .= "<a href='$link' class='btn btn-icon btn-primary'><i class='fa fa-edit'></i></a>&nbsp;";
+                $link = route('sertifikat.print',$data->id);
+                $action = "<a target='_blank' href='$link' class='btn btn-icon btn-primary'>Setifikat</a>&nbsp;";
 
                 return $action;
             })
@@ -186,5 +185,15 @@ class MagberTransactionController extends Controller
             ->escapeColumns([])
             ->addIndexColumn()
             ->make(true);
+    }
+
+    public function sertifikatPrint($id)
+    {
+        $magber = Magber::findOrFail($id);
+        $trans = MagberTransaction::with('user','detail_alb','riwayat_magang')->first();
+        if(empty($trans)){
+            return 'error';
+        }
+        return view('Admin.magber.sertifikat.sertifikat',compact('magber','trans'));
     }
 }

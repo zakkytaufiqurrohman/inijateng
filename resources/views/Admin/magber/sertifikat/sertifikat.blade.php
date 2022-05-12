@@ -143,65 +143,45 @@
             <div class="container mt-2">
                 <div class="p-2 flex-fill bd-highlight text-center">
                     <h5>
-                        SURAT KETERANGAN LULUS <br>
-                        SELEKSI ANGGOTA LUAR BIASA (ALB)
+                    TANDA TELAH MENGIKUTI MAGANG BERSAMA (TTMB)
                     </h5>
                     Nomor: 38/SKL-ALB/XI/2021
                 </div>
             </div>
             <div class="container mt-4">
                 <div>
-                Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia bekerja sama dengan Pengurus
-                Daerah Kota Surakarta dan Pengurus Daerah Kabupaten Karanganyar Ikatan Notaris
-                Indonesia, dengan ini menerangkan bahwa : <br><br><br>
+                Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia. Dengan ini menerangkan bahwa : <br><br><br>
                 <div class="anak">
                     <div class="row">
                         <div class="col-4">
                             Nama
                         </div>
                         <div class="col">
-                            : {{$alb->nama}}
+                            : {{$trans->user->name}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            Alamat Rumah
+                            Nomor ALB
                         </div>
                         <div class="col">
-                            : {{$alb->alamat}}
+                            : {{$trans->detail_alb->no_alb}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            Asal Perguruan Tinggi
-                        </div>
+                        Notaris Penerima Magang</div>
                         <div class="col">
-                            : {{$alb->s1}}
+                            : {{$trans->riwayat_magang->penerima_magang}}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-4">
-                            Progdi MKn
-                        </div>
-                        <div class="col">
-                            : {{$alb->s2}}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            Tanggal Lulus Progdi MKn
-                        </div>
-                        <div class="col">
-                            : {{$alb->tahun_s2}}
-                        </div>
-                    </div>
+                    
                 </div>
                     <br>
-                    Telah lulus Seleksi ALB INI berdasarkan Peraturan Perkumpulan INI Nomor: 22/PERKUM/INI/2021 tentang Pendaftaran Anggota Luar Biasa INI sesuai Surat Keputusan ALB/INIJATENG/XI/2021, Tanggal 25 November 2021
+                    Telah mengikuti magang Bersama berdasarkan Peraturan Perkumpulan INI mengenai Magang yang berlaku, pada tanggal 24 Februari 2022, dengan Materi Semester 2, dengan hasil penilaian BAIK, sesuai dengan Berita Acara Pelaksanaan Magang Bersama Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia, tanggal 24 Februari 2022.
                     <br>
                     <br>
-                    Surat Keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
-                    <br>
+                    Tanda Telah Mengikuti Magang Bersama (TTMB) ini dikeluarkan oleh Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia, untukk dapat dipergunakan sebagaimana mestinya.                    <br>
                     <br>
                     <div class="container mt-2">
                         <div class="p-2 flex-fill bd-highlight text-center">
