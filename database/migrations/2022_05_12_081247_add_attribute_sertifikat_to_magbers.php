@@ -15,9 +15,8 @@ class AddAttributeSertifikatToMagbers extends Migration
     {
         Schema::table('magbers', function (Blueprint $table) {
             $table->string('nomor');
-            $table->string('tempat_dan_tanggal');
-            $table->string('no_perkumpulan');
-            $table->string('no_sk');
+            $table->string('tempat');
+            $table->string('tanggal');
             $table->string('ketua');
             $table->string('sekretaris');
         });
@@ -32,9 +31,8 @@ class AddAttributeSertifikatToMagbers extends Migration
     {
         Schema::table('magbers', function (Blueprint $table) {
             $table->dropColumn('nomor');
-            $table->dropColumn('tempat_dan_tanggal');
-            $table->dropColumn('no_perkumpulan');
-            $table->dropColumn('no_sk');
+            $table->dropColumn('tempat');
+            $table->dropColumn('tanggal');
             $table->dropColumn('ketua');
             $table->dropColumn('sekretaris');
         });
