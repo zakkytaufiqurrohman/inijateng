@@ -145,7 +145,7 @@
                     <h5>
                     TANDA TELAH MENGIKUTI MAGANG BERSAMA (TTMB)
                     </h5>
-                    Nomor: 38/SKL-ALB/XI/2021
+                    <b> Nomor: {{$trans->nomor}}/{{$magber->nomor}} </b>
                 </div>
             </div>
             <div class="container mt-4">
@@ -178,7 +178,7 @@
                     
                 </div>
                     <br>
-                    Telah mengikuti magang Bersama berdasarkan Peraturan Perkumpulan INI mengenai Magang yang berlaku, pada tanggal 24 Februari 2022, dengan Materi Semester 2, dengan hasil penilaian BAIK, sesuai dengan Berita Acara Pelaksanaan Magang Bersama Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia, tanggal 24 Februari 2022.
+                    Telah mengikuti magang Bersama berdasarkan Peraturan Perkumpulan INI mengenai Magang yang berlaku, pada tanggal {{$magber->tanggal}}, dengan Materi Semester {{$trans->magber_ke}}, dengan hasil penilaian <b>BAIK</b>, sesuai dengan Berita Acara Pelaksanaan Magang Bersama Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia, tanggal {{$magber->tanggal}}.
                     <br>
                     <br>
                     Tanda Telah Mengikuti Magang Bersama (TTMB) ini dikeluarkan oleh Pengurus Wilayah Jawa Tengah Ikatan Notaris Indonesia, untukk dapat dipergunakan sebagaimana mestinya.                    <br>
@@ -186,7 +186,7 @@
                     <div class="container mt-2">
                         <div class="p-2 flex-fill bd-highlight text-center">
 
-                            Semarang, 25 November 2021 <br>
+                            {{$magber->tempat}}, {{$magber->tanggal}} <br>
                             PENGURUS WILAYAH JAWA TENGAH <br>
                             IKATAN NOTARIS INDONESIA
 
@@ -200,7 +200,7 @@
                         <div class="col-sm-6">
                             <div class="mt-4">
                                 <!-- <div class="card-body"> -->
-                                    <h6 class="text-center text-decoration-underline">Dr. WIDHI HANDOKO, S.H., Sp.N</h6>
+                                    <h6 class="text-center text-decoration-underline">{{$magber->ketua}}</h6>
                                     <h6 class="text-center">KETUA</h6>
                                 <!-- </div> -->
                             </div>
@@ -208,7 +208,7 @@
                         <div class="col-sm-6">
                             <div class="mt-4">
                                 <!-- <div class="card-body"> -->
-                                    <h6 class="text-center text-decoration-underline">Dr. CATHARINA MULYANI SANTOSO, S.H., M.H</h6>
+                                    <h6 class="text-center text-decoration-underline">{{$magber->sekretaris}}</h6>
                                     <h6 class="text-center ">SEKRETARIS</h6>
                                 <!-- </div> -->
                             </div>

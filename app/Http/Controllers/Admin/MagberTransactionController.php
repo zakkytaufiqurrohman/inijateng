@@ -189,8 +189,8 @@ class MagberTransactionController extends Controller
 
     public function sertifikatPrint($id)
     {
-        $magber = Magber::findOrFail($id);
-        $trans = MagberTransaction::with('user','detail_alb','riwayat_magang')->first();
+        $magber = Magber::where('status','1')->first();
+        $trans = MagberTransaction::with('user','detail_alb','riwayat_magang')->where('id',$id)->first();
         if(empty($trans)){
             return 'error';
         }
