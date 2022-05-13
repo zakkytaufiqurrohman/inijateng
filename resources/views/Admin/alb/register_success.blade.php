@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-body mt-3 mb-3">
 				<h2>Terimakasih Anda Sudah bergabung di Event Kami</h2>
-				<h4>Silahkan Cek Email Anda untuk melihat E-Card (proses validasi 1x24 jam)
+				<h4>Silahkan Cek Email Anda untuk melihat E-Card
                 </div>
                 <div class="card-footer text-muted">
                     inijateng.org

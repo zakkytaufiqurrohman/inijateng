@@ -19,7 +19,7 @@
              <h3>   {{ $event->judul }} </h3>
                 </div>
                 <div class="card-body mt-3 mb-3">
-                <h5 class="card-title">Id Card akan tampil setelah proses verifikasi oleh sistem (1x24jam)</h5>
+                <h5 class="card-title">Id Card akan tampil setelah proses verifikasi oleh sistem (Mohon untuk Menunggu)</h5>
                 </div>
                 <div class="card-footer text-muted">
                     inijateng.org
