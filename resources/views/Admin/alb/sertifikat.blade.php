@@ -146,7 +146,7 @@
                         SURAT KETERANGAN LULUS <br>
                         SELEKSI ANGGOTA LUAR BIASA (ALB)
                     </h5>
-                    Nomor: 38/SKL-ALB/XI/2021
+                    Nomor: {{$alb->nomor}}/{{$event->nomor}}
                 </div>
             </div>
             <div class="container mt-4">
@@ -167,8 +167,11 @@
                         <div class="col-4">
                             Alamat Rumah
                         </div>
-                        <div class="col">
-                            : {{$alb->alamat}}
+                        <div class="col-md-1" style="width: 1px">
+                           :
+                        </div>
+                        <div class="col" style="margin-left: -15px;">
+                            {{$alb->alamat}}
                         </div>
                     </div>
                     <div class="row">
@@ -197,7 +200,7 @@
                     </div>
                 </div>
                     <br>
-                    Telah lulus Seleksi ALB INI berdasarkan Peraturan Perkumpulan INI Nomor: 22/PERKUM/INI/2021 tentang Pendaftaran Anggota Luar Biasa INI sesuai Surat Keputusan ALB/INIJATENG/XI/2021, Tanggal 25 November 2021
+                    Telah lulus Seleksi ALB INI berdasarkan Peraturan Perkumpulan INI Nomor: {{$event->no_perkumpulan}} tentang Pendaftaran Anggota Luar Biasa INI sesuai Surat Keputusan {{$event->no_sk}}, Tanggal {{$event->tanggal}}
                     <br>
                     <br>
                     Surat Keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
@@ -206,7 +209,7 @@
                     <div class="container mt-2">
                         <div class="p-2 flex-fill bd-highlight text-center">
 
-                            Semarang, 25 November 2021 <br>
+                            {{$event->tempat}}, {{$event->tanggal}} <br>
                             PENGURUS WILAYAH JAWA TENGAH <br>
                             IKATAN NOTARIS INDONESIA
 
@@ -220,7 +223,7 @@
                         <div class="col-sm-6">
                             <div class="mt-4">
                                 <!-- <div class="card-body"> -->
-                                    <h6 class="text-center text-decoration-underline">Dr. WIDHI HANDOKO, S.H., Sp.N</h6>
+                                    <h6 class="text-center text-decoration-underline">{{$event->ketua}}</h6>
                                     <h6 class="text-center">KETUA</h6>
                                 <!-- </div> -->
                             </div>
@@ -228,7 +231,7 @@
                         <div class="col-sm-6">
                             <div class="mt-4">
                                 <!-- <div class="card-body"> -->
-                                    <h6 class="text-center text-decoration-underline">Dr. CATHARINA MULYANI SANTOSO, S.H., M.H</h6>
+                                    <h6 class="text-center text-decoration-underline">{{$event->sekretaris}}</h6>
                                     <h6 class="text-center ">SEKRETARIS</h6>
                                 <!-- </div> -->
                             </div>

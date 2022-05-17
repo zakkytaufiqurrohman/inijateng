@@ -250,7 +250,7 @@ Route::post('/event_alb/register', [AlbEventController::class, 'registerAlb'])->
 Route::get('/event_alb_success/{id}', [AlbEventController::class, 'eventAlbSuccess'])->name('event_alb.success');
 Route::get('alb/card/{id}', [AlbEventController::class, 'eventAlbIdCard'])->name('event_alb.id_card');
 Route::get('/sertifikat/{id}/alb', [AlbEventController::class, 'sertifikat'])->name('sertifikat_alb');
-
+Route::get('/sertifikat_belakang/{id}/alb', [AlbEventController::class, 'sertifikatBelakang'])->name('sertifikat_alb_belakang');
 // Route::view('/table', 'components.table');
 // Route::view('/form', 'components.form');
 // Route::view('/register', 'components.register');

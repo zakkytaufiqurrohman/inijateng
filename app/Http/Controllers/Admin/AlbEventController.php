@@ -7,6 +7,7 @@ use App\Http\Controllers\DependantDropdownController;
 use App\Mail\RegisterAlb;
 use App\Models\Alb;
 use App\Models\AlbTransaction;
+use App\Models\NilaiAlb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -388,7 +389,16 @@ class AlbEventController extends Controller
     public function sertifikat($id)
     {
         $alb = AlbTransaction::findOrFail($id);
-        return view('Admin.alb.sertifikat',compact('alb'));
+        $event = Alb::where('status','1')->first();
+        return view('Admin.alb.sertifikat',compact('alb','event'));
+    }
+
+    public function sertifikatBelakang($id)
+    {
+        $alb = AlbTransaction::findOrFail($id);
+        $event = Alb::where('status','1')->first();
+        $nilai = NilaiAlb::where('alb_transaction_id',$alb->id)->first();
+        return view('Admin.alb.sertifikat_belakang',compact('alb','event','nilai'));
     }
 
 }
