@@ -34,6 +34,16 @@ class MagberTransaction extends Model
         return $this->belongsTo(RiwayatMagang::class, 'user_id', 'user_id');
     }
 
+    public function riwayat_magangs()
+    {
+        return $this->hasMany(RiwayatMagang::class, 'user_id', 'user_id');
+    }
+
+    public function riwayat_ttmbs()
+    {
+        return $this->hasMany(RiwayatTTMB::class, 'user_id', 'user_id');
+    }
+
     public function detail_berkas_alb()
     {
         return $this->belongsTo(DetailBerkasAlb::class, 'user_id', 'user_id');

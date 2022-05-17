@@ -163,8 +163,12 @@ class MagberTransactionController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 $link = route('sertifikat.print',$data->id);
-                $action = "<a target='_blank' href='$link' class='btn btn-icon btn-primary'>Setifikat</a>&nbsp;";
-
+                $action = "<a target='_blank' href='$link' class='btn btn-icon btn-primary'>TTMB</a>&nbsp;";
+                if($data->magber_ke == '4'){
+                    $links = route('sertifikat.lulus',$data->id);
+                    $action .= "<br>";
+                    $action .= "<a target='_blank' href='$links' class='btn btn-icon btn-primary'>Setifikat</a>&nbsp;";
+                }
                 return $action;
             })
             ->addColumn('nik',function ($data) {
@@ -195,5 +199,16 @@ class MagberTransactionController extends Controller
             return 'error';
         }
         return view('Admin.magber.sertifikat.sertifikat',compact('magber','trans'));
+    }
+    public function sertifikatLulus($id)
+    {
+        // $trans = MagberTransaction::leftJoin('riwayat_magang','riwayat_magang.user_id','magber_transactions.user_id')->where('magber_transactions.id',$id)->get();
+        $trans = MagberTransaction::with('riwayat_magangs','riwayat_ttmbs')->where('id',$id)->first();
+
+        // var_dump($trans->riwayat_magangs);
+        if(empty($trans)){
+            return 'error';
+        }
+        return view('Admin.magber.sertifikat.sertifikat_lulus',compact('trans'));
     }
 }

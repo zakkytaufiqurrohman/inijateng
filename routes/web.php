@@ -219,6 +219,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{maber}', [MagberTransactionController::class, 'sertifikatIndex'])->name('.index');
         Route::get('sertifikat/data', [MagberTransactionController::class, 'sertifikatData'])->name('.data');
         Route::get('/{id}/print', [MagberTransactionController::class, 'sertifikatPrint'])->name('.print');
+        Route::get('/{id}/lulus', [MagberTransactionController::class, 'sertifikatLulus'])->name('.lulus');
         // Route::post('/validasi', [MagberTransactionController::class, 'verifikasi_validasi'])->name('.validasi');
     });
 
