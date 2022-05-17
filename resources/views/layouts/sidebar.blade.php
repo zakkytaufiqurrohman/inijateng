@@ -142,7 +142,7 @@
             @endif
 
         @endif
-        @if(auth()->user()->can('all') || auth()->user()->can('verifikator_alb') )
+        @if(auth()->user()->can('all') || auth()->user()->can('verifikator_maber_4') )
             <li class="menu-header">Laporan</li>
             <li class="nav-item {{ (request()->is('preview_riwayat*')) ? 'active' : '' }}">
                 <a href="{{ route('preview_riwayat.index') }}" class="nav-link"><i class="fas fa-history"></i><span>Preview Ttmb & Riwayat</span></a>
