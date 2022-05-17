@@ -34,7 +34,8 @@ class AlbTransaction extends Model
         'bukti_bayar',
         'bendahara_status',
         'verifikator_status',
-        'alamat'
+        'alamat',
+        'nomor'
     ];
 
     public function provincies()

@@ -133,6 +133,12 @@ class AlbEventController extends Controller
                 $nama_suket = rand(10,100).time()."_".$text;
                 $suket->move(public_path('upload/alb_register'),$nama_suket);
             }
+            $nomor = 1;
+            $max = AlbTransaction::orderBy('nomor','desc')->first();
+            if($max->alb_id == $request->alb_id){
+                $nomor = $max->nomor + 1;
+            }
+
             $user = AlbTransaction::create([
                 'alb_id'=> $request->alb_id,
                 'kode'=> $request->nik,
@@ -156,7 +162,8 @@ class AlbEventController extends Controller
                 'ktp'=> $nama_ktp,
                 'bukti_bayar'=> $nama_bukti,
                 'bendahara_status'=> '0',
-                'verifikator_status' => '0'
+                'verifikator_status' => '0',
+                'nomor' => $nomor,
             ]);
 
             DB::commit();
