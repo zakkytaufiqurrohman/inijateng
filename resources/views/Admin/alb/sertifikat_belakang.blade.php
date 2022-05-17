@@ -33,7 +33,7 @@
     </style>
 </head>
 
-<!-- <body onload='window.print()' onafterprint="window.close()" > -->
+<body onload='window.print()' onafterprint="window.close()" >
     <!-- <div class="container"> -->
         <div class="page">
 
