@@ -142,15 +142,15 @@
             @endif
 
         @endif
-        @if(auth()->user()->can('all') )
+        @if(auth()->user()->can('all') || auth()->user()->can('verifikator_alb') )
             <li class="menu-header">Laporan</li>
-            <li class="nav-item {{ (request()->is('laporan*')) ? 'active' : '' }}">
-                <a href="{{ route('laporan.transaksi') }}" class="nav-link"><i class="fas fa-newspaper"></i><span>Lap Transaksi</span></a>
-            </li>
             <li class="nav-item {{ (request()->is('preview_riwayat*')) ? 'active' : '' }}">
                 <a href="{{ route('preview_riwayat.index') }}" class="nav-link"><i class="fas fa-history"></i><span>Preview Ttmb & Riwayat</span></a>
             </li>
             @if(auth()->user()->can('all'))
+            <li class="nav-item {{ (request()->is('laporan*')) ? 'active' : '' }}">
+                <a href="{{ route('laporan.transaksi') }}" class="nav-link"><i class="fas fa-newspaper"></i><span>Lap Transaksi</span></a>
+            </li>
             <li class="nav-item dropdown {{ (request()->is('sertifikat/maber/*')) ? 'active' : '' }}"">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Sertifikat TTMB</span></a>
                 <ul class="dropdown-menu">
@@ -161,7 +161,7 @@
                     <li class="{{ (request()->is('sertifikat/maber/4')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',4) }}">TTMB 4</a></li>
                 </ul>
             </li>
-            @endif
+           
 
             <!-- front page -->
             <li class="menu-header">Front Page</li>
@@ -169,6 +169,7 @@
             <li class="nav-item {{ (request()->is('berkas*')) ? 'active' : '' }}">
                 <a href="{{ route('profile_page') }}" class="nav-link"><i class="fas fa-user-cog"></i><span>Profile</span></a>
             </li>
+            @endif
         @endif        
     </aside>
 </div>
