@@ -291,6 +291,14 @@ class MagberController extends Controller
         $foto = $request->bukti_bayar;
         $text = str_replace(' ', '',$foto->getClientOriginalName());
         $fotos = time()."_".$text;
+
+        //nomor
+        $nomor = 1;
+        $max = MagberTransaction::where('magber_ke',$request->semester)->orderBy('nomor','desc')->first();
+        if($max->magber_id == $request->event_id){
+            $nomor = $max->nomor + 1;
+        }
+
         try {
             $datas = MagberTransaction::create([
                 'user_id' => $user->id,
@@ -300,6 +308,7 @@ class MagberController extends Controller
                 'bendahara_status' => 0,
                 'bendahara_status' => 0,
                 'kode' => $user->nik,
+                'nomor' => $nomor
             ]);
 
             $foto->move(public_path('upload/bukti_bayar_maber'),$fotos);

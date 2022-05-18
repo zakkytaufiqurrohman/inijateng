@@ -16,7 +16,8 @@ class MagberTransaction extends Model
         'bukti_bayar',
         'bendahara_status',
         'bendahara_status',
-        'kode'
+        'kode',
+        'nomor'
     ];
 
     public function user()
