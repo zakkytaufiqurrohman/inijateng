@@ -223,6 +223,12 @@ Route::middleware('auth')->group(function () {
         // Route::post('/validasi', [MagberTransactionController::class, 'verifikasi_validasi'])->name('.validasi');
     });
 
+    // data pendaftar ALB
+    Route::name('alb_registered')->prefix('/alb_registered')->group(function () {
+        Route::get('/', [LapTransaksiController::class, 'albRegistered'])->name('.index');
+        Route::get('alb_registered/data', [LapTransaksiController::class, 'albRegisteredData'])->name('.data');
+    });
+
     // end laporan
 
     /** begin FRONT PAGE */

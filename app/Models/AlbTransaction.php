@@ -47,4 +47,10 @@ class AlbTransaction extends Model
     {
         return $this->belongsTo(City::class,'kota','id');
     }
+
+    public function tempat_lahir()
+    {
+        return $this->belongsTo(City::class,'tempat_lahir','id');
+    }
+    
 }

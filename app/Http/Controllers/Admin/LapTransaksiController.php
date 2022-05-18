@@ -8,6 +8,7 @@ use App\Models\AlbTransaction;
 use App\Models\Magber;
 use App\Models\MagberTransaction;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class LapTransaksiController extends Controller
 {
@@ -96,5 +97,35 @@ class LapTransaksiController extends Controller
             'magber_bendahara4',
             'magber_verif4'
         ));
+    }
+
+    public function albRegistered()
+    {
+        return view('Admin.alb.lap_alb_registered');
+    }
+
+    public function albRegisteredData(Request $request){
+       
+        $data = AlbTransaction::with('provincies','kotas','tempat_lahir')->get();
+        return DataTables::of($data)
+            ->addColumn('nik',function ($data) {
+                return $data->nik;
+            })
+            ->addColumn('wa', function ($data) {
+                return $data->wa;
+            })
+            ->addColumn('tempat_lahir', function ($data) {
+                return $data->kotas->name;
+            })
+            ->addColumn('provinsi', function ($data) {
+                return $data->provincies->name;
+            })
+            ->addColumn('kota', function ($data) {
+                return $data->kotas->name;
+            })
+            
+            ->escapeColumns([])
+            ->addIndexColumn()
+            ->make(true);
     }
 }
