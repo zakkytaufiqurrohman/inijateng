@@ -165,10 +165,10 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Data Pendaftar</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ (request()->is('alb_registered')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('alb_registered.index') }}">ALB</a></li>
-                    <li class="{{ (request()->is('sertifikat/maber/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',1) }}">TTMB 1</a></li>
-                    <li class="{{ (request()->is('sertifikat/maber/2')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',2) }}">TTMB 2</a></li>
-                    <li class="{{ (request()->is('sertifikat/maber/3')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',3) }}">TTMB 3</a></li>
-                    <li class="{{ (request()->is('sertifikat/maber/4')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',4) }}">TTMB 4</a></li>
+                    <li class="{{ (request()->is('maber_registered/1')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('maber_registered.index',1) }}">TTMB 1</a></li>
+                    <li class="{{ (request()->is('maber_registered/2')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('maber_registered.index',2) }}">TTMB 2</a></li>
+                    <li class="{{ (request()->is('maber_registered/3')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('maber_registered.index',3) }}">TTMB 3</a></li>
+                    <li class="{{ (request()->is('maber_registered/4')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('maber_registered.index',4) }}">TTMB 4</a></li>
                 </ul>
             </li>
            

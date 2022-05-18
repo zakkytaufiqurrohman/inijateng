@@ -229,6 +229,12 @@ Route::middleware('auth')->group(function () {
         Route::get('alb_registered/data', [LapTransaksiController::class, 'albRegisteredData'])->name('.data');
     });
 
+    // data pendaftar magber
+    Route::name('maber_registered')->prefix('/maber_registered')->group(function () {
+        Route::get('/{magber}', [LapTransaksiController::class, 'maberRegistered'])->name('.index');
+        Route::get('maber_registered/data', [LapTransaksiController::class, 'maberRegisteredData'])->name('.data');
+    });
+
     // end laporan
 
     /** begin FRONT PAGE */

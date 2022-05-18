@@ -128,4 +128,94 @@ class LapTransaksiController extends Controller
             ->addIndexColumn()
             ->make(true);
     }
+
+    public function maberRegistered($maber)
+    {
+        return view('Admin.magber.lap_magber_registered',compact('maber'));
+    }
+
+    public function maberRegisteredData(Request $request){
+       
+        $data = MagberTransaction::with(['user' => function($user){
+            $user->with(['kotas','provincies','lahir'])->get();
+        },'detail_alb','riwayat_magangs','riwayat_ttmbs'])
+        ->where('magber_ke',$request->id)->get();
+        return DataTables::of($data)
+            ->addColumn('nik',function ($data) {
+                return $data->nik;
+            })
+            ->addColumn('wa', function ($data) {
+                return optional($data->user)->wa;
+            })
+            ->addColumn('nama', function ($data) {
+                return optional($data->user)->name;
+            })
+            ->addColumn('email', function ($data) {
+                return optional($data->user)->email;
+            })
+            ->addColumn('tempat_lahir', function ($data) {
+                return optional($data->user->lahir)->name;
+            })
+            ->addColumn('tanggal_lahir', function ($data) {
+                return optional($data->user)->tgl_lahir;
+            })
+            ->addColumn('nik', function ($data) {
+                return optional($data->user)->nik;
+            })
+            ->addColumn('provinsi', function ($data) {
+                return optional($data->user->provincies)->name;
+            })
+            ->addColumn('kota', function ($data) {
+                return optional($data->user->kotas)->name;
+            })
+            ->addColumn('alamat', function ($data) {
+                return optional($data->detail_alb)->alamat;
+            })
+            ->addColumn('no_alb', function ($data) {
+                return optional($data->detail_alb)->no_alb;
+            })
+            ->addColumn('s1', function ($data) {
+                return optional($data->detail_alb)->s1;
+            })
+            ->addColumn('lulus_s1', function ($data) {
+                return optional($data->detail_alb)->tgl_lulus_s1;
+            })
+            ->addColumn('s2', function ($data) {
+                return optional($data->detail_alb)->s2;
+            })
+            ->addColumn('lulus_s2', function ($data) {
+                return optional($data->detail_alb)->tgl_lulus_s2;
+            })
+            ->addColumn('no_alb', function ($data) {
+                return optional($data->detail_alb)->no_alb;
+            })
+            ->addColumn('riwayat_magang', function ($data) {
+
+                $riwayat = '';
+                $riwayats = $data->riwayat_magangs();
+                if ($riwayats->count() > 0) {
+                    foreach ($riwayats->get() as $key => $data) {
+                        $riwayat .= ($key + 1) . ". " . $data->penerima_magang . "<br>";
+                    }
+                }
+
+                return $riwayat;
+            })
+            ->addColumn('riwayat_ttmb', function ($data) {
+
+                $riwayat = '';
+                $riwayats = $data->riwayat_ttmbs();
+                if ($riwayats->count() > 0) {
+                    foreach ($riwayats->get() as $key => $data) {
+                        $riwayat .= ($key + 1) . ". " . $data->materi .' | '. $data->tgl_nomor. "<br>";
+                    }
+                }
+
+                return $riwayat;
+            })
+            
+            ->escapeColumns([])
+            ->addIndexColumn()
+            ->make(true);
+    }
 }
