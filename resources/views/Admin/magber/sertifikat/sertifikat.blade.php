@@ -145,7 +145,7 @@
                     <h5>
                     TANDA TELAH MENGIKUTI MAGANG BERSAMA (TTMB)
                     </h5>
-                    <b> Nomor: {{$trans->nomor}}/{{$magber->nomor}} </b>
+                    <b> Nomor: {{$trans->nomor}}/SK-MB/{{$trans->magber_ke}}/{{$magber->nomor}} </b>
                 </div>
             </div>
             <div class="container mt-4">
