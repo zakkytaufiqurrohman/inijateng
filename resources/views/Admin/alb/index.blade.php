@@ -21,6 +21,13 @@
                                 <th>Keterangan</th>
                                 <th>Link Group</th>
                                 <th>Status</th>
+                                <th>Tanggal</th>
+                                <th>Tempat</th>
+                                <th>Nomor</th>
+                                <th>No Sk</th>
+                                <th>Nomor Perkumpulan</th>
+                                <th>Ketua</th>
+                                <th>Sekretaris</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -37,7 +44,7 @@
 
 <!-- modal add -->
 <div class="modal fade" tabindex="-1" role="dialog" id="modal-add">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tambah Data Maber</h5>
@@ -72,6 +79,49 @@
                         <label>Link Group</label>
                         <input type="text" class="form-control" name="link_group" id="link_group" placeholder="link group wa" autocomplete="off">
                     </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Tanggal</label>
+                                <input type="text" class="form-control datepicker" name="tanggal" autocomplete="off">
+                            </div>
+                            <div class="col">
+                                <label>Tempat</label>
+                                <input type="text" class="form-control" name="tempat" placeholder="semarang" autocomplete="off">
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Nomor</label>
+                                <input type="text" class="form-control" name="nomor" autocomplete="off">
+                            </div>
+                            <div class="col">
+                                <label>No Sk</label>
+                                <input type="text" class="form-control" name="no_sk" placeholder="no sk" autocomplete="off">
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="form-group">
+                        <label>No Perkumpulan</label>
+                        <input type="text" class="form-control" name="no_perkumpulan" id="no_perkumpulan" placeholder="no perkumpulan" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Ketua</label>
+                                <input type="text" class="form-control" name="ketua" autocomplete="off">
+                            </div>
+                            <div class="col">
+                                <label>Sekretaris</label>
+                                <input type="text" class="form-control" name="sekretaris" autocomplete="off">
+                            </div>
+                        </div>
+                      
+                    </div>
                    
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -86,7 +136,7 @@
 
 <!-- modal edit -->
 <div class="modal fade" tabindex="-1" role="dialog" id="modal-edit">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Data Maber</h5>
@@ -129,6 +179,49 @@
                     <div class="form-group">
                         <label>Link Group</label>
                         <input type="text" class="form-control" name="link_group" id="update-keterangan" placeholder="link group wa" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Tanggal</label>
+                                <input type="text" class="form-control datepicker" name="tanggal" autocomplete="off">
+                            </div>
+                            <div class="col">
+                                <label>Tempat</label>
+                                <input type="text" class="form-control" name="tempat" placeholder="semarang" autocomplete="off">
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Nomor</label>
+                                <input type="text" class="form-control" name="nomor" autocomplete="off">
+                            </div>
+                            <div class="col">
+                                <label>No Sk</label>
+                                <input type="text" class="form-control" name="no_sk" placeholder="no sk" autocomplete="off">
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="form-group">
+                        <label>No Perkumpulan</label>
+                        <input type="text" class="form-control" name="no_perkumpulan" id="no_perkumpulan" placeholder="no perkumpulan" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Ketua</label>
+                                <input type="text" class="form-control" name="ketua" autocomplete="off">
+                            </div>
+                            <div class="col">
+                                <label>Sekretaris</label>
+                                <input type="text" class="form-control" name="sekretaris" autocomplete="off">
+                            </div>
+                        </div>
+                      
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -188,6 +281,34 @@
                 },
                 {
                     data: 'status',
+                    "width": "20%"
+                },
+                {
+                    data: 'tanggal',
+                    "width": "20%"
+                },
+                {
+                    data: 'tempat',
+                    "width": "20%"
+                },
+                {
+                    data: 'nomor',
+                    "width": "20%"
+                },
+                {
+                    data: 'no_sk',
+                    "width": "20%"
+                },
+                {
+                    data: 'no_perkumpulan',
+                    "width": "20%"
+                },
+                {
+                    data: 'ketua',
+                    "width": "20%"
+                },
+                {
+                    data: 'sekretaris',
                     "width": "20%"
                 },
                 {
@@ -287,6 +408,13 @@
                 $('#modal-edit').find("input[name='end_date']").val(result['data']['end_date']);
                 $('#modal-edit').find("input[name='link_group']").val(result['data']['link_group']);
                 $('#modal-edit').find("select[name='status']").val(result['data']['status']).trigger('change');
+                $('#modal-edit').find("input[name='tanggal']").val(result['data']['tanggal']);
+                $('#modal-edit').find("input[name='tempat']").val(result['data']['tempat']);
+                $('#modal-edit').find("input[name='nomor']").val(result['data']['nomor']);
+                $('#modal-edit').find("input[name='no_sk']").val(result['data']['no_sk']);
+                $('#modal-edit').find("input[name='no_perkumpulan']").val(result['data']['no_perkumpulan']);
+                $('#modal-edit').find("input[name='ketua']").val(result['data']['ketua']);
+                $('#modal-edit').find("input[name='sekretaris']").val(result['data']['sekretaris']);
             },
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');

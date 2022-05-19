@@ -222,6 +222,13 @@ class AlbEventController extends Controller
             'end_date' => 'required',
             'keterangan' => 'required',
             'banner' => 'required|mimes:jpg,bmp,png|max:30000',
+            'nomor' => 'required',
+            'tempat' => 'required',
+            'tanggal' => 'required',
+            'no_perkumpulan' => 'required',
+            'no_sk' => 'required',
+            'ketua' => 'required',
+            'sekretaris' => 'required',
         ], [
             'judul.required' => 'Nama tidak boleh kosong',
             'judul.unique' => 'Nama sudah ada',
@@ -243,6 +250,13 @@ class AlbEventController extends Controller
                 'banner' => $fotos,
                 'link_group' => $request->input('link_group'),
                 'keterangan' => $request->input('keterangan'),
+                'nomor' => $request->nomor,
+                'tempat' => $request->tempat,
+                'tanggal' => $request->tanggal,
+                'no_perkumpulan' => $request->no_perkumpulan,
+                'no_sk' => $request->no_sk,
+                'ketua' => $request->ketua,
+                'sekretaris' => $request->sekretaris
             ]);
 
             DB::commit();
@@ -289,6 +303,13 @@ class AlbEventController extends Controller
             'banner' => 'mimes:jpg,bmp,png|max:30000',
             'start_date.required' => 'start_date tidak boleh kosong',
             'end_date.required' => 'end_date tidak boleh kosong',
+            'nomor' => 'required',
+            'tempat' => 'required',
+            'tanggal' => 'required',
+            'no_perkumpulan' => 'required',
+            'no_sk' => 'required',
+            'ketua' => 'required',
+            'sekretaris' => 'required',
         ], [
             'judul.required' => 'Judul tidak boleh kosong',
             'judul.unique' => 'Judul sudah ada',
@@ -325,6 +346,13 @@ class AlbEventController extends Controller
             $alb->link_group = $request->link_group;
             $alb->banner = $nama_foto;
             $alb->keterangan = $request->input('keterangan');
+            $alb->nomor = $request->nomor;
+            $alb->tempat = $request->tempat;
+            $alb->tanggal = $request->tanggal;
+            $alb->no_perkumpulan = $request->no_perkumpulan;
+            $alb->no_sk = $request->no_sk;
+            $alb->ketua = $request->ketua;
+            $alb->sekretaris = $request->sekretaris;
             $alb->save();
 
             DB::commit();
