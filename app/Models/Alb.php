@@ -16,6 +16,13 @@ class Alb extends Model
         'start_date',
         'end_date',
         'link_group',
-        'banner'
+        'banner',
+        'nomor',
+        'tempat',
+        'tanggal',
+        'no_perkumpulan',
+        'no_sk',
+        'ketua',
+        'sekretaris',
     ];
 }

@@ -115,13 +115,13 @@ class LapTransaksiController extends Controller
                 return $data->wa;
             })
             ->addColumn('tempat_lahir', function ($data) {
-                return $data->kotas->name;
+                return optional($data->kotas)->name;
             })
             ->addColumn('provinsi', function ($data) {
-                return $data->provincies->name;
+                return optional($data->provincies)->name;
             })
             ->addColumn('kota', function ($data) {
-                return $data->kotas->name;
+                return optional($data->kotas)->name;
             })
             
             ->escapeColumns([])
