@@ -23,6 +23,7 @@
                                 <th>Alamat</th>
                                 <th>Kota</th>
                                 <th>Provinsi</th>
+                                <th>No ALB</th>
                                 <th>S1</th>
                                 <th>Tahun lulus S1</th>
                                 <th>S2</th>
@@ -103,6 +104,10 @@
                 },
                 {
                     data: 'provinsi',
+                    "width": "15%"
+                },
+                {
+                    data: 'no_alb',
                     "width": "15%"
                 },
                 {

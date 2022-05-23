@@ -155,7 +155,7 @@
 </style>
 
 
-    <title>yukdaftar.com</title>
+    <title>INI</title>
 </head>
 <body>
     
