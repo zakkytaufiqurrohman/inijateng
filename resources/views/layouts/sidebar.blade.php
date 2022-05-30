@@ -161,7 +161,7 @@
                     <li class="{{ (request()->is('sertifikat/maber/4')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('sertifikat.index',4) }}">TTMB 4</a></li>
                 </ul>
             </li>
-            <li class="nav-item dropdown {{ (request()->is('alb_registered/*')) ? 'active' : '' }}"">
+            <li class="nav-item dropdown {{ (request()->is('alb_registered','maber_registered/*')) ? 'active' : '' }}"">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-alt"></i><span>Data Pendaftar</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ (request()->is('alb_registered')) ? 'active' : '' }}"><a class="nav-link" href="{{ route('alb_registered.index') }}">ALB</a></li>

@@ -109,7 +109,7 @@ class LapTransaksiController extends Controller
         $data = AlbTransaction::with('provincies','kotas','tempat_lahir')->get();
         return DataTables::of($data)
             ->addColumn('nik',function ($data) {
-                return $data->nik;
+                return "'".$data->nik;
             })
             ->addColumn('wa', function ($data) {
                 return $data->wa;
@@ -142,7 +142,7 @@ class LapTransaksiController extends Controller
         ->where('magber_ke',$request->id)->get();
         return DataTables::of($data)
             ->addColumn('nik',function ($data) {
-                return $data->nik;
+                return "'".$data->nik;
             })
             ->addColumn('wa', function ($data) {
                 return optional($data->user)->wa;
